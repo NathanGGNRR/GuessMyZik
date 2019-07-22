@@ -25,7 +25,7 @@ namespace GuessMyZik.Pages
         public LoginPage()
         {
             this.InitializeComponent();
-            loginPageOpacityStoryBoard.Begin(); //Start the storyboard called loginPageOpacityStoryBoard on LoginPage.xaml: animates opacity of the gridLoginPage from 0 to 1 in 1 second.
+            loginPageOpacityStoryBoard.Begin(); //Start the storyboard called loginPageOpacityStoryBoard on LoginPage.xaml: animate opacity of the gridLoginPage from 0 to 1 in 1 second.
         }
     }
 }

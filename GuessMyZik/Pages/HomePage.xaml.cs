@@ -28,7 +28,7 @@ namespace GuessMyZik.Pages
         public HomePage()
         {
             this.InitializeComponent();
-            logoOpacityStoryBoard.Begin(); //Start the storyboard called logoOpacityStoryBoard on HomePage.xaml: animates opacity of the logo from 0 to 1 in 2 seconds and then returns to 0.
+            logoOpacityStoryBoard.Begin(); //Start the storyboard called logoOpacityStoryBoard on HomePage.xaml: animate opacity of the logo from 0 to 1 in 2 seconds and then returns to 0.
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace GuessMyZik.Pages
                 gridHomePage.ColumnDefinitions[i].Width = new GridLength(1, GridUnitType.Star); //Change the values of the first and the last ColumnDefinitions of the gridHomePage to 1. The basic value is 4.
             }
             gridWelcome.Visibility = Visibility.Visible; //Make the visibility of gridWelcome on Visible.
-            homePageOpacityStoryBoard.Begin(); //Start the storyboard called homePageOpacityStoryBoard on HomePage.xaml: animates opacity of the gridWelcome from 0 to 1 in 2 seconds and the blink animation on "CLICK TO START".
+            homePageOpacityStoryBoard.Begin(); //Start the storyboard called homePageOpacityStoryBoard on HomePage.xaml: animate opacity of the gridWelcome from 0 to 1 in 2 seconds and the blink animation on "CLICK TO START".
         }
 
         /// <summary>
@@ -49,15 +49,15 @@ namespace GuessMyZik.Pages
         /// </summary>
         private void PlatineLogoHome_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            platineSound.Play();    //Play the platine.wav file in Assets/Music, platineSound is the name of the MediaElement on HomePage.xaml.
+            platineSound.Play(); //Play the platine.wav file in Assets/Music, platineSound is the name of the MediaElement on HomePage.xaml.
         }
 
         /// <summary>
-        /// Function started at the click, the storyboard called loginPageOpacityStoryBoard on HomePage.xaml: animates opacity of the entire page from 1 to 0 in 1 second.
+        /// Function started at the click, the storyboard called loginPageOpacityStoryBoard on HomePage.xaml: animate opacity of the entire page from 1 to 0 in 1 second.
         /// </summary>
         private void HomePage_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
-            loginPageOpacityStoryBoard.Begin(); //Start the storyboard called loginPageOpacityStoryBoard on HomePage.xaml: animates opacity of the entire page from 1 to 0 in 1 second.
+            loginPageOpacityStoryBoard.Begin(); //Start the storyboard called loginPageOpacityStoryBoard on HomePage.xaml: animate opacity of the entire page from 1 to 0 in 1 second.
         }
 
         /// <summary>

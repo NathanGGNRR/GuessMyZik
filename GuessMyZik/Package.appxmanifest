@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="e33b7812-4751-47f9-9045-a631025372c3"
+    Publisher="CN=natha"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="e33b7812-4751-47f9-9045-a631025372c3" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>GuessMyZik</DisplayName>
+    <PublisherDisplayName>natha</PublisherDisplayName>
+    <Logo>Assets\Pictures\Loading Pictures\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="GuessMyZik.App">
+      <uap:VisualElements
+        DisplayName="GuessMyZik"
+        Square150x150Logo="Assets\Pictures\Loading Pictures\Square150x150Logo.png"
+        Square44x44Logo="Assets\Pictures\Loading Pictures\Square44x44Logo.png"
+        Description="GuessMyZik is a little inspired game by blinds test."
+        BackgroundColor="#016fb9">
+        <uap:DefaultTile Wide310x150Logo="Assets\Pictures\Loading Pictures\Wide310x150Logo.png" Square71x71Logo="Assets\Pictures\Loading Pictures\SmallTile.png" Square310x310Logo="Assets\Pictures\Loading Pictures\LargeTile.png" ShortName="GuessMyZik"/>
+        <uap:SplashScreen Image="Assets\Pictures\Loading Pictures\SplashScreen.png"  BackgroundColor="#016fb9"/>
+        <uap:LockScreen BadgeLogo="Assets\Pictures\Loading Pictures\BadgeLogo.png" Notification="badge"/>
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

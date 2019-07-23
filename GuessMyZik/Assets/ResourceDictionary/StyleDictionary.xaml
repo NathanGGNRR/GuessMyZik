@@ -1,0 +1,25 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="MainColor">#016FB9</Color>
+    <Color x:Key="MainDarkColor">#005B8E</Color>
+    
+    <Color x:Key="WriteColor">#F2F2F2</Color>
+    <Color x:Key="TransparentColor">#00000000</Color>
+    
+    <Color x:Key="SecondaryColor">#AFA98D</Color>
+    <Color x:Key="SecondaryDarkColor">#9B9680</Color>
+    
+    <Color x:Key="ThirdColor">#6D8EA0</Color>
+    <Color x:Key="ThirdDarkColor">#557989</Color>
+
+    <Color x:Key="DarkColor">#182825</Color>
+    <Color x:Key="LightBlue">#22AED1</Color>
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Assets/ResourceDictionary/ButtonStyleDictionary.xaml" />
+        <ResourceDictionary Source="/Assets/ResourceDictionary/TextBoxStyleDictionary.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+</ResourceDictionary>

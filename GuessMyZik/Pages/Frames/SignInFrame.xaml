@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="GuessMyZik.Pages.Frames.SignInFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GuessMyZik.Pages.Frames"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+    <Grid x:Name="gridLogin" >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Pictures/backgroundSecondary.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="6.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="6"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="logoBluePicture" Source="/Assets/Pictures/LoginPage/textLogoSecondary.png" Stretch="Uniform" Grid.Row="2" Grid.Column="1" Canvas.ZIndex="2"/>
+        <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource SecondaryColor}"/>
+        <Rectangle Grid.Row="4" Grid.ColumnSpan="3" Fill="{StaticResource SecondaryColor}"/>
+        <Rectangle Grid.Column="0" Grid.RowSpan="7" Fill="{StaticResource SecondaryColor}"/>
+        <Rectangle Grid.Column="2"  Grid.RowSpan="7" Fill="{StaticResource SecondaryColor}"/>
+        <Grid x:Name="gridFormLogin" Grid.Row="5" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="1" Grid.Column="1">
+                <Grid Margin="0 0 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="userPicture" Source="/Assets/Pictures/LoginPage/userSecondary.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2"/>
+                    <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Username or Mail Account" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource SecondaryColor}"  Padding="0"/>
+                </Grid>
+                <TextBox x:Name="textUserOrMail" FontSize="15" FontFamily="Trebuchet MS" Style="{StaticResource textBoxFocusSecondary}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="1" >
+                <Grid Margin="0 0 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="passwordPicture" Source="/Assets/Pictures/LoginPage/passwordSecondary.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2" Margin="0 0 0 3"/>
+                    <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Password" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource SecondaryColor}" Padding="0"/>
+                </Grid>
+                <PasswordBox x:Name="passwordBox" Style="{StaticResource passwordBoxFocusSecondary}" FontSize="15" FontFamily="Trebuchet MS" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

@@ -118,6 +118,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Frames\RegistrationFrame.xaml.cs">
+      <DependentUpon>RegistrationFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\SignInFrame.xaml.cs">
+      <DependentUpon>SignInFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -139,7 +145,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Pictures\backgroundSecondary.png" />
-    <Content Include="Assets\Pictures\guess.png">
+    <Content Include="Assets\Pictures\LoginPage\envelopeThird.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Pictures\LoginPage\guess.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Pictures\Loading Pictures\BadgeLogo.scale-100.png" />
@@ -192,22 +201,34 @@
     <Content Include="Assets\Pictures\Loading Pictures\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Pictures\Loading Pictures\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Pictures\Loading Pictures\Wide310x150Logo.scale-400.png" />
-    <Content Include="Assets\Pictures\logo.png">
+    <Content Include="Assets\Pictures\LoginPage\passwordSecondary.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Pictures\password.png">
+    <Content Include="Assets\Pictures\LoginPage\passwordThird.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Pictures\LoginPage\textLogoMain.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Pictures\LoginPage\textLogoSecondary.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Pictures\LoginPage\textLogoThird.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Pictures\LoginPage\userSecondary.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Pictures\LoginPage\userThird.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Pictures\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Pictures\platineLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Pictures\textLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Pictures\textLogoBlue.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\Pictures\user.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Properties\Default.rd.xml" />
@@ -226,6 +247,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\ResourceDictionary\TextBoxStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Frames\RegistrationFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Frames\SignInFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

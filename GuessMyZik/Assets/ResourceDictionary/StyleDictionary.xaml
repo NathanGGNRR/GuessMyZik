@@ -17,6 +17,8 @@
     <Color x:Key="DarkColor">#182825</Color>
     <Color x:Key="LightBlue">#22AED1</Color>
 
+    <Color x:Key="ExitColor">#FFAE0B0B</Color>
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Assets/ResourceDictionary/ButtonStyleDictionary.xaml" />
         <ResourceDictionary Source="/Assets/ResourceDictionary/TextBoxStyleDictionary.xaml" />

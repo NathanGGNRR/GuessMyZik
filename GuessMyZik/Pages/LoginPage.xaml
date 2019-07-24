@@ -14,7 +14,7 @@
         <Storyboard x:Name="loginPageOpacityStoryBoard">
             <DoubleAnimation Storyboard.TargetName="gridLoginPage" Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:1"/>
         </Storyboard>
-        
+
     </Page.Resources>
 
     <Grid x:Name="gridLoginPage" Opacity="1">
@@ -30,84 +30,40 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="gridLogin" Grid.Row="1" Grid.Column="1">
-            <Grid.Background>
-                <ImageBrush ImageSource="/Assets/Pictures/backgroundSecondary.png"/>
-            </Grid.Background>
+        <Grid x:Name="gridExit" Grid.Column="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="6"/>
-                <RowDefinition Height="0.5*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="0.35*"/>
-                <RowDefinition Height="6"/>
-                <RowDefinition Height="6.5*"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnExit" Grid.Row="1" Grid.Column="1" Style="{StaticResource BtnExitSVG}" Click="BtnExit_Click"  />
+        </Grid>
+
+        <Grid x:Name="gridBoxLogin" Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="6"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="6"/>
-            </Grid.ColumnDefinitions>
-            <Image x:Name="logoBluePicture" Source="/Assets/Pictures/textLogoBlue.png" Stretch="Uniform" Grid.Row="2" Grid.Column="1" Canvas.ZIndex="2"/>
-            <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource MainDarkColor}"/>
-            <Rectangle Grid.Row="4" Grid.ColumnSpan="3" Fill="{StaticResource MainDarkColor}"/>
-            <Rectangle Grid.Column="0" Grid.RowSpan="7" Fill="{StaticResource MainDarkColor}"/>
-            <Rectangle Grid.Column="2"  Grid.RowSpan="7" Fill="{StaticResource MainDarkColor}"/>
-            <Rectangle Grid.Column="0" Grid.Row="8" Fill="{StaticResource SecondaryDarkColor}" Canvas.ZIndex="3"/>
-            <Rectangle Grid.Column="2" Grid.Row="8" Fill="{StaticResource ThirdDarkColor}" Canvas.ZIndex="3"/>
-            <Grid x:Name="gridFormLogin" Grid.Row="5" Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="6*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Row="1" Grid.Column="1">
-                    <Grid Margin="0 0 0 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="6*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image x:Name="userPicture" Source="/Assets/Pictures/user.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2"/>
-                        <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Username or Mail Account" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource SecondaryColor}"  Padding="0"/>
-                    </Grid>
-                    <TextBox FontSize="15" FontFamily="Trebuchet MS" Style="{StaticResource textBoxFocus}"/>
-                </StackPanel>
-                <StackPanel Grid.Row="2" Grid.Column="1" >
-                    <Grid Margin="0 0 0 5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="6*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image x:Name="passwordPicture" Source="/Assets/Pictures/password.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2" Margin="0 0 0 3"/>
-                        <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Password" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource SecondaryColor}" Padding="0"/>
-                    </Grid>
-                    <TextBox Style="{StaticResource textBoxFocus}" FontSize="15" FontFamily="Trebuchet MS" />
+            <Frame x:Name="navigationLogin">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition />
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
 
-                </StackPanel>
-            </Grid>
-            <Grid x:Name="gridButtonLogin" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="6"/>
-                </Grid.RowDefinitions>
+            <Grid x:Name="gridButtonLogin" Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="6"/>
-                    <ColumnDefinition Width="6"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnSignIn" Style="{StaticResource BtnSecondary}" Content="Sign In" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch"  Canvas.ZIndex="4"  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0" />
-                <Rectangle Grid.Row="1" Grid.Column="0" Fill="{StaticResource SecondaryDarkColor}"/>
-                <Button x:Name="btnRegistration" Grid.Column="3" Style="{StaticResource BtnThird}" Content="Registration" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Canvas.ZIndex="4"  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0" />
-                <Rectangle Grid.Column="3" Grid.Row="1" Fill="{StaticResource ThirdDarkColor}"/>
-                <Rectangle Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Fill="{StaticResource SecondaryDarkColor}" Canvas.ZIndex="3"/>
-                <Rectangle Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Fill="{StaticResource ThirdDarkColor}" Canvas.ZIndex="3"/>
+                <Button x:Name="btnLeft"  Style="{StaticResource BtnMediumSecondary}" Background="{StaticResource SecondaryColor}" Content="Sign In" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" FocusVisualPrimaryBrush="{StaticResource SecondaryDarkColor}" Canvas.ZIndex="4"/>
+                <Button x:Name="btnRight" Grid.Column="1" Style="{StaticResource BtnMediumThird}" Background="{StaticResource ThirdColor}" Content="Registration" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" FocusVisualPrimaryBrush="{StaticResource ThirdDarkColor}" Canvas.ZIndex="4" Click="BtnRight_Click"/>
             </Grid>
         </Grid>
         <Grid x:Name="gridGuest" Grid.Row="1" Grid.Column="3">
@@ -132,21 +88,12 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="4"/>
                 </Grid.ColumnDefinitions>
-                <Image x:Name="guessPicture" Source="/Assets/Pictures/guess.png" Stretch="Uniform" Grid.Row="2" Grid.Column="1" Canvas.ZIndex="2"/>
+                <Image x:Name="guessPicture" Source="/Assets/Pictures/LoginPage/guess.png" Stretch="Uniform" Grid.Row="2" Grid.Column="1" Canvas.ZIndex="2"/>
                 <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource MainDarkColor}"/>
                 <Rectangle Grid.Column="0" Grid.RowSpan="4" Fill="{StaticResource MainDarkColor}"/>
                 <Rectangle Grid.Column="2" x:Name="testRect" Grid.RowSpan="4" Fill="{StaticResource MainDarkColor}"/>
-                <Rectangle Grid.Column="0" Grid.Row="5" Fill="{StaticResource SecondaryDarkColor}" Canvas.ZIndex="3"/>
-                <Rectangle Grid.Column="2" Grid.Row="5" Fill="{StaticResource SecondaryDarkColor}" Canvas.ZIndex="3"/>
-                <Grid x:Name="gridButtonGuess" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="4"/>
-                    </Grid.RowDefinitions>
-                    <Button x:Name="btnGuest" Style="{StaticResource BtnSecondary}" Background="{StaticResource SecondaryColor}" Content="Play as a Guest" FontFamily="Kaushan Script" FontSize="23" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" Canvas.ZIndex="4"  VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="0,0,0,0"/>
-                    <Rectangle Grid.Row="1" Fill="{StaticResource SecondaryDarkColor}"/>
+                <Button x:Name="btnGuest" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource BtnSmallSecondary}" Content="Play as a Guest" FontFamily="Kaushan Script" FontSize="23" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Canvas.ZIndex="4" Padding="0"/>
 
-                </Grid>
             </Grid>
         </Grid>
     </Grid>

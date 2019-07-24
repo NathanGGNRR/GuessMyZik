@@ -62,8 +62,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="btnLeft"  Style="{StaticResource BtnMediumSecondary}" Background="{StaticResource SecondaryColor}" Content="Sign In" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" FocusVisualPrimaryBrush="{StaticResource SecondaryDarkColor}" Canvas.ZIndex="4"/>
-                <Button x:Name="btnRight" Grid.Column="1" Style="{StaticResource BtnMediumThird}" Background="{StaticResource ThirdColor}" Content="Registration" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" FocusVisualPrimaryBrush="{StaticResource ThirdDarkColor}" Canvas.ZIndex="4" Click="BtnRight_Click"/>
+                <Button x:Name="btnLeft"  Style="{StaticResource BtnMediumSecondary}" Background="{StaticResource SecondaryColor}" Content="Sign In" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource SecondaryDarkColor}" Canvas.ZIndex="4" Click="BtnLeft_Click"/>
+                <Button x:Name="btnRight" Grid.Column="1" Style="{StaticResource BtnMediumThird}" Background="{StaticResource ThirdColor}" Content="Registration" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource ThirdDarkColor}" Canvas.ZIndex="4" Click="BtnRight_Click" />
             </Grid>
         </Grid>
         <Grid x:Name="gridGuest" Grid.Row="1" Grid.Column="3">
@@ -92,7 +92,7 @@
                 <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource MainDarkColor}"/>
                 <Rectangle Grid.Column="0" Grid.RowSpan="4" Fill="{StaticResource MainDarkColor}"/>
                 <Rectangle Grid.Column="2" x:Name="testRect" Grid.RowSpan="4" Fill="{StaticResource MainDarkColor}"/>
-                <Button x:Name="btnGuest" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource BtnSmallSecondary}" Content="Play as a Guest" FontFamily="Kaushan Script" FontSize="23" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Canvas.ZIndex="4" Padding="0"/>
+                <Button x:Name="btnGuest" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource BtnSmallSecondary}" Content="Play as a Guest" FontFamily="Kaushan Script" FontSize="23" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Canvas.ZIndex="4" Padding="0" Background="{StaticResource SecondaryColor}" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource SecondaryDarkColor}"/>
 
             </Grid>
         </Grid>

@@ -8,6 +8,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="0 0 0 0"/>
         <Setter Property="FocusVisualMargin" Value="-3"/>
@@ -61,11 +62,11 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Fill="{StaticResource SecondaryDarkColor}"/>
-                        <Rectangle Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Fill="{StaticResource SecondaryDarkColor}"/>
-                        <Rectangle x:Name="rectangle" Grid.Row="0" Grid.Column="1" Fill="{StaticResource SecondaryDarkColor}"/>
-                        <Rectangle Grid.Row="2" Grid.Column="1" Fill="{StaticResource SecondaryDarkColor}"/>
-                        <ContentPresenter Grid.Row="1" Grid.Column="1" x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{StaticResource SecondaryColor}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{StaticResource WriteColor}"/>
+                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle x:Name="rectangle" Grid.Row="0" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle Grid.Row="2" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <ContentPresenter Grid.Row="1" Grid.Column="1" x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -79,6 +80,7 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="0 0 0 0"/>
         <Setter Property="FocusVisualMargin" Value="-3"/>
@@ -117,26 +119,26 @@
                                 <VisualState x:Name="PointerOver">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="(ContentPresenter.Background).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="{StaticResource ThirdColor}"/>
-                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{StaticResource WriteColor}"/>
+                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path= Background}"/>
+                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path= Foreground}"/>
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="ContentPresenter" Storyboard.TargetProperty="(ContentPresenter.Foreground).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="{StaticResource WriteColor}"/>
-                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{StaticResource ThirdColor}"/>
+                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path= Foreground}"/>
+                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path= Background}"/>
                                         </ColorAnimationUsingKeyFrames>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="{StaticResource ThirdDarkColor}"/>
-                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{StaticResource WriteColor}"/>
+                                            <EasingColorKeyFrame KeyTime="00:00:00" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path= FocusVisualPrimaryBrush}"/>
+                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path= Foreground}"/>
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Fill="{StaticResource ThirdDarkColor}"/>
-                        <Rectangle Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Fill="{StaticResource ThirdDarkColor}"/>
-                        <Rectangle x:Name="rectangle" Grid.Row="0" Grid.Column="1" Fill="{StaticResource ThirdDarkColor}"/>
-                        <Rectangle Grid.Row="2" Grid.Column="1" Fill="{StaticResource ThirdDarkColor}"/>
-                        <ContentPresenter Grid.Row="1" Grid.Column="1" x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{StaticResource ThirdColor}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{StaticResource WriteColor}"/>
+                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle x:Name="rectangle" Grid.Row="0" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle Grid.Row="2" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <ContentPresenter Grid.Row="1" Grid.Column="1" x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -150,6 +152,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="0 0 0 0"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FocusVisualMargin" Value="-3"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -201,11 +204,11 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Fill="{StaticResource SecondaryDarkColor}"/>
-                        <Rectangle Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Fill="{StaticResource SecondaryDarkColor}"/>
-                        <Rectangle x:Name="rectangle" Grid.Row="0" Grid.Column="1" Fill="{StaticResource SecondaryDarkColor}"/>
-                        <Rectangle Grid.Row="2" Grid.Column="1" Fill="{StaticResource SecondaryDarkColor}"/>
-                        <ContentPresenter Grid.Row="1" Grid.Column="1" x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{StaticResource SecondaryColor}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{StaticResource WriteColor}"/>
+                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle x:Name="rectangle" Grid.Row="0" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle Grid.Row="2" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <ContentPresenter Grid.Row="1" Grid.Column="1" x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -219,6 +222,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="Padding" Value="0 0 0 0"/>
+        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="FocusVisualMargin" Value="-3"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -270,11 +274,14 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Fill="{StaticResource ThirdDarkColor}"/>
-                        <Rectangle Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Fill="{StaticResource ThirdDarkColor}"/>
-                        <Rectangle x:Name="rectangle" Grid.Row="0" Grid.Column="1" Fill="{StaticResource ThirdDarkColor}"/>
-                        <Rectangle Grid.Row="2" Grid.Column="1" Fill="{StaticResource ThirdDarkColor}"/>
-                        <ContentPresenter Grid.Row="1" Grid.Column="1" x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{StaticResource ThirdColor}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{StaticResource WriteColor}"/>
+                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle x:Name="rectangle" Grid.Row="0" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle Grid.Row="2" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <ContentPresenter Grid.Row="1" Grid.Column="1" x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BackgroundSizing="{TemplateBinding BackgroundSizing}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" CornerRadius="{TemplateBinding CornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" Content="{TemplateBinding Content}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}"/>
+
+
+
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

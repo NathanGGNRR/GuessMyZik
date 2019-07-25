@@ -14,6 +14,13 @@
         <Storyboard x:Name="loginPageOpacityStoryBoard">
             <DoubleAnimation Storyboard.TargetName="gridLoginPage" Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:1"/>
         </Storyboard>
+        <Storyboard x:Name="btnExitPointerEntered">
+            <ColorAnimation Storyboard.TargetName="btnExit" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.3"/>
+        </Storyboard>
+        <Storyboard x:Name="btnExitPointerExited">
+            <ColorAnimation Storyboard.TargetName="btnExit" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource WriteColor}" Duration="0:0:0.3"/>
+        </Storyboard>
+        
 
     </Page.Resources>
 
@@ -41,7 +48,9 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="btnExit" Grid.Row="1" Grid.Column="1" Style="{StaticResource BtnExitSVG}" Click="BtnExit_Click"  />
+            <Grid x:Name="gridBtnExit" Grid.Row="1" Grid.Column="1" PointerEntered="BtnExit_PointerEntered" PointerExited="BtnExit_PointerExited" Background="Transparent" Tapped="BtnExit_Tapped">
+                <Button x:Name="btnExit" Style="{StaticResource BtnExitSVG}" Background="{StaticResource WriteColor}" />
+            </Grid>
         </Grid>
 
         <Grid x:Name="gridBoxLogin" Grid.Row="1" Grid.Column="1">

@@ -16,13 +16,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
-// Pour plus d'informations sur le modèle d'élément Page vierge, consultez la page https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace GuessMyZik.Pages
 {
-    ///// <summary>
-    ///// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
-    ///// </summary>
+    /// <summary>
+    /// An empty page can be used alone or as a landing page within a frame.
+    /// </summary>
     public sealed partial class HomePage : Page
     {
         public HomePage()
@@ -32,8 +30,10 @@ namespace GuessMyZik.Pages
         }
 
         /// <summary>
-        /// Function started at the end of the animation of the logo. 
+        /// Called when the storyboard logoOpacityStoryBoard is completed.
         /// </summary>
+        /// <param name="sender">Element on which the animation is launched.</param>
+        /// <param name="e">Event details to the object.</param>
         private void AnimationHomePage(object sender, object e)
         {
             for (int i = 0; i < gridHomePage.ColumnDefinitions.Count; i+=2)
@@ -45,24 +45,30 @@ namespace GuessMyZik.Pages
         }
 
         /// <summary>
-        /// Function started when the mouse entered on the platine picture. platine.wav is started.
+        /// Called when the mouse entered on the platine picture called platineLogoHome.
         /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to PointerRoutedEventArgs.</param>
         private void PlatineLogoHome_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
             platineSound.Play(); //Play the platine.wav file in Assets/Music, platineSound is the name of the MediaElement on HomePage.xaml.
         }
 
         /// <summary>
-        /// Function started at the click, the storyboard called loginPageOpacityStoryBoard on HomePage.xaml: animate opacity of the entire page from 1 to 0 in 1 second.
+        /// Called when you click wherever you are on this page.
         /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to PointerRoutedEventArgs.</param>
         private void HomePage_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             loginPageOpacityStoryBoard.Begin(); //Start the storyboard called loginPageOpacityStoryBoard on HomePage.xaml: animate opacity of the entire page from 1 to 0 in 1 second.
         }
 
         /// <summary>
-        /// Function started at the end of the animation of the storyboard loginPageOpacityStoryBoard.
+        /// Called when the storyboard loginPageOpacityStoryBoard is completed.
         /// </summary>
+        /// <param name="sender">Element on which the animation is launched.</param>
+        /// <param name="e">Event details to the object.</param>
         private void AnimationLoginPage(object sender, object e)
         {
             this.Frame.Navigate(typeof(LoginPage)); //Close this page and open LoginPage.

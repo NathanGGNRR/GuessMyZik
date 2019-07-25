@@ -6,6 +6,7 @@
     <Color x:Key="MainDarkColor">#005B8E</Color>
     
     <Color x:Key="WriteColor">#F2F2F2</Color>
+    <Color x:Key="WriteDarkColor">#FFC8C8C8</Color>
     <Color x:Key="TransparentColor">#00000000</Color>
     
     <Color x:Key="SecondaryColor">#AFA98D</Color>
@@ -18,6 +19,7 @@
     <Color x:Key="LightBlue">#22AED1</Color>
 
     <Color x:Key="ExitColor">#FFAE0B0B</Color>
+    <Color x:Key="LastColor">#22aed1</Color>
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Assets/ResourceDictionary/ButtonStyleDictionary.xaml" />

@@ -17,17 +17,16 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GuessMyZik.Pages;
 
-
 namespace GuessMyZik
 {
     /// <summary>
-    /// Fournit un comportement spécifique à l'application afin de compléter la classe Application par défaut.
+    /// Provides application-specific behavior to complete the default Application class.
     /// </summary>
     sealed partial class App : Application
     {
         /// <summary>
-        /// Initialise l'objet d'application de singleton.  Il s'agit de la première ligne du code créé
-        /// à être exécutée. Elle correspond donc à l'équivalent logique de main() ou WinMain().
+        /// Initializes the singleton application object.  This is the first line of the code created
+        /// to be executed. It therefore corresponds to the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
         {
@@ -37,29 +36,29 @@ namespace GuessMyZik
         }
 
         /// <summary>
-        /// Invoqué lorsque l'application est lancée normalement par l'utilisateur final.  D'autres points d'entrée
-        /// seront utilisés par exemple au moment du lancement de l'application pour l'ouverture d'un fichier spécifique.
+        /// Invoked when the application is normally launched by the end user.  Other entry points
+        /// will be used, for example, when launching the application to open a specific file.
         /// </summary>
-        /// <param name="e">Détails concernant la requête et le processus de lancement.</param>
+        /// <param name="e">Details about the request and the launch process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
-            // Ne répétez pas l'initialisation de l'application lorsque la fenêtre comporte déjà du contenu,
-            // assurez-vous juste que la fenêtre est active
+            // Do not repeat the initialization of the application when the window already contains content,
+            // just make sure the window is active.
             if (rootFrame == null)
             {
-                // Créez un Frame utilisable comme contexte de navigation et naviguez jusqu'à la première page
+                // Create a Frame that can be used as a navigation context and navigate to the first page.
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: chargez l'état de l'application précédemment suspendue
+                    //TODO: load the status of the previously suspended application.
                 }
 
-                // Placez le frame dans la fenêtre active
+                // Place the frame in the active window.
                 Window.Current.Content = rootFrame;
             }
 
@@ -67,37 +66,37 @@ namespace GuessMyZik
             {
                 if (rootFrame.Content == null)
                 {
-                    // Quand la pile de navigation n'est pas restaurée, accédez à la première page,
-                    // puis configurez la nouvelle page en transmettant les informations requises en tant que
-                    // paramètre
+                    // When the navigation stack is not restored, go to the first page,
+                    // then configure the new page by sending the required information as
+                    // setting.
                     rootFrame.Navigate(typeof(LoginPage), e.Arguments);
                 }
-                // Vérifiez que la fenêtre actuelle est active
+                // Check that the current window is active
                 Window.Current.Activate();
             }
         }
 
         /// <summary>
-        /// Appelé lorsque la navigation vers une page donnée échoue
+        /// Called when navigation to a given page fails.
         /// </summary>
-        /// <param name="sender">Frame à l'origine de l'échec de navigation.</param>
-        /// <param name="e">Détails relatifs à l'échec de navigation</param>
+        /// <param name="sender">Frame causing navigation failure.</param>
+        /// <param name="e">Details of navigation failure.</param>
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         /// <summary>
-        /// Appelé lorsque l'exécution de l'application est suspendue.  L'état de l'application est enregistré
-        /// sans savoir si l'application pourra se fermer ou reprendre sans endommager
-        /// le contenu de la mémoire.
+        /// Called when application execution is suspended.  The status of the application is recorded
+        /// without knowing if the application will be able to close or resume without damaging
+        /// the content of the memory.
         /// </summary>
-        /// <param name="sender">Source de la requête de suspension.</param>
-        /// <param name="e">Détails de la requête de suspension.</param>
+        /// <param name="sender">Source of the request for suspension.</param>
+        /// <param name="e">Details of the request for suspension.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: enregistrez l'état de l'application et arrêtez toute activité en arrière-plan
+            //TODO: record the status of the application and stop all background activity.
             deferral.Complete();
         }
     }

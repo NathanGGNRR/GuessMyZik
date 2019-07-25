@@ -40,9 +40,9 @@
                 <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition Width="6*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <Grid Margin="0 0 0 5">
@@ -53,31 +53,38 @@
                     <Image x:Name="userPicture" Source="/Assets/Pictures/LoginPage/userThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2"/>
                     <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Username" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}"  Padding="0"/>
                 </Grid>
-                <TextBox x:Name="textUsername" FontSize="15" FontFamily="Trebuchet MS" Style="{StaticResource textBoxFocusThird}"/>
+                <TextBox x:Name="textUsername" FontSize="15" FontFamily="Trebuchet MS" Style="{StaticResource textBoxFocusThird}" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="registerEnable_KeyUp"/>
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.Column="1" >
-                <Grid Margin="0 0 0 5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="6*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image x:Name="passwordPicture" Source="/Assets/Pictures/LoginPage/passwordThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2" Margin="0 0 0 3"/>
-                    <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Password" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}" Padding="0"/>
-                </Grid>
-                <PasswordBox x:Name="passwordBox" Style="{StaticResource passwordBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" />
-            </StackPanel>
+            <Grid Grid.Row="2" Grid.Column="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel>
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="6*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="passwordPicture" Source="/Assets/Pictures/LoginPage/passwordThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2" Margin="0 0 0 3"/>
+                        <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Password" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}" Padding="0"/>
+                    </Grid>
+                    <PasswordBox x:Name="passwordBox" Style="{StaticResource passwordBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="registerEnable_KeyUp"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="6*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="passwordConfirmPicture" Source="/Assets/Pictures/LoginPage/passwordThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2" Margin="0 0 0 3"/>
+                        <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Confirm Password" FontFamily="Kaushan Script" FontSize="18" Foreground="{StaticResource ThirdColor}" Padding="0" VerticalAlignment="Center"/>
+                    </Grid>
+                    <PasswordBox x:Name="passwordConfirmBox" Style="{StaticResource passwordBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="registerEnable_KeyUp"/>
+                </StackPanel>
+            </Grid>
             <StackPanel Grid.Row="3" Grid.Column="1" >
-                <Grid Margin="0 0 0 5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="0.5*"/>
-                        <ColumnDefinition Width="6*"/>
-                    </Grid.ColumnDefinitions>
-                    <Image x:Name="passwordConfirmPicture" Source="/Assets/Pictures/LoginPage/passwordThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2" Margin="0 0 0 3"/>
-                    <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Confirm Password" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}" Padding="0"/>
-                </Grid>
-                <PasswordBox x:Name="passwordConfirmBox" Style="{StaticResource passwordBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" />
-            </StackPanel>
-            <StackPanel Grid.Row="4" Grid.Column="1" >
                 <Grid Margin="0 0 0 5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*"/>
@@ -86,8 +93,10 @@
                     <Image x:Name="mailPicture" Source="/Assets/Pictures/LoginPage/envelopeThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2" Margin="0 0 0 3"/>
                     <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Email Address" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}" Padding="0"/>
                 </Grid>
-                <TextBox x:Name="textMail" Style="{StaticResource textBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" />
+                <TextBox x:Name="textMail" Style="{StaticResource textBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="registerEnable_KeyUp" />
             </StackPanel>
+            <Button Grid.Row="4" Grid.Column="1" x:Name="btnRegister"  Style="{StaticResource BtnPrimaryThird}" Background="{StaticResource ThirdColor}" Content="Register Now" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource ThirdDarkColor}" Canvas.ZIndex="4" Margin="0 10 0 10" IsEnabled="False"/>
+
         </Grid>
     </Grid>
 </Page>

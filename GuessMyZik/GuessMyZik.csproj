@@ -124,6 +124,9 @@
     <Compile Include="Pages\Frames\SignInFrame.xaml.cs">
       <DependentUpon>SignInFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Frames\WelcomeLoginFrame.xaml.cs">
+      <DependentUpon>WelcomeLoginFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -255,6 +258,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Frames\SignInFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Frames\WelcomeLoginFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

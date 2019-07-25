@@ -1,0 +1,56 @@
+﻿<Page
+    x:Class="GuessMyZik.Pages.Frames.WelcomeLoginFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GuessMyZik.Pages.Frames"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+    >
+    <Grid x:Name="gridWelcomeLogin" >
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Pictures/backgroundSecondary.png"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.35*"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="6.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="6"/>
+        </Grid.ColumnDefinitions>
+        <Image x:Name="logoBluePicture" Source="/Assets/Pictures/LoginPage/textLogoMain.png" Stretch="Uniform" Grid.Row="2" Grid.Column="1" Canvas.ZIndex="2"/>
+        <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource MainDarkColor}"/>
+        <Rectangle Grid.Row="4" Grid.ColumnSpan="3" Fill="{StaticResource MainDarkColor}"/>
+        <Rectangle Grid.Column="0" Grid.RowSpan="7" Fill="{StaticResource MainDarkColor}"/>
+        <Rectangle Grid.Column="2"  Grid.RowSpan="7" Fill="{StaticResource MainDarkColor}"/>
+        <Grid Grid.Row="5" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="9*"/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" Text="There are several ways to play GuessMyZik:" FontSize="25" Foreground="{StaticResource MainDarkColor}" FontFamily="Trebuchet MS" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBlock Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" Text="-Play as a guest, no follow-up and impossible to play against other players." FontSize="23" Foreground="{StaticResource SecondaryColor}" FontFamily="Trebuchet MS" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBlock Grid.Row="7" Grid.Column="1" TextWrapping="Wrap" Text="-Play with your account, profile with tracking and the possibility to play against other players" FontSize="23" Foreground="{StaticResource ThirdColor}" FontFamily="Trebuchet MS" HorizontalAlignment="Stretch" VerticalAlignment="Top" FontWeight="Bold"/>
+
+        </Grid>
+    </Grid>
+</Page>

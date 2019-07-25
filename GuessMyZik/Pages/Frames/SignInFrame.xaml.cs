@@ -13,18 +13,32 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// Pour plus d'informations sur le modèle d'élément Page vierge, consultez la page https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace GuessMyZik.Pages.Frames
 {
     /// <summary>
-    /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
+    /// An empty page can be used alone or as a landing page within a frame.
     /// </summary>
     public sealed partial class SignInFrame : Page
     {
         public SignInFrame()
         {
             this.InitializeComponent();
+        }
+
+        /// <summary>
+        /// Called when a keyboard key is pressed into textbox.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to KeyRoutedEventArgs.</param>
+        private void enableConnect_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            if(passwordBox.Password != "" && textUserOrMail.Text != "") //Check if all the textbox are empty or not.
+            {
+                btnConnect.IsEnabled = true; //Enabled the button btnRegister.
+            } else
+            {
+                btnConnect.IsEnabled = false; //Disabled the button btnRegister.
+            }
         }
     }
 }

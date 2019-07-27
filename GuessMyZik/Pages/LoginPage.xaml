@@ -101,7 +101,7 @@
                 <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource MainDarkColor}"/>
                 <Rectangle Grid.Column="0" Grid.RowSpan="4" Fill="{StaticResource MainDarkColor}"/>
                 <Rectangle Grid.Column="2" x:Name="testRect" Grid.RowSpan="4" Fill="{StaticResource MainDarkColor}"/>
-                <Button x:Name="btnGuest" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource BtnSmallSecondary}" Content="Play as a Guest" FontFamily="Kaushan Script" FontSize="23" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Canvas.ZIndex="4" Padding="0" Background="{StaticResource SecondaryColor}" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource SecondaryDarkColor}"/>
+                <Button x:Name="btnGuest" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource BtnSmallSecondary}" Content="Play as a Guest" FontFamily="Kaushan Script" FontSize="23" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Canvas.ZIndex="4" Padding="0" Background="{StaticResource SecondaryColor}" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource SecondaryDarkColor}" Click="BtnGuest_Click"/>
 
             </Grid>
         </Grid>

@@ -7,7 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
+    <Page.Resources>
+        <Storyboard x:Name="errorFirstTextBoxStoryboard">
+            <ColorAnimation x:Name="errorFirstTextBoxColor"  Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.5" AutoReverse="True" Completed="ErrorFirstTextBoxColor_Completed"/>
+        </Storyboard>
+        <Storyboard x:Name="errorSecondTextBoxStoryboard">
+            <ColorAnimation x:Name="errorSecondTextBoxColor"  Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.5" AutoReverse="True" Completed="ErrorSecondTextBoxColor_Completed" />
+        </Storyboard>
+    </Page.Resources>
     <Grid x:Name="gridLogin" >
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/Pictures/backgroundSecondary.png"/>
@@ -32,11 +39,11 @@
         <Rectangle Grid.Column="2"  Grid.RowSpan="7" Fill="{StaticResource SecondaryDarkColor}"/>
         <Grid x:Name="gridFormLogin" Grid.Row="5" Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -52,7 +59,9 @@
                     <Image x:Name="userPicture" Source="/Assets/Pictures/LoginPage/userSecondary.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2"/>
                     <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Username or Mail Account" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource SecondaryColor}"  Padding="0"/>
                 </Grid>
-                <TextBox x:Name="textUserOrMail" FontSize="15" FontFamily="Trebuchet MS" Style="{StaticResource textBoxFocusSecondary}" SelectionHighlightColor="{StaticResource SecondaryDarkColor}"/>
+                <TextBox x:Name="textUserOrMail" FontSize="15" FontFamily="Trebuchet MS" Style="{StaticResource textBoxFocusSecondary}" SelectionHighlightColor="{StaticResource SecondaryDarkColor}" KeyUp="enableConnect_KeyUp"/>
+                <TextBlock x:Name="errorUserOrMail" Foreground="{StaticResource ExitColor}" FontFamily="Trebuchet MS" FontSize="15" FontWeight="Bold"/>
+
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1" >
                 <Grid Margin="0 0 0 5">
@@ -64,8 +73,10 @@
                     <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Password" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource SecondaryColor}" Padding="0"/>
                 </Grid>
                 <PasswordBox x:Name="passwordBox" Style="{StaticResource passwordBoxFocusSecondary}" FontSize="15" FontFamily="Trebuchet MS" KeyUp="enableConnect_KeyUp" SelectionHighlightColor="{StaticResource SecondaryDarkColor}" />
+                <TextBlock x:Name="errorPassword" Foreground="{StaticResource ExitColor}" FontFamily="Trebuchet MS" FontSize="15" FontWeight="Bold"/>
+
             </StackPanel>
-            <Button Grid.Row="3" Grid.Column="1" x:Name="btnConnect"  Style="{StaticResource BtnPrimarySecondary}" Background="{StaticResource SecondaryColor}" Content="Connect Now" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource SecondaryDarkColor}" Canvas.ZIndex="4" Margin="0 10 0 10" IsEnabled="False"/>
+            <Button Grid.Row="3" Grid.Column="1" x:Name="btnConnect"  Style="{StaticResource BtnPrimarySecondary}" Background="{StaticResource SecondaryColor}" Content="Connect Now" FontFamily="Kaushan Script" FontSize="27" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource SecondaryDarkColor}" Canvas.ZIndex="4" Margin="0 10 0 10" IsEnabled="False" Click="BtnConnect_Click"/>
         </Grid>
     </Grid>
 </Page>

@@ -7,7 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
+    <Page.Resources>
+        <Storyboard x:Name="errorFirstTextBoxStoryboard">
+            <ColorAnimation x:Name="errorFirstTextBoxColor"  Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.5" AutoReverse="True" Completed="ErrorFirstTextBoxColor_Completed" />
+        </Storyboard>
+        <Storyboard x:Name="errorSecondTextBoxStoryboard">
+            <ColorAnimation x:Name="errorSecondTextBoxColor"  Storyboard.TargetProperty="(TextBox.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.5" AutoReverse="True" Completed="ErrorSecondTextBoxColor_Completed" />
+        </Storyboard>
+    </Page.Resources>
     <Grid x:Name="gridRegistration" >
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/Pictures/backgroundSecondary.png"/>
@@ -32,12 +39,12 @@
         <Rectangle Grid.Column="2"  Grid.RowSpan="7" Fill="{StaticResource ThirdDarkColor}"/>
         <Grid x:Name="gridFormRegistration" Grid.Row="5" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.25*"/>
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="1.5*"/>
                 <RowDefinition Height="1.5*"/>
-                <RowDefinition Height="1.5*"/>
-                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.25*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.5*"/>
@@ -53,7 +60,8 @@
                     <Image x:Name="userPicture" Source="/Assets/Pictures/LoginPage/userThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2"/>
                     <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Username" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}"  Padding="0"/>
                 </Grid>
-                <TextBox x:Name="textUsername" FontSize="15" FontFamily="Trebuchet MS" Style="{StaticResource textBoxFocusThird}" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="registerEnable_KeyUp"/>
+                <TextBox x:Name="textUsername" FontSize="15" FontFamily="Trebuchet MS" Style="{StaticResource textBoxFocusThird}" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="registerEnable_KeyUp" FontWeight="Bold"/>
+                <TextBlock x:Name="errorUsername" Foreground="{StaticResource ExitColor}" FontFamily="Trebuchet MS" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
             <Grid Grid.Row="2" Grid.Column="1" >
                 <Grid.ColumnDefinitions>
@@ -83,6 +91,7 @@
                     </Grid>
                     <PasswordBox x:Name="passwordConfirmBox" Style="{StaticResource passwordBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="registerEnable_KeyUp"/>
                 </StackPanel>
+                <TextBlock x:Name="errorPassword" Foreground="{StaticResource ExitColor}" FontFamily="Trebuchet MS" FontSize="15" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontWeight="Bold"/>
             </Grid>
             <StackPanel Grid.Row="3" Grid.Column="1" >
                 <Grid Margin="0 0 0 5">
@@ -94,8 +103,9 @@
                     <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Email Address" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}" Padding="0"/>
                 </Grid>
                 <TextBox x:Name="textMail" Style="{StaticResource textBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="registerEnable_KeyUp" />
+                <TextBlock x:Name="errorMail" Foreground="{StaticResource ExitColor}" FontFamily="Trebuchet MS" FontSize="15" FontWeight="Bold"/>
             </StackPanel>
-            <Button Grid.Row="4" Grid.Column="1" x:Name="btnRegister"  Style="{StaticResource BtnPrimaryThird}" Background="{StaticResource ThirdColor}" Content="Register Now" FontFamily="Kaushan Script" FontSize="28" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource ThirdDarkColor}" Canvas.ZIndex="4" Margin="0 10 0 10" IsEnabled="False"/>
+            <Button Grid.Row="4" Grid.Column="1" x:Name="btnRegister"  Style="{StaticResource BtnPrimaryThird}" Background="{StaticResource ThirdColor}" Content="Register Now" FontFamily="Kaushan Script" FontSize="22" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource ThirdDarkColor}" Canvas.ZIndex="4" Margin="0 10 0 10" IsEnabled="False" Click="BtnRegister_Click" />
 
         </Grid>
     </Grid>

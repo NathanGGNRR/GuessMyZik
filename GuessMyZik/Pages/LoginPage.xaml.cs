@@ -107,6 +107,18 @@ namespace GuessMyZik.Pages
                 btnRight.IsEnabled = true; //Enabled the button btnLeft.
             }
         }
+
+        /// <summary>
+        /// Called when you click on the button btnGuest.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to RoutedEventArgs.</param>
+        private void BtnGuest_Click(object sender, RoutedEventArgs e)
+        {
+            //
+            // FRAME WITH TWO CONSTRUCTEUR 1 AVEC USERS et un SANS
+            //
+        }
     }
 }
  

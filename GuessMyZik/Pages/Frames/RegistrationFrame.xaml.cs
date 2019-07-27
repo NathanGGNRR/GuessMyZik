@@ -12,6 +12,17 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using GuessMyZik.Classes;
+using Windows.UI.Xaml.Media.Animation;
+using Windows.Security.Cryptography.Core;
+using Windows.Storage.Streams;
+using Windows.Security.Cryptography;
+using Windows.UI.Popups;
+using System.Diagnostics;
+using Windows.Web.Http;
+using System.Net.NetworkInformation;
 
 namespace GuessMyZik.Pages.Frames
 {
@@ -20,9 +31,14 @@ namespace GuessMyZik.Pages.Frames
     /// </summary>
     public sealed partial class RegistrationFrame : Page
     {
+
+        private readonly SymmetricEncryption encryptionProvider;
+        private APIConnect apiConnect = new APIConnect();
+
         public RegistrationFrame()
         {
             this.InitializeComponent();
+            encryptionProvider = new SymmetricEncryption(); //Instantiates the SymmetricEncryption class
         }
 
         /// <summary>
@@ -40,6 +56,89 @@ namespace GuessMyZik.Pages.Frames
             {
                 btnRegister.IsEnabled = false; //Disabled the button btnRegister.
             }
+            this.resetErrorTextBox(); //Reset all error messages
         }
+
+        /// <summary>
+        /// Called when you click on the btnRegister button.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to RoutedEventArgs.</param>
+        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificationAuth.IsValidPassword(passwordBox.Password, passwordConfirmBox.Password)) //Check if both password match.
+            {
+                if(VerificationAuth.IsValidEmail(textMail.Text)) //Check if mail is valid.
+                {
+                    string passwordEncrypted = encryptionProvider.Encrypt(passwordBox.Password); //Encrypt the password.
+                    Users registration = new Users(textUsername.Text, passwordEncrypted, textMail.Text); //Create new Users with information.
+                    string response = await apiConnect.PostAsJsonAsync(registration, "http://localhost/api/auth/registration.php"); //HttpRequest to the URL with the user's information and recover the return.
+                    if (response == "YES") //Registration good.
+                    {
+                        //
+                        // FRAME WITH TWO CONSTRUCTEUR 1 AVEC USERS et un SANS
+                        //
+                    } else
+                    {
+                        Dictionary<string, string> dicoJSON = JsonConvert.DeserializeObject<Dictionary<string, string>>(response); //Deserialize the response of the php files to a dictionary.
+                        if (dicoJSON.ContainsKey("username")) //If the dictionary contains the key username.
+                        {
+                            VerificationAuth.AnimationErrorTextBox(textUsername, errorFirstTextBoxStoryboard, errorFirstTextBoxColor, btnRegister); //Launch error animation on textUsername TextBox.
+                            errorUsername.Text = "Your username is already taken.";
+                        }
+                        if (dicoJSON.ContainsKey("mail")) //If the dictionary contains the key mail.
+                        {
+                            VerificationAuth.AnimationErrorTextBox(textMail, errorSecondTextBoxStoryboard, errorSecondTextBoxColor, btnRegister); //Launch error animation on textMail TextBox.
+                            errorMail.Text = "Your email is already taken.";
+                        }
+                    }
+                    
+
+                } else
+                {
+                   VerificationAuth.AnimationErrorTextBox(textMail, errorFirstTextBoxStoryboard, errorFirstTextBoxColor, btnRegister); //Launch error animation on textMail TextBox.
+                    errorMail.Text = "Your email is invalid.";
+                }
+            }
+            else
+            {
+                VerificationAuth.AnimationErrorTextBox(passwordBox, errorFirstTextBoxStoryboard, errorFirstTextBoxColor, btnRegister); //Launch error animation on passwordBox PasswordBox.
+                VerificationAuth.AnimationErrorTextBox(passwordConfirmBox, errorSecondTextBoxStoryboard, errorSecondTextBoxColor, btnRegister); //Launch error animation on passwordConfirmBox PasswordBox.
+                errorPassword.Text = "The passwords do not match.";
+            }
+        }
+
+        /// <summary>
+        /// Called when the animation of the ErrorFirstTextBoxColor storyboard is finished.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to the target object.</param>
+        private void ErrorFirstTextBoxColor_Completed(object sender, object e)
+        {
+            errorFirstTextBoxStoryboard.Stop(); //Stop the storyboard
+        }
+
+        /// <summary>
+        /// Called when the animation of the ErrorSecondTextBoxColor storyboard is finished.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to the target object.</param>
+        private void ErrorSecondTextBoxColor_Completed(object sender, object e)
+        {
+            errorSecondTextBoxStoryboard.Stop(); //Stop the storyboard
+        }
+
+        /// <summary>
+        /// Function that empties all the TextBox.
+        /// </summary>
+        private void resetErrorTextBox()
+        {
+            errorPassword.Text = "";
+            errorMail.Text = "";
+            errorUsername.Text = "";
+        }
+
+        
+
     }
 }

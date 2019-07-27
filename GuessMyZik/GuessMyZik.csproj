@@ -118,6 +118,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\APIConnect.cs" />
+    <Compile Include="Classes\SymmetricEncryption.cs" />
+    <Compile Include="Classes\Users.cs" />
+    <Compile Include="Classes\VerificationAuth.cs" />
     <Compile Include="Pages\Frames\RegistrationFrame.xaml.cs">
       <DependentUpon>RegistrationFrame.xaml</DependentUpon>
     </Compile>

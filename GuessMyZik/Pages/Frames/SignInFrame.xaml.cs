@@ -12,6 +12,17 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
+using GuessMyZik.Classes;
+using Windows.UI.Xaml.Media.Animation;
+using Windows.Security.Cryptography.Core;
+using Windows.Storage.Streams;
+using Windows.Security.Cryptography;
+using Windows.UI.Popups;
+using System.Diagnostics;
+using Windows.Web.Http;
+using System.Net.NetworkInformation;
 
 namespace GuessMyZik.Pages.Frames
 {
@@ -20,9 +31,13 @@ namespace GuessMyZik.Pages.Frames
     /// </summary>
     public sealed partial class SignInFrame : Page
     {
+        private readonly SymmetricEncryption encryptionProvider;
+        private APIConnect apiConnect = new APIConnect();
+
         public SignInFrame()
         {
             this.InitializeComponent();
+            encryptionProvider = new SymmetricEncryption(); //Instantiates the SymmetricEncryption class
         }
 
         /// <summary>
@@ -39,6 +54,69 @@ namespace GuessMyZik.Pages.Frames
             {
                 btnConnect.IsEnabled = false; //Disabled the button btnRegister.
             }
+            this.resetErrorTextBox(); //Reset all error messages
+        }
+
+        /// <summary>
+        /// Called when the animation of the ErrorFirstTextBoxColor storyboard is finished.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to the target object.</param>
+        private void ErrorFirstTextBoxColor_Completed(object sender, object e)
+        {
+            errorFirstTextBoxStoryboard.Stop(); //Stop the storyboard
+        }
+
+        /// <summary>
+        /// Called when the animation of the ErrorSecondTextBoxColor storyboard is finished.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to the target object.</param>
+        private void ErrorSecondTextBoxColor_Completed(object sender, object e)
+        {
+            errorSecondTextBoxStoryboard.Stop(); //Stop the storyboard
+        }
+
+        /// <summary>
+        /// Called when you click on the btnRegister button.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to RoutedEventArgs.</param>
+        private async void BtnConnect_Click(object sender, RoutedEventArgs e)
+        {
+            string userLogin = textUserOrMail.Text;
+            string response = await apiConnect.PostAsJsonAsync(userLogin, "http://localhost/api/auth/login.php"); //HttpRequest to the URL with the user's information and recover the return.
+            if (response != "NO") //If the username or the mail is in the database.
+            {
+                Dictionary<string, string> dicoJSON = JsonConvert.DeserializeObject<Dictionary<string, string>>(response); //Deserialize the response of the php files to a dictionary.
+                string passwordEncrypted = encryptionProvider.Decrypt(dicoJSON["password"]); //Decrypt the password from the database.
+                if (passwordEncrypted == passwordBox.Password) //Check if the decrypted password and the password from the PasswordBox match.
+                {
+                    //
+                    // FRAME WITH TWO CONSTRUCTEUR 1 AVEC USERS et un SANS
+                    //
+                }
+                else
+                {
+                    VerificationAuth.AnimationErrorTextBox(textUserOrMail, errorFirstTextBoxStoryboard, errorFirstTextBoxColor, btnConnect); //Launch error animation on textUsername TextBox.
+                    VerificationAuth.AnimationErrorTextBox(passwordBox, errorSecondTextBoxStoryboard, errorSecondTextBoxColor, btnConnect); //Launch error animation on textUsername PasswordBox.
+                    errorPassword.Text = "Your identifiants are invalid.";
+                }
+            }
+            else
+            {
+                VerificationAuth.AnimationErrorTextBox(textUserOrMail, errorFirstTextBoxStoryboard, errorFirstTextBoxColor, btnConnect); //Launch error animation on textUsername TextBox.
+                errorUserOrMail.Text = "Your username or your email is invalid.";
+            }
+        }
+
+        /// <summary>
+        /// Function that empties all the TextBox.
+        /// </summary>
+        private void resetErrorTextBox()
+        {
+            errorPassword.Text = "";
+            errorUserOrMail.Text = "";
         }
     }
 }

@@ -118,12 +118,32 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\AlbumClasses\Album.cs" />
+    <Compile Include="Classes\AlbumClasses\Albums.cs" />
     <Compile Include="Classes\APIConnect.cs" />
+    <Compile Include="Classes\ArtistClasses\Artist.cs" />
+    <Compile Include="Classes\ArtistClasses\Artists.cs" />
+    <Compile Include="Classes\CategoryClasses\Category.cs" />
+    <Compile Include="Classes\CategoryClasses\Categories.cs" />
+    <Compile Include="Classes\GameFrameParameters.cs" />
+    <Compile Include="Classes\FrameParameters.cs" />
     <Compile Include="Classes\SymmetricEncryption.cs" />
+    <Compile Include="Classes\TrackClasses\Track.cs" />
+    <Compile Include="Classes\TrackClasses\Tracks.cs" />
     <Compile Include="Classes\Users.cs" />
+    <Compile Include="Classes\ChooseGame.cs" />
     <Compile Include="Classes\VerificationAuth.cs" />
+    <Compile Include="Pages\Frames\FristStepSoloFrame.xaml.cs">
+      <DependentUpon>FristStepSoloFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Frames\RegistrationFrame.xaml.cs">
       <DependentUpon>RegistrationFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\SecondStepSoloCategoryFrame.xaml.cs">
+      <DependentUpon>SecondStepSoloCategoryFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\SecondStepSoloOtherFrame.xaml.cs">
+      <DependentUpon>SecondStepSoloOtherFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frames\SignInFrame.xaml.cs">
       <DependentUpon>SignInFrame.xaml</DependentUpon>
@@ -136,6 +156,9 @@
     </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -232,7 +255,16 @@
     <Content Include="Assets\Pictures\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Pictures\MainPage\albumTest.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Pictures\MainPage\artistTest.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Pictures\platineLogo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Pictures\MainPage\profilGuest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Pictures\textLogo.png">
@@ -249,6 +281,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Assets\ResourceDictionary\ListViewStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\ResourceDictionary\StyleDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -257,9 +293,21 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Frames\FristStepSoloFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\Frames\RegistrationFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Frames\SecondStepSoloCategoryFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Frames\SecondStepSoloOtherFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Frames\SignInFrame.xaml">
       <SubType>Designer</SubType>
@@ -274,6 +322,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

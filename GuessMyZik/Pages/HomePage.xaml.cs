@@ -23,6 +23,9 @@ namespace GuessMyZik.Pages
     /// </summary>
     public sealed partial class HomePage : Page
     {
+
+        private Frame rootFrame;
+
         public HomePage()
         {
             this.InitializeComponent();
@@ -71,7 +74,13 @@ namespace GuessMyZik.Pages
         /// <param name="e">Event details to the object.</param>
         private void AnimationLoginPage(object sender, object e)
         {
-            this.Frame.Navigate(typeof(LoginPage)); //Close this page and open LoginPage.
+            rootFrame.Navigate(typeof(LoginPage), rootFrame); //Close this page and open LoginPage.
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            rootFrame = (Frame)e.Parameter;
         }
     }
 }

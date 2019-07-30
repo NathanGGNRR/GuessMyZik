@@ -31,6 +31,8 @@ namespace GuessMyZik.Pages.Frames
     /// </summary>
     public sealed partial class SignInFrame : Page
     {
+
+        private Frame rootFrame;
         private readonly SymmetricEncryption encryptionProvider;
         private APIConnect apiConnect = new APIConnect();
 
@@ -88,13 +90,11 @@ namespace GuessMyZik.Pages.Frames
             string response = await apiConnect.PostAsJsonAsync(userLogin, "http://localhost/api/auth/login.php"); //HttpRequest to the URL with the user's information and recover the return.
             if (response != "NO") //If the username or the mail is in the database.
             {
-                Dictionary<string, string> dicoJSON = JsonConvert.DeserializeObject<Dictionary<string, string>>(response); //Deserialize the response of the php files to a dictionary.
-                string passwordEncrypted = encryptionProvider.Decrypt(dicoJSON["password"]); //Decrypt the password from the database.
+                Users user = JsonConvert.DeserializeObject<Users>(response); //Deserialize the response of the php files to a dictionary.
+                string passwordEncrypted = encryptionProvider.Decrypt(user.password); //Decrypt the password from the database.
                 if (passwordEncrypted == passwordBox.Password) //Check if the decrypted password and the password from the PasswordBox match.
                 {
-                    //
-                    // FRAME WITH TWO CONSTRUCTEUR 1 AVEC USERS et un SANS
-                    //
+                    rootFrame.Navigate(typeof(MainPage), new FrameParameters(rootFrame, null,user), new DrillInNavigationTransitionInfo()); //Close this page and open MainPage.
                 }
                 else
                 {
@@ -118,5 +118,13 @@ namespace GuessMyZik.Pages.Frames
             errorPassword.Text = "";
             errorUserOrMail.Text = "";
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            rootFrame = (Frame)e.Parameter;
+        }
+
+       
     }
 }

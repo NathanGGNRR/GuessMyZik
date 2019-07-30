@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using GuessMyZik.Pages;
+using Windows.UI.Xaml.Media.Animation;
+using GuessMyZik.Classes;
 
 namespace GuessMyZik
 {
@@ -51,6 +53,12 @@ namespace GuessMyZik
                 // Create a Frame that can be used as a navigation context and navigate to the first page.
                 rootFrame = new Frame();
 
+                // Create a navigation Transition for the main frame.
+                TransitionCollection transitionCollection = new TransitionCollection();
+                transitionCollection.Add(new NavigationThemeTransition());
+                rootFrame.ContentTransitions = transitionCollection;
+
+
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
@@ -69,7 +77,7 @@ namespace GuessMyZik
                     // When the navigation stack is not restored, go to the first page,
                     // then configure the new page by sending the required information as
                     // setting.
-                    rootFrame.Navigate(typeof(LoginPage), e.Arguments);
+                    rootFrame.Navigate(typeof(MainPage), new FrameParameters(rootFrame, null, new Users("test","test","test@test.fr")), new DrillInNavigationTransitionInfo());
                 }
                 // Check that the current window is active
                 Window.Current.Activate();

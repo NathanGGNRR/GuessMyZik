@@ -48,5 +48,17 @@ namespace GuessMyZik.Classes
         }
 
 
+        /// <summary>
+        /// Function send string to the url with HttpClient.
+        /// </summary>
+        /// <param name="item">String to sent.</param>
+        /// <param name="url">URL of the API for the HttpRequest.</param>
+        public async Task<string> GetAsJsonAsync(string url)
+        {
+            HttpClient httpClient = new HttpClient(); //Instanciation of HttpClient.
+            var httpResponseMessage = await httpClient.GetAsync(new Uri(url)); //Send to the API Server (url) the string.
+            return this.response = await httpResponseMessage.Content.ReadAsStringAsync(); //Recover display content of the php files and convert to string.
+        }
+
     }
 }

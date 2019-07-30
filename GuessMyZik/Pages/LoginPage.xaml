@@ -12,7 +12,7 @@
     </Page.Background>
     <Page.Resources>
         <Storyboard x:Name="loginPageOpacityStoryBoard">
-            <DoubleAnimation Storyboard.TargetName="gridLoginPage" Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:1"/>
+            <DoubleAnimation Storyboard.TargetName="gridLoginPage" Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:1" />
         </Storyboard>
         <Storyboard x:Name="btnExitPointerEntered">
             <ColorAnimation Storyboard.TargetName="btnExit" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.3"/>
@@ -37,22 +37,9 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="gridExit" Grid.Column="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="35"/>
-                <ColumnDefinition Width="25"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid x:Name="gridBtnExit" Grid.Row="1" Grid.Column="1" PointerEntered="BtnExit_PointerEntered" PointerExited="BtnExit_PointerExited" Background="Transparent" Tapped="BtnExit_Tapped">
-                <Button x:Name="btnExit" Style="{StaticResource BtnExitSVG}" Background="{StaticResource WriteColor}" />
-            </Grid>
+        <Grid x:Name="gridBtnExit" Grid.ColumnSpan="5" Grid.RowSpan="3" PointerEntered="BtnExit_PointerEntered" PointerExited="BtnExit_PointerExited" Background="Transparent" Tapped="BtnExit_Tapped" Height="30" Width="30" Margin="0 25 25 0" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button x:Name="btnExit" Style="{StaticResource BtnExitSVG}" Background="{StaticResource WriteColor}" />
         </Grid>
-
         <Grid x:Name="gridBoxLogin" Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="9*"/>

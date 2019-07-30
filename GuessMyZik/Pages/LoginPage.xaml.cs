@@ -27,7 +27,9 @@ namespace GuessMyZik.Pages
     public sealed partial class LoginPage : Page
     {
 
+        private Frame rootFrame;
         private RegistrationFrame registrationFrame = new RegistrationFrame();
+        
 
         public LoginPage()
         {
@@ -75,7 +77,7 @@ namespace GuessMyZik.Pages
         {
             if ((sender as Button).Content.ToString() == "Registration") //Check if the content of the button BtnRight is equal to Registration.
             {
-                navigationLogin.Navigate(typeof(RegistrationFrame), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight }); //Display the page RegistrationFrame into the frame navigationLogin with an animation (Page come with slide from right).
+                navigationLogin.Navigate(typeof(RegistrationFrame), rootFrame, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight }); //Display the page RegistrationFrame into the frame navigationLogin with an animation (Page come with slide from right).
                 (sender as Button).Content = "Back"; //Change the content of the button btnRight to Back.
                 btnLeft.IsEnabled = false; //Disabled the button btnLeft.
             }
@@ -96,7 +98,7 @@ namespace GuessMyZik.Pages
         {
             if ((sender as Button).Content.ToString() == "Sign In") //Check if the content of the button BtnLeft is equal to Sign In.
             {
-                navigationLogin.Navigate(typeof(SignInFrame), null, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft }); //Display the page SignInFrame into the frame navigationLogin with an animation (Page come with slide from left).
+                navigationLogin.Navigate(typeof(SignInFrame), rootFrame, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromLeft }); //Display the page SignInFrame into the frame navigationLogin with an animation (Page come with slide from left).
                 (sender as Button).Content = "Back"; //Change the content of the button btnLeft to Back.
                 btnRight.IsEnabled = false;  //Disabled the button btnLeft.
             }
@@ -115,10 +117,15 @@ namespace GuessMyZik.Pages
         /// <param name="e">Event details to RoutedEventArgs.</param>
         private void BtnGuest_Click(object sender, RoutedEventArgs e)
         {
-            //
-            // FRAME WITH TWO CONSTRUCTEUR 1 AVEC USERS et un SANS
-            //
+            rootFrame.Navigate(typeof(MainPage), null, new DrillInNavigationTransitionInfo()); //Close this page and open MainPage.
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            rootFrame = (Frame)e.Parameter;
+        }
+
     }
 }
  

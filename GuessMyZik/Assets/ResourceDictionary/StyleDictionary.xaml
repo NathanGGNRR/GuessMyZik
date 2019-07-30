@@ -14,18 +14,24 @@
     
     <Color x:Key="ThirdColor">#6D8EA0</Color>
     <Color x:Key="ThirdDarkColor">#557989</Color>
-
+    <Color x:Key="ThirdLightColor">#FF99ACB6</Color>
+    <Color x:Key="ThirdWhiteColor">#FFC3D5DE</Color>
+    
     <Color x:Key="DarkColor">#182825</Color>
     <Color x:Key="LightBlue">#22AED1</Color>
 
     <Color x:Key="ExitColor">#FFAE0B0B</Color>
+    <Color x:Key="ExitDarkColor">#6e0707</Color>
+
     <Color x:Key="LastColor">#22aed1</Color>
+    <Color x:Key="LastDarkColor">#187c95</Color>
 
     <Color x:Key="TextBoxBorderBrush">#66000000</Color>
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Assets/ResourceDictionary/ButtonStyleDictionary.xaml" />
         <ResourceDictionary Source="/Assets/ResourceDictionary/TextBoxStyleDictionary.xaml" />
+        <ResourceDictionary Source="/Assets/ResourceDictionary/ListViewStyleDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

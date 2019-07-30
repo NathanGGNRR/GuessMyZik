@@ -32,6 +32,7 @@ namespace GuessMyZik.Pages.Frames
     public sealed partial class RegistrationFrame : Page
     {
 
+        private Frame rootFrame;
         private readonly SymmetricEncryption encryptionProvider;
         private APIConnect apiConnect = new APIConnect();
 
@@ -75,9 +76,7 @@ namespace GuessMyZik.Pages.Frames
                     string response = await apiConnect.PostAsJsonAsync(registration, "http://localhost/api/auth/registration.php"); //HttpRequest to the URL with the user's information and recover the return.
                     if (response == "YES") //Registration good.
                     {
-                        //
-                        // FRAME WITH TWO CONSTRUCTEUR 1 AVEC USERS et un SANS
-                        //
+                        rootFrame.Navigate(typeof(MainPage), new FrameParameters(rootFrame, null, registration), new DrillInNavigationTransitionInfo()); //Close this page and open MainPage.
                     } else
                     {
                         Dictionary<string, string> dicoJSON = JsonConvert.DeserializeObject<Dictionary<string, string>>(response); //Deserialize the response of the php files to a dictionary.
@@ -138,7 +137,12 @@ namespace GuessMyZik.Pages.Frames
             errorUsername.Text = "";
         }
 
-        
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            rootFrame = (Frame)e.Parameter;
+        }
+
 
     }
 }

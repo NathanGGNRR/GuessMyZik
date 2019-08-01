@@ -20,6 +20,7 @@ namespace GuessMyZik.Classes.AlbumClasses
         public string cover_xl { get; set; }
         public int genre_id { get; set; }
         public int nb_tracks { get; set; }
+        public string release_date { get; set; }
         public string record_type { get; set; }
         public string tracklist { get; set; }
         public bool explicit_lyrics { get; set; }

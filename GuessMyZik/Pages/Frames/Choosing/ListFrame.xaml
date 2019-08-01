@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="GuessMyZik.Pages.Frames.Choosing.ListFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GuessMyZik.Pages.Frames.Choosing"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    NavigationCacheMode="Required"
+    VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Page.Resources>
+        
+        
+        
+    </Page.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Pictures/backgroundSecondary.png"/>
+        </Grid.Background>
+        <ListView x:Name="listViewTracks" SelectionMode="Multiple" ItemContainerStyle="{StaticResource ListViewItemContainerStyleCheckBoxSolo}" IsItemClickEnabled="True" ItemClick="ListViewTracks_ItemClick"   >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="image" Source="{Binding Path=album.cover_medium}" Stretch="Uniform" Margin="10 5 10 5"/>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="{Binding title_short}" FontSize="20"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="from the album:" FontSize="15" Margin="0 0 4 0"/>
+                                <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="{Binding Path=album.title}" FontSize="15"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="duration:" FontSize="13" Margin="0 0 4 0"/>
+                                <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="{Binding duration}" FontSize="13" Margin="0 0 4 0"/>
+                                <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="seconds" FontSize="13" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>

@@ -15,9 +15,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using GuessMyZik.Pages.Frames;
+using GuessMyZik.Pages.Frames.Login;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
+using GuessMyZik.Classes;
 
 namespace GuessMyZik.Pages
 {
@@ -28,8 +29,7 @@ namespace GuessMyZik.Pages
     {
 
         private Frame rootFrame;
-        private RegistrationFrame registrationFrame = new RegistrationFrame();
-        
+        private APIConnect apiConnect = new APIConnect();
 
         public LoginPage()
         {
@@ -115,9 +115,10 @@ namespace GuessMyZik.Pages
         /// </summary>
         /// <param name="sender">Element on which the event is launched.</param>
         /// <param name="e">Event details to RoutedEventArgs.</param>
-        private void BtnGuest_Click(object sender, RoutedEventArgs e)
+        private async void BtnGuest_Click(object sender, RoutedEventArgs e)
         {
-            rootFrame.Navigate(typeof(MainPage), null, new DrillInNavigationTransitionInfo()); //Close this page and open MainPage.
+            string nbVisiteur = await apiConnect.PostAsJsonAsync("ADD", "http://localhost/api/auth/guest.php");
+            rootFrame.Navigate(typeof(MainPage), new FrameParameters(rootFrame, null, Convert.ToInt16(nbVisiteur)), new DrillInNavigationTransitionInfo()); //Close this page and open MainPage.         
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

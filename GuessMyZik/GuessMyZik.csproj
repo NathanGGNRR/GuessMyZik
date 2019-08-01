@@ -125,30 +125,41 @@
     <Compile Include="Classes\ArtistClasses\Artists.cs" />
     <Compile Include="Classes\CategoryClasses\Category.cs" />
     <Compile Include="Classes\CategoryClasses\Categories.cs" />
+    <Compile Include="Classes\ChoosingFrameParametersArtists.cs" />
     <Compile Include="Classes\GameFrameParameters.cs" />
     <Compile Include="Classes\FrameParameters.cs" />
+    <Compile Include="Classes\Levels.cs" />
     <Compile Include="Classes\SymmetricEncryption.cs" />
     <Compile Include="Classes\TrackClasses\Track.cs" />
     <Compile Include="Classes\TrackClasses\Tracks.cs" />
     <Compile Include="Classes\Users.cs" />
     <Compile Include="Classes\ChooseGame.cs" />
     <Compile Include="Classes\VerificationAuth.cs" />
-    <Compile Include="Pages\Frames\FristStepSoloFrame.xaml.cs">
+    <Compile Include="Pages\Frames\Choosing\GridFrame.xaml.cs">
+      <DependentUpon>GridFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Choosing\ListFrame.xaml.cs">
+      <DependentUpon>ListFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Steps\FourStepSoloFrame.xaml.cs">
+      <DependentUpon>FourStepSoloFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Steps\FristStepSoloFrame.xaml.cs">
       <DependentUpon>FristStepSoloFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\RegistrationFrame.xaml.cs">
+    <Compile Include="Pages\Frames\Login\RegistrationFrame.xaml.cs">
       <DependentUpon>RegistrationFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\SecondStepSoloCategoryFrame.xaml.cs">
-      <DependentUpon>SecondStepSoloCategoryFrame.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Frames\SecondStepSoloOtherFrame.xaml.cs">
+    <Compile Include="Pages\Frames\Steps\SecondStepSoloOtherFrame.xaml.cs">
       <DependentUpon>SecondStepSoloOtherFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\SignInFrame.xaml.cs">
+    <Compile Include="Pages\Frames\Login\SignInFrame.xaml.cs">
       <DependentUpon>SignInFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\WelcomeLoginFrame.xaml.cs">
+    <Compile Include="Pages\Frames\Steps\ThirdStepSoloFrame.xaml.cs">
+      <DependentUpon>ThirdStepSoloFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Login\WelcomeLoginFrame.xaml.cs">
       <DependentUpon>WelcomeLoginFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
@@ -281,7 +292,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Assets\ResourceDictionary\CheckBoxStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\ResourceDictionary\ExpanderStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\ResourceDictionary\ListViewStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\ResourceDictionary\SliderStyleDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,27 +316,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\FristStepSoloFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\Frames\RegistrationFrame.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\Frames\SecondStepSoloCategoryFrame.xaml">
+    <Page Include="Pages\Frames\Choosing\GridFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\SecondStepSoloOtherFrame.xaml">
+    <Page Include="Pages\Frames\Choosing\ListFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\SignInFrame.xaml">
+    <Page Include="Pages\Frames\Steps\FourStepSoloFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\WelcomeLoginFrame.xaml">
+    <Page Include="Pages\Frames\Steps\FristStepSoloFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Frames\Login\RegistrationFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Frames\Steps\SecondStepSoloOtherFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Frames\Login\SignInFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Frames\Steps\ThirdStepSoloFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Frames\Login\WelcomeLoginFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -333,6 +368,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp">
+      <Version>5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI">
+      <Version>5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.2</Version>

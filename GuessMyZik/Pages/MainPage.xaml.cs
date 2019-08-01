@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using GuessMyZik.Pages.Frames;
+using GuessMyZik.Pages.Frames.Steps;
+using GuessMyZik.Pages.Frames.Choosing;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using GuessMyZik.Classes;
@@ -29,6 +31,7 @@ using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Toolkit.Uwp.UI;
 
 namespace GuessMyZik.Pages
 {
@@ -40,12 +43,15 @@ namespace GuessMyZik.Pages
 
         private Frame rootFrame;
         private Users connectedUser;
+        private int? nbVisiteur;
+        private APIConnect apiConnect = new APIConnect();
+        
 
         public MainPage()
         {
             this.InitializeComponent();
             this.DataContext = this;
-            navigationSolo.Navigate(typeof(FristStepSoloFrame), new FrameParameters(rootFrame, navigationSolo, connectedUser));
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -54,9 +60,50 @@ namespace GuessMyZik.Pages
             FrameParameters parameter = (FrameParameters)e.Parameter;
             rootFrame = parameter.rootFrame;
             connectedUser = parameter.connectedUser;
+            nbVisiteur = parameter.nbVisiteur;
+            navigationSolo.Navigate(typeof(FristStepSoloFrame), new GameFrameParameters(rootFrame, navigationSolo, connectedUser, null, new Dictionary<int, object>(), null, null));
+            InitializeMainPage();
+             
         }
 
-      
+        private void InitializeMainPage()
+        {
+            if(connectedUser != null)
+            {
+                gridUser.Visibility = Visibility.Visible;
+                btnsUser.Visibility = Visibility.Visible;
+                InitializeUser();
+            } else
+            {
+                gridGuest.Visibility = Visibility.Visible;
+                btnsGuest.Visibility = Visibility.Visible;
+                InitializeGuest();
+            }
+        }
+
+        private async void InitializeUser()
+        {
+            textWelcomeUser.Text = "Welcome " + connectedUser.username;
+            personPicture.Initials = (connectedUser.username[0].ToString() + connectedUser.username[1].ToString()).ToUpper();
+            string response = await apiConnect.GetAsJsonAsync("http://localhost/api/auth/level.php");
+            List<Levels> levels = JsonConvert.DeserializeObject<List<Levels>>(response);
+            double amountActualLevel = Convert.ToDouble(levels[Convert.ToInt16(connectedUser.level_id) - 1].amount_xp);
+            double amountNextLevel = 38400;
+            if (connectedUser.level_id != "10")
+            {
+                amountNextLevel = Convert.ToDouble(levels[Convert.ToInt16(connectedUser.level_id)].amount_xp);
+            }
+            double calcul = Convert.ToDouble(((Convert.ToDouble(connectedUser.xp) - amountActualLevel) / (amountNextLevel - amountActualLevel)) * 100);
+            double value = Math.Round(calcul);
+            progressUser.Value = value;
+            textLvl.Text = "Lvl " + connectedUser.level_id;
+        }
+
+        private void InitializeGuest()
+        {
+            textNbVisiteur.Text = nbVisiteur.ToString();
+        }
+
 
         /// <summary>
         /// Called when you click on the grid element gridBtnExit.
@@ -199,6 +246,7 @@ namespace GuessMyZik.Pages
         private void BtnDisconnectUser_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
+            rootFrame.GoBack();
         }
 
         /// <summary>
@@ -208,10 +256,10 @@ namespace GuessMyZik.Pages
         /// <param name="e">Event details to TappedRoutedEventArgs.</param>
         private void BtnDisconnectGuest_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            apiConnect.PostAsJson(nbVisiteur.ToString(), "http://localhost/api/auth/guest.php");
+            rootFrame.GoBack();
         }
 
         
-
     }
 }

@@ -29,16 +29,25 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-
-// Pour plus d'informations sur le modèle d'élément Page vierge, consultez la page https://go.microsoft.com/fwlink/?LinkId=234238
-
-namespace GuessMyZik.Pages.Frames
+namespace GuessMyZik.Pages.Frames.Steps
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
     public sealed partial class SecondStepSoloOtherFrame : Page
     {
+        #region Variables
+        private GameFrameParameters gameFrameParameters;
+
+        private Frame gameFrame;
+        private int? classType;
+        private APIConnect apiConnect = new APIConnect();
+        private Users connectedUser; 
+
+        private int pageFound = 0;
+        private int pageAdd = 0;
+        #endregion
+
         public SecondStepSoloOtherFrame()
         {
             this.InitializeComponent();
@@ -48,11 +57,10 @@ namespace GuessMyZik.Pages.Frames
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            GameFrameParameters parameter = (GameFrameParameters)e.Parameter;
-            rootFrame = parameter.rootFrame;
-            gameFrame = parameter.secondFrame;
-            connectedUser = parameter.connectedUser;
-            classType = parameter.classTypeSelected;
+            gameFrameParameters = (GameFrameParameters)e.Parameter;
+            gameFrame = gameFrameParameters.secondFrame;
+            classType = gameFrameParameters.classTypeSelected;
+            connectedUser = gameFrameParameters.connectedUser;
             InitializeUIControl();
         }
 
@@ -70,7 +78,7 @@ namespace GuessMyZik.Pages.Frames
             else if (classType == 2)
             {
                 textFound.Text = "Album(s) found: (can scroll name)";
-                textAdd.Text = "dataTemplateFound(s) add: (scrollable too)";
+                textAdd.Text = "Album(s) add: (scrollable too)";
                 DataTemplate dataTemplateFound = this.Resources["templateAlbumFound"] as DataTemplate;
                 listViewFound.ItemTemplate = dataTemplateFound;
                 DataTemplate dataTemplateAdd = this.Resources["templateAlbumAdd"] as DataTemplate;
@@ -79,27 +87,20 @@ namespace GuessMyZik.Pages.Frames
             else
             {
                 textFound.Text = "Track(s) found: (can scroll name)";
-                textAdd.Text = "Track(s) add: (scrollable too)";
+                textAdd.Text = "Track(s) add: (min 5 / max 20)";
                 DataTemplate dataTemplateFound = this.Resources["templateTrackFound"] as DataTemplate;
                 listViewFound.ItemTemplate = dataTemplateFound;
                 DataTemplate dataTemplateAdd = this.Resources["templateTrackAdd"] as DataTemplate;
                 listViewAdd.ItemTemplate = dataTemplateAdd;
+                if (gameFrameParameters.connectedUser != null)
+                {
+                    checkBoxTrack.Visibility = Visibility.Visible;
+                }
             }
         }
 
         #region Global
-
-        #region Variables
-        private Frame rootFrame;
-        private Frame gameFrame;
-
-        private Users connectedUser;
-        private int classType;
-        private APIConnect apiConnect = new APIConnect();
-
-        private int pageFound = 0;
-        private int pageAdd = 0;
-        #endregion
+      
 
         #region Event Search
         private void BtnSearch_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -169,6 +170,25 @@ namespace GuessMyZik.Pages.Frames
             gameFrame.GoBack();
         }
 
+        private void BtnValid_Click(object sender, RoutedEventArgs e)
+        {
+            if(classType == 1)
+            {
+                gameFrameParameters.listSelected[0] = listArtistsAdd;
+                gameFrame.Navigate(typeof(ThirdStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            } else if (classType == 2)
+            {
+                gameFrameParameters.listSelected[0] = listAlbumsAdd;
+                gameFrame.Navigate(typeof(ThirdStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            } else
+            {
+                gameFrameParameters.game_duel = checkBoxTrack.IsChecked;
+                gameFrameParameters.number_tracks = listTracksAdd.data.Count();
+                gameFrameParameters.listTrack = listTracksAdd.data;
+                //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            }
+        }
+
         private void BtnBackFound_Click(object sender, RoutedEventArgs e)
         {
             chooseClassNext(false, true);
@@ -187,6 +207,17 @@ namespace GuessMyZik.Pages.Frames
         private void BtnNextAdd_Click(object sender, RoutedEventArgs e)
         {
             chooseClassNext(true, false);
+        }
+
+        private void EnableValidButton()
+        {
+            btnValid.IsEnabled = true;
+        }
+
+
+        private void DisableValidButton()
+        {
+            btnValid.IsEnabled = false;
         }
 
 
@@ -335,6 +366,21 @@ namespace GuessMyZik.Pages.Frames
                     ProgressAnimation(false, progressFound, textEmptyFound);
                     if (listArtists.data.Count != 0)
                     {
+                        if(listArtistsAdd.data.Count != 0)
+                        {
+                            List<Artist> listArtistCleared = listArtists.data;
+                            foreach(Artist artistListArtist in listArtists.data.ToList())
+                            {
+                                foreach (Artist artistListArtistAdd in listArtistsAdd.data)
+                                {
+                                    if (artistListArtist.id == artistListArtistAdd.id)
+                                    {
+                                        listArtistCleared.Remove(artistListArtist);
+                                    }
+                                }
+                            }
+                            listArtists.data = listArtistCleared;     
+                        }
                         ShowListView(true, gridFound, textEmptyFound);
                         chooseClass();
                     }
@@ -350,6 +396,21 @@ namespace GuessMyZik.Pages.Frames
                     ProgressAnimation(false, progressFound, textEmptyFound);
                     if (listAlbums.data.Count != 0)
                     {
+                        if (listAlbumsAdd.data.Count != 0)
+                        {
+                            List<Album> listAlbumsCleared = listAlbums.data;
+                            foreach (Album albumListAlbum in listAlbums.data.ToList())
+                            {
+                                foreach (Album albumListAlbumAdd in listAlbumsAdd.data)
+                                {
+                                    if (albumListAlbum.id == albumListAlbumAdd.id)
+                                    {
+                                        listAlbumsCleared.Remove(albumListAlbum);
+                                    }
+                                }
+                            }
+                            listAlbums.data = listAlbumsCleared;
+                        }
                         ShowListView(true, gridFound, textEmptyFound);
                         chooseClass();
                     }
@@ -365,6 +426,21 @@ namespace GuessMyZik.Pages.Frames
                     ProgressAnimation(false, progressFound, textEmptyFound);
                     if (listTracks.data.Count != 0)
                     {
+                        if (listTracksAdd.data.Count != 0)
+                        {
+                            List<Track> listTracksCleared = listTracks.data;
+                            foreach (Track trackListTrack in listTracks.data.ToList())
+                            {
+                                foreach (Track trackListTrackAdd in listTracksAdd.data)
+                                {
+                                    if (trackListTrack.id == trackListTrackAdd.id)
+                                    {
+                                        listTracksCleared.Remove(trackListTrack);
+                                    }
+                                }
+                            }
+                            listTracks.data = listTracksCleared;
+                        }
                         ShowListView(true, gridFound, textEmptyFound);
                         chooseClass();
                     }
@@ -520,7 +596,7 @@ namespace GuessMyZik.Pages.Frames
         {
             if (nextPage)
             {
-                if (((pageAdd + 1) * 5) + 5 >= this.listArtists.data.Count)
+                if (((pageAdd + 1) * 5) + 5 >= this.listArtistsAdd.data.Count)
                 {
                     int count = this.listArtistsAdd.data.Count - (pageAdd * 5);
                     pageAdd++;
@@ -549,7 +625,7 @@ namespace GuessMyZik.Pages.Frames
                     LoadArtistsAdd();
                 }
                 else
-                {
+                {  
                     btnBackAdd.IsEnabled = false;
                 }
             }
@@ -576,9 +652,8 @@ namespace GuessMyZik.Pages.Frames
                     LoadArtistsFound(false);
                 }
             }
-            if (artistAdd.Count > 5)
+            if (listArtistsAdd.data.Count > 5)
             {
-
                 btnNextAdd.IsEnabled = true;
             }
             else
@@ -587,6 +662,7 @@ namespace GuessMyZik.Pages.Frames
                 btnNextAdd.IsEnabled = false;
                 if (listArtistsAdd.data.Count == 1)
                 {
+                    EnableValidButton();
                     ShowListView(true, gridAdd, textEmptyAdd);
                 }
             }
@@ -601,7 +677,7 @@ namespace GuessMyZik.Pages.Frames
             LoadArtistsFound();
             LoadArtistsAdd();
 
-            if (artistAdd.Count > 5)
+            if (listArtistsAdd.data.Count > 5)
             {
                 btnNextAdd.IsEnabled = true;
             }
@@ -611,6 +687,7 @@ namespace GuessMyZik.Pages.Frames
                 btnBackAdd.IsEnabled = false;
                 if (listArtistsAdd.data.Count == 0)
                 {
+                    DisableValidButton();
                     ShowListView(false, gridAdd, textEmptyAdd);
                 }
             }
@@ -754,7 +831,7 @@ namespace GuessMyZik.Pages.Frames
         {
             if (nextPage)
             {
-                if (((pageAdd + 1) * 5) + 5 >= this.listArtists.data.Count)
+                if (((pageAdd + 1) * 5) + 5 >= this.listAlbumsAdd.data.Count)
                 {
                     int count = this.listAlbumsAdd.data.Count - (pageAdd * 5);
                     pageAdd++;
@@ -797,12 +874,13 @@ namespace GuessMyZik.Pages.Frames
 
         private void listViewFoundClickAlbum(ItemClickEventArgs e)
         {
+            
             albumAdd.Insert(0, e.ClickedItem as Album);
             listAlbumsAdd.data.Insert(0, e.ClickedItem as Album);
             albumShowing.Remove(e.ClickedItem as Album);
             listAlbums.data.Remove(e.ClickedItem as Album);
             LoadAlbumsFound();
-            LoadAlbumsAdd();
+            LoadAlbumsAdd(); 
             if (albumShowing.Count == 0 && listAlbums.data.Count > 0)
             {
                 if (pageFound > 0)
@@ -810,7 +888,7 @@ namespace GuessMyZik.Pages.Frames
                     LoadAlbumsFound(false);
                 }
             }
-            if (albumAdd.Count > 5)
+            if (listAlbumsAdd.data.Count > 5)
             {
 
                 btnNextAdd.IsEnabled = true;
@@ -821,6 +899,7 @@ namespace GuessMyZik.Pages.Frames
                 btnNextAdd.IsEnabled = false;
                 if (listAlbumsAdd.data.Count == 1)
                 {
+                    EnableValidButton();
                     ShowListView(true, gridAdd, textEmptyAdd);
                 }
             }
@@ -835,7 +914,7 @@ namespace GuessMyZik.Pages.Frames
             LoadAlbumsFound();
             LoadAlbumsAdd();
 
-            if (albumAdd.Count > 5)
+            if (listAlbumsAdd.data.Count > 5)
             {
                 btnNextAdd.IsEnabled = true;
             }
@@ -845,6 +924,7 @@ namespace GuessMyZik.Pages.Frames
                 btnBackAdd.IsEnabled = false;
                 if (listAlbumsAdd.data.Count == 0)
                 {
+                    DisableValidButton();
                     ShowListView(false, gridAdd, textEmptyAdd);
                 }
             }
@@ -988,7 +1068,7 @@ namespace GuessMyZik.Pages.Frames
         {
             if (nextPage)
             {
-                if (((pageAdd + 1) * 5) + 5 >= this.listArtists.data.Count)
+                if (((pageAdd + 1) * 5) + 5 >= this.listTracksAdd.data.Count)
                 {
                     int count = this.listTracksAdd.data.Count - (pageAdd * 5);
                     pageAdd++;
@@ -1044,9 +1124,12 @@ namespace GuessMyZik.Pages.Frames
                     LoadTracksFound(false);
                 }
             }
-            if (trackAdd.Count > 5)
+            if (listTracksAdd.data.Count > 5)
             {
-
+                if (listTracksAdd.data.Count > 20)
+                {
+                    DisableValidButton();
+                }
                 btnNextAdd.IsEnabled = true;
             }
             else
@@ -1056,6 +1139,10 @@ namespace GuessMyZik.Pages.Frames
                 if (listTracksAdd.data.Count == 1)
                 {
                     ShowListView(true, gridAdd, textEmptyAdd);
+                }
+                if (listTracksAdd.data.Count >= 5)
+                {            
+                    EnableValidButton();
                 }
             }
         }
@@ -1069,7 +1156,7 @@ namespace GuessMyZik.Pages.Frames
             LoadTracksFound();
             LoadTracksAdd();
 
-            if (trackAdd.Count > 5)
+            if (listTracks.data.Count > 5)
             {
                 btnNextAdd.IsEnabled = true;
             }
@@ -1081,11 +1168,15 @@ namespace GuessMyZik.Pages.Frames
                 {
                     ShowListView(false, gridAdd, textEmptyAdd);
                 }
+                if(listTracksAdd.data.Count < 5)
+                {
+                    DisableValidButton();
+                }
             }
         }
 
         #endregion
 
-  
+       
     }
 }

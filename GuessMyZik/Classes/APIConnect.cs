@@ -49,6 +49,30 @@ namespace GuessMyZik.Classes
 
 
         /// <summary>
+        /// Function convert item paramter to JSON and send him to the url with HttpClient.
+        /// </summary>
+        /// <param name="item">Object to convert to JSON.</param>
+        /// <param name="url">URL of the API for the HttpRequest.</param>
+        public void PostAsJson<T>(T item, string url)
+        {
+            HttpClient httpClient = new HttpClient();   //Instanciation of HttpClient.
+            var itemAsJson = JsonConvert.SerializeObject(item); //Convert the object item to JSON Object.
+            _ = httpClient.PostAsync(new Uri(url), new HttpStringContent(itemAsJson)); //Send to the API Server (url) the JSON Object.
+        }
+
+        /// <summary>
+        /// Function send string to the url with HttpClient.
+        /// </summary>
+        /// <param name="item">String to sent.</param>
+        /// <param name="url">URL of the API for the HttpRequest.</param>
+        public void PostAsJson(string item, string url)
+        {
+            HttpClient httpClient = new HttpClient(); //Instanciation of HttpClient.
+            _ = httpClient.PostAsync(new Uri(url), new HttpStringContent(item)); //Send to the API Server (url) the string.
+        }
+
+
+        /// <summary>
         /// Function send string to the url with HttpClient.
         /// </summary>
         /// <param name="item">String to sent.</param>

@@ -24,7 +24,7 @@ using System.Diagnostics;
 using Windows.Web.Http;
 using System.Net.NetworkInformation;
 
-namespace GuessMyZik.Pages.Frames
+namespace GuessMyZik.Pages.Frames.Login
 {
     /// <summary>
     /// An empty page can be used alone or as a landing page within a frame.
@@ -86,6 +86,8 @@ namespace GuessMyZik.Pages.Frames
         /// <param name="e">Event details to RoutedEventArgs.</param>
         private async void BtnConnect_Click(object sender, RoutedEventArgs e)
         {
+            progressConnect.IsActive = true;
+            backgroundWaiting.Visibility = Visibility.Visible;
             string userLogin = textUserOrMail.Text;
             string response = await apiConnect.PostAsJsonAsync(userLogin, "http://localhost/api/auth/login.php"); //HttpRequest to the URL with the user's information and recover the return.
             if (response != "NO") //If the username or the mail is in the database.
@@ -94,10 +96,12 @@ namespace GuessMyZik.Pages.Frames
                 string passwordEncrypted = encryptionProvider.Decrypt(user.password); //Decrypt the password from the database.
                 if (passwordEncrypted == passwordBox.Password) //Check if the decrypted password and the password from the PasswordBox match.
                 {
-                    rootFrame.Navigate(typeof(MainPage), new FrameParameters(rootFrame, null,user), new DrillInNavigationTransitionInfo()); //Close this page and open MainPage.
+                    rootFrame.Navigate(typeof(MainPage), new FrameParameters(rootFrame, null, user), new DrillInNavigationTransitionInfo()); //Close this page and open MainPage.
                 }
                 else
                 {
+                    progressConnect.IsActive = false;
+                    backgroundWaiting.Visibility = Visibility.Collapsed;
                     VerificationAuth.AnimationErrorTextBox(textUserOrMail, errorFirstTextBoxStoryboard, errorFirstTextBoxColor, btnConnect); //Launch error animation on textUsername TextBox.
                     VerificationAuth.AnimationErrorTextBox(passwordBox, errorSecondTextBoxStoryboard, errorSecondTextBoxColor, btnConnect); //Launch error animation on textUsername PasswordBox.
                     errorPassword.Text = "Your identifiants are invalid.";
@@ -105,6 +109,8 @@ namespace GuessMyZik.Pages.Frames
             }
             else
             {
+                progressConnect.IsActive = false;
+                backgroundWaiting.Visibility = Visibility.Collapsed;
                 VerificationAuth.AnimationErrorTextBox(textUserOrMail, errorFirstTextBoxStoryboard, errorFirstTextBoxColor, btnConnect); //Launch error animation on textUsername TextBox.
                 errorUserOrMail.Text = "Your username or your email is invalid.";
             }

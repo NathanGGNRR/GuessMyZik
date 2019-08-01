@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    NavigationCacheMode="Required"
     mc:Ignorable="d" 
     >
     <Page.Background>
@@ -74,16 +76,16 @@
                     <ColumnDefinition Width="0.7*"/>
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
-                <Image x:Name="guessPicture" Source="/Assets/Pictures/MainPage/profilGuest.png" Stretch="Uniform"  Canvas.ZIndex="2"  Margin="0,0,10,0" VerticalAlignment="Top"/>
-                <Grid Grid.Column="1" x:Name="gridGuest" Visibility="Visible">
+                <PersonPicture x:Name="personPicture" Width="75" VerticalAlignment="Top" BackgroundSizing="InnerBorderEdge" />
+                <Grid Grid.Column="1" x:Name="gridGuest" Visibility="Collapsed">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="Welcome as a guest" FontSize="38" VerticalAlignment="Bottom" Padding="0,0,0,0" HorizontalAlignment="Left"/>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" Padding="0,0,0,0">
-                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" VerticalAlignment="Center" Text="Guest number:" FontSize="25" Margin="0 0 10 0" Padding="0 0 2 0"/>
-                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="250" FontSize="28" VerticalAlignment="Center" Padding="0 0 2 0"/>
+                    <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" Text="Welcome as a guest" FontSize="38" VerticalAlignment="Bottom" Padding="0,0,0,0" HorizontalAlignment="Left"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Padding="0,0,0,0" Margin="0 0 0 27">
+                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" VerticalAlignment="Center" Text="Guest number:" FontSize="25" Margin="0 0 10 0" Padding="0 0 2 0" />
+                        <TextBlock x:Name="textNbVisiteur" Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="250" FontSize="28" VerticalAlignment="Center" Padding="0 0 2 0"/>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1" x:Name="gridUser" Visibility="Collapsed">
@@ -91,7 +93,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="Welcome AtomicxFire" FontSize="38" VerticalAlignment="Bottom" Padding="0,0,0,0" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="textWelcomeUser" Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="Welcome AtomicxFire" FontSize="38" VerticalAlignment="Bottom" Padding="0,0,0,0" HorizontalAlignment="Left"/>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
@@ -116,7 +118,7 @@
                             <Rectangle Grid.Row="3" Grid.ColumnSpan="3" Fill="{StaticResource SecondaryDarkColor}"/>
                             <Rectangle Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Fill="{StaticResource SecondaryDarkColor}"/>
                             <Rectangle Grid.Column="2"  Grid.Row="1" Grid.RowSpan="3" Fill="{StaticResource SecondaryDarkColor}"/>
-                            <ProgressBar Value="74" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1" Background="{StaticResource WriteColor}" Foreground="{StaticResource SecondaryDarkColor}" />
+                            <ProgressBar x:Name="progressUser" Value="74" VerticalAlignment="Stretch" Grid.Row="2" Grid.Column="1" Background="{StaticResource WriteColor}" Foreground="{StaticResource SecondaryDarkColor}" />
                         </Grid>
                         <TextBlock x:Name="textLvl" Grid.Column="1"  Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="Lvl 2" FontSize="18" VerticalAlignment="Top" Padding="0,0,0,0" HorizontalAlignment="Center" />
                         <Grid Grid.Column="2">
@@ -147,10 +149,10 @@
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
                 <Grid x:Name="gridBtnDisconnectGuest" Grid.Column="6" Grid.Row="1" PointerEntered="BtnDisconnectGuest_PointerEntered" PointerExited="BtnDisconnectGuest_PointerExited" Background="Transparent" Tapped="BtnDisconnectGuest_Tapped">
-                    <Button x:Name="btnDisconnectGuest" Style="{StaticResource BtnDisconnect}" Background="{StaticResource SecondaryColor}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch"/>
+                    <Button x:Name="btnDisconnectGuest" Style="{StaticResource BtnDisconnect}" Background="{StaticResource SecondaryColor}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" />
                 </Grid>
             </Grid>
-            <Grid  Grid.Column="3" x:Name="btnsUser" Visibility="Visible">
+            <Grid  Grid.Column="3" x:Name="btnsUser" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.2*"/>
                     <ColumnDefinition Width="0.7*"/>

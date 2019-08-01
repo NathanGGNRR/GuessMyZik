@@ -23,8 +23,12 @@ using Windows.UI.Popups;
 using System.Diagnostics;
 using Windows.Web.Http;
 using System.Net.NetworkInformation;
+using Windows.UI.Xaml.Media.Imaging;
+using Windows.Graphics.Imaging;
+using System.Text;
+using Windows.Storage;
 
-namespace GuessMyZik.Pages.Frames
+namespace GuessMyZik.Pages.Frames.Login
 {
     /// <summary>
     /// An empty page can be used alone or as a landing page within a frame.
@@ -71,14 +75,18 @@ namespace GuessMyZik.Pages.Frames
             {
                 if(VerificationAuth.IsValidEmail(textMail.Text)) //Check if mail is valid.
                 {
+                    progressRegister.IsActive = true;
+                    backgroundWaiting.Visibility = Visibility.Visible;
                     string passwordEncrypted = encryptionProvider.Encrypt(passwordBox.Password); //Encrypt the password.
-                    Users registration = new Users(textUsername.Text, passwordEncrypted, textMail.Text); //Create new Users with information.
+                    Users registration = new Users(textUsername.Text, passwordEncrypted, textMail.Text, "1", "0"); //Create new Users with information.
                     string response = await apiConnect.PostAsJsonAsync(registration, "http://localhost/api/auth/registration.php"); //HttpRequest to the URL with the user's information and recover the return.
                     if (response == "YES") //Registration good.
                     {
                         rootFrame.Navigate(typeof(MainPage), new FrameParameters(rootFrame, null, registration), new DrillInNavigationTransitionInfo()); //Close this page and open MainPage.
                     } else
                     {
+                        progressRegister.IsActive = false;
+                        backgroundWaiting.Visibility = Visibility.Collapsed;
                         Dictionary<string, string> dicoJSON = JsonConvert.DeserializeObject<Dictionary<string, string>>(response); //Deserialize the response of the php files to a dictionary.
                         if (dicoJSON.ContainsKey("username")) //If the dictionary contains the key username.
                         {

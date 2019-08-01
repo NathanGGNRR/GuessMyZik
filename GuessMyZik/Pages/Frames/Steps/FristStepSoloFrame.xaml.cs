@@ -2,30 +2,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-using Newtonsoft.Json;
-using System.Threading.Tasks;
-using GuessMyZik.Classes;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.Security.Cryptography.Core;
-using Windows.Storage.Streams;
-using Windows.Security.Cryptography;
-using Windows.UI.Popups;
-using System.Diagnostics;
-using Windows.Web.Http;
-using System.Net.NetworkInformation;
-using Windows.UI.Xaml.Shapes;
+using Windows.UI.Xaml.Navigation;
+using GuessMyZik.Pages.Frames;
+using Windows.ApplicationModel.Core;
 using Windows.UI;
+using GuessMyZik.Classes;
+using GuessMyZik.Classes.ArtistClasses;
+using GuessMyZik.Classes.AlbumClasses;
+using GuessMyZik.Classes.TrackClasses;
+using Windows.UI.Xaml.Shapes;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using Newtonsoft.Json;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
-namespace GuessMyZik.Pages.Frames
+namespace GuessMyZik.Pages.Frames.Steps
 {
     /// <summary>
     /// An empty page can be used alone or as a landing page within a frame.
@@ -33,7 +37,7 @@ namespace GuessMyZik.Pages.Frames
     public sealed partial class FristStepSoloFrame : Page
     {
 
-        private FrameParameters frameParameters;
+        private GameFrameParameters gameFrameParameters;
 
         private Frame rootFrame;
         private Frame gameFrame;
@@ -49,10 +53,10 @@ namespace GuessMyZik.Pages.Frames
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            frameParameters = (FrameParameters)e.Parameter;
-            rootFrame = frameParameters.rootFrame;
-            gameFrame = frameParameters.secondFrame;
-            connectedUser = frameParameters.connectedUser;
+            gameFrameParameters = (GameFrameParameters)e.Parameter;
+            rootFrame = gameFrameParameters.rootFrame;
+            gameFrame = gameFrameParameters.secondFrame;
+            connectedUser = gameFrameParameters.connectedUser;
         }
 
         private void BtnMusic_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -65,14 +69,14 @@ namespace GuessMyZik.Pages.Frames
             ChooseGame.AnimationColorBtnSoloExited(pathMusic, (sender as Button), "ThirdColor");
         }
 
-        private void BtnCategory_PointerEntered(object sender, PointerRoutedEventArgs e)
+        private void BtnRandom_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            ChooseGame.AnimationColorBtnSoloEntered(pathCategory, (sender as Button), "WriteColor");
+            ChooseGame.AnimationColorBtnSoloEntered(pathRandom, (sender as Button), "WriteColor");
         }
 
-        private void BtnCategory_PointerExited(object sender, PointerRoutedEventArgs e)
+        private void BtnRandom_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            ChooseGame.AnimationColorBtnSoloExited(pathCategory, (sender as Button), "ThirdColor");
+            ChooseGame.AnimationColorBtnSoloExited(pathRandom, (sender as Button), "ThirdColor");
         }
 
         private void BtnAlbum_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -95,24 +99,28 @@ namespace GuessMyZik.Pages.Frames
             ChooseGame.AnimationColorBtnSoloExited(pathArtist, (sender as Button), "ThirdColor");
         }
 
-        private void BtnCategory_Click(object sender, RoutedEventArgs e)
+        private void BtnRandom_Click(object sender, RoutedEventArgs e)
         {
-            gameFrame.Navigate(typeof(SecondStepSoloCategoryFrame), new FrameParameters(rootFrame, gameFrame, connectedUser));
+            gameFrameParameters.classTypeSelected = 4;
+            gameFrame.Navigate(typeof(ThirdStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void BtnMusic_Click(object sender, RoutedEventArgs e)
         {
-            gameFrame.Navigate(typeof(SecondStepSoloOtherFrame), new GameFrameParameters(rootFrame, gameFrame, connectedUser, 3), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.classTypeSelected = 3;
+            gameFrame.Navigate(typeof(SecondStepSoloOtherFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void BtnAlbum_Click(object sender, RoutedEventArgs e)
         {
-            gameFrame.Navigate(typeof(SecondStepSoloOtherFrame), new GameFrameParameters(rootFrame, gameFrame, connectedUser, 2), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.classTypeSelected = 2;
+            gameFrame.Navigate(typeof(SecondStepSoloOtherFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void BtnArtist_Click(object sender, RoutedEventArgs e)
         {
-            gameFrame.Navigate(typeof(SecondStepSoloOtherFrame), new GameFrameParameters(rootFrame, gameFrame, connectedUser, 1), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.classTypeSelected = 1;
+            gameFrame.Navigate(typeof(SecondStepSoloOtherFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }
 }

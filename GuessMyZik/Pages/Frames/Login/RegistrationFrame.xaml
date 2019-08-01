@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="GuessMyZik.Pages.Frames.RegistrationFrame"
+    x:Class="GuessMyZik.Pages.Frames.Login.RegistrationFrame"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:GuessMyZik.Pages.Frames"
+    xmlns:local="using:GuessMyZik.Pages.Frames.Login"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -51,6 +51,8 @@
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
+            <ProgressRing x:Name="progressRegister" Grid.RowSpan="6" Grid.ColumnSpan="3" IsActive="False" Foreground="{StaticResource SecondaryColor}" Height="50" Width="50"/>
+            <Rectangle x:Name="backgroundWaiting" Fill="Black" Grid.RowSpan="5" Grid.ColumnSpan="3" Canvas.ZIndex="5" Opacity="0.5" Visibility="Collapsed"/>
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <Grid Margin="0 0 0 5">
                     <Grid.ColumnDefinitions>

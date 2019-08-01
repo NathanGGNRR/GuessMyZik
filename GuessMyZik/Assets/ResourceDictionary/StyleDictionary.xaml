@@ -32,6 +32,9 @@
         <ResourceDictionary Source="/Assets/ResourceDictionary/ButtonStyleDictionary.xaml" />
         <ResourceDictionary Source="/Assets/ResourceDictionary/TextBoxStyleDictionary.xaml" />
         <ResourceDictionary Source="/Assets/ResourceDictionary/ListViewStyleDictionary.xaml" />
+        <ResourceDictionary Source="/Assets/ResourceDictionary/ExpanderStyleDictionary.xaml" />
+        <ResourceDictionary Source="/Assets/ResourceDictionary/SliderStyleDictionary.xaml" />
+        <ResourceDictionary Source="/Assets/ResourceDictionary/CheckBoxStyleDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

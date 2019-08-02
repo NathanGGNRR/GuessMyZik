@@ -31,7 +31,7 @@ using System.Windows.Input;
 using Microsoft.Toolkit.Uwp.UI;
 using GuessMyZik.Classes.FrameParameters;
 
-namespace GuessMyZik.Pages.Frames.Steps
+namespace GuessMyZik.Pages.Frames.Steps.Solo
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.

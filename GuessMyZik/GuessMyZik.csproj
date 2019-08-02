@@ -144,22 +144,25 @@
     <Compile Include="Pages\Frames\Choosing\ListFrame.xaml.cs">
       <DependentUpon>ListFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\Steps\FourStepSoloFrame.xaml.cs">
+    <Compile Include="Pages\Frames\Steps\Solo\FourStepSoloFrame.xaml.cs">
       <DependentUpon>FourStepSoloFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\Steps\FristStepSoloFrame.xaml.cs">
+    <Compile Include="Pages\Frames\Steps\Solo\FristStepSoloFrame.xaml.cs">
       <DependentUpon>FristStepSoloFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frames\Login\RegistrationFrame.xaml.cs">
       <DependentUpon>RegistrationFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\Steps\SecondStepSoloOtherFrame.xaml.cs">
+    <Compile Include="Pages\Frames\Steps\Multi\FirstStepMultiFrame.xaml.cs">
+      <DependentUpon>FirstStepMultiFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Steps\Solo\SecondStepSoloOtherFrame.xaml.cs">
       <DependentUpon>SecondStepSoloOtherFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frames\Login\SignInFrame.xaml.cs">
       <DependentUpon>SignInFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\Steps\ThirdStepSoloFrame.xaml.cs">
+    <Compile Include="Pages\Frames\Steps\Solo\ThirdStepSoloFrame.xaml.cs">
       <DependentUpon>ThirdStepSoloFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frames\Login\WelcomeLoginFrame.xaml.cs">
@@ -331,11 +334,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\Steps\FourStepSoloFrame.xaml">
+    <Page Include="Pages\Frames\Steps\Solo\FourStepSoloFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\Steps\FristStepSoloFrame.xaml">
+    <Page Include="Pages\Frames\Steps\Solo\FristStepSoloFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -343,7 +346,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Frames\Steps\SecondStepSoloOtherFrame.xaml">
+    <Page Include="Pages\Frames\Steps\Multi\FirstStepMultiFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Frames\Steps\Solo\SecondStepSoloOtherFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -351,7 +358,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\Steps\ThirdStepSoloFrame.xaml">
+    <Page Include="Pages\Frames\Steps\Solo\ThirdStepSoloFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

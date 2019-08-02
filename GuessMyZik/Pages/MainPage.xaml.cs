@@ -15,7 +15,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using GuessMyZik.Pages.Frames;
-using GuessMyZik.Pages.Frames.Steps;
+using GuessMyZik.Pages.Frames.Steps.Solo;
+using GuessMyZik.Pages.Frames.Steps.Multi;
 using GuessMyZik.Pages.Frames.Choosing;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
@@ -62,6 +63,7 @@ namespace GuessMyZik.Pages
             connectedUser = parameter.connectedUser;
             nbVisiteur = parameter.nbVisiteur;
             navigationSolo.Navigate(typeof(FristStepSoloFrame), new GameFrameParameters(rootFrame, navigationSolo, connectedUser, null, new Dictionary<int, object>(), null, null));
+            navigationMulti.Navigate(typeof(FirstStepMultiFrame), new GameFrameParameters(rootFrame, navigationMulti, connectedUser, null, new Dictionary<int, object>(), null, null));
             InitializeMainPage();
              
         }

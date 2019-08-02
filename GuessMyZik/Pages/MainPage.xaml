@@ -223,6 +223,8 @@
                     </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="6"/>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="6"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="6"/>
                     </Grid.RowDefinitions>
@@ -235,6 +237,15 @@
                     <Rectangle Grid.Row="4" Grid.ColumnSpan="3" Fill="{StaticResource ThirdDarkColor}"/>
                     <Rectangle Grid.Column="0" Grid.RowSpan="7" Fill="{StaticResource ThirdDarkColor}"/>
                     <Rectangle Grid.Column="2"  Grid.RowSpan="7" Fill="{StaticResource ThirdDarkColor}"/>
+                    <Rectangle Grid.Row="2" Grid.Column="1" Fill="{StaticResource ThirdDarkColor}"/>
+                    <TextBlock x:Name="textMultiGame" Grid.Row="1" Grid.Column="1"  Foreground="{StaticResource ThirdDarkColor}" FontFamily="Kaushan Script"  Text="Multi Game" FontSize="36" VerticalAlignment="Center" Padding="0,0,0,0" HorizontalAlignment="Center" />
+                    <Frame x:Name="navigationMulti" Grid.Column="1" Grid.Row="3">
+                        <Frame.ContentTransitions>
+                            <TransitionCollection>
+                                <NavigationThemeTransition />
+                            </TransitionCollection>
+                        </Frame.ContentTransitions>
+                    </Frame>
                 </Grid>
             </Grid>
             <Grid Grid.Row="2" Grid.ColumnSpan="3">

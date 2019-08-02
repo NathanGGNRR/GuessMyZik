@@ -1042,6 +1042,68 @@
         </Setter>
     </Style>
 
+    <Style x:Key="BtnMultiGame" TargetType="Button">
+        <Setter Property="BackgroundSizing" Value="OuterBorderEdge"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0 0 0 0"/>
+        <Setter Property="FocusVisualMargin" Value="-3"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="3"/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="background" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{StaticResource WriteColor}"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="text" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{StaticResource SecondaryColor}"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="background" Storyboard.TargetProperty="(Rectangle.Fill).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{StaticResource SecondaryDarkColor}"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="text" Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="00:00:0.5" Value="{StaticResource WriteColor}"/>
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle x:Name="borderLeft" Grid.RowSpan="4" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle x:Name="borderRight" Grid.Column="3" Grid.RowSpan="4" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle x:Name="borderTop" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle x:Name="borderBottom" Grid.Row="3" Grid.Column="1" Fill="{TemplateBinding BorderBrush}"/>
+                        <Rectangle x:Name="background" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Fill="{TemplateBinding Background}"  Canvas.ZIndex="0"/>
+                        <ContentPresenter Grid.Row="1" Grid.Column="1" x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" Content="{TemplateBinding Content}" Margin="0 5 0 5" Canvas.ZIndex="3"/>
+                        <TextBlock x:Name="text" Grid.Row="2" Grid.Column="1"  Text="{TemplateBinding Tag}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Padding="0,0,0,0" HorizontalAlignment="Center" Canvas.ZIndex="3"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
     <Style x:Key="BtnExitSVG" TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>

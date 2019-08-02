@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GuessMyZik.Classes.FrameParameters;
 
-namespace GuessMyZik.Pages.Frames.Steps
+namespace GuessMyZik.Pages.Frames.Steps.Solo
 {
     /// <summary>
     /// An empty page can be used alone or as a landing page within a frame.

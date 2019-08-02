@@ -123,15 +123,18 @@
     <Compile Include="Classes\APIConnect.cs" />
     <Compile Include="Classes\ArtistClasses\Artist.cs" />
     <Compile Include="Classes\ArtistClasses\Artists.cs" />
-    <Compile Include="Classes\CategoryClasses\Category.cs" />
-    <Compile Include="Classes\CategoryClasses\Categories.cs" />
-    <Compile Include="Classes\ChoosingFrameParametersArtists.cs" />
-    <Compile Include="Classes\GameFrameParameters.cs" />
-    <Compile Include="Classes\FrameParameters.cs" />
+    <Compile Include="Classes\FrameParameters\ChoosingFrameParameters.cs" />
+    <Compile Include="Classes\FrameParameters\ChoosingFrameParametersAlbums.cs" />
+    <Compile Include="Classes\FrameParameters\ChoosingFrameParametersArtists.cs" />
+    <Compile Include="Classes\FrameParameters\GameFrameParameters.cs" />
+    <Compile Include="Classes\FrameParameters\FrameParameters.cs" />
     <Compile Include="Classes\Levels.cs" />
+    <Compile Include="Classes\RandomClasse.cs" />
     <Compile Include="Classes\SymmetricEncryption.cs" />
     <Compile Include="Classes\TrackClasses\Track.cs" />
     <Compile Include="Classes\TrackClasses\Tracks.cs" />
+    <Compile Include="Classes\TrackRandomClasses\Contributor.cs" />
+    <Compile Include="Classes\TrackRandomClasses\TrackRandom.cs" />
     <Compile Include="Classes\Users.cs" />
     <Compile Include="Classes\ChooseGame.cs" />
     <Compile Include="Classes\VerificationAuth.cs" />
@@ -297,6 +300,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\ResourceDictionary\ExpanderStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Assets\ResourceDictionary\GridViewStyleDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

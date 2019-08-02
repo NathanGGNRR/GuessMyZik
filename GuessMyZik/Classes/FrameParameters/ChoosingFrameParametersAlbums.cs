@@ -23,7 +23,6 @@ using GuessMyZik.Classes;
 using GuessMyZik.Classes.ArtistClasses;
 using GuessMyZik.Classes.AlbumClasses;
 using GuessMyZik.Classes.TrackClasses;
-using GuessMyZik.Classes.CategoryClasses;
 using Windows.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -34,20 +33,20 @@ using System.Windows.Input;
 using Microsoft.Toolkit.Uwp.UI;
 
 
-namespace GuessMyZik.Classes
+namespace GuessMyZik.Classes.FrameParameters
 {
-    class ChoosingFrameParametersArtists
+    class ChoosingFrameParametersAlbums
     {
         public Frame choosingFrame { get; set; }
-        public List<Artist> listArtist { get; set; }
-        public Tracks listMusicArtist { get; set; }
+        public Albums listAlbum { get; set; }
+        public Tracks listMusicAlbum { get; set; }
         public List<Track> listMusicChoosing { get; set; }
         public TextBox textMusics { get; set; }
 
-        public ChoosingFrameParametersArtists(Frame frame, List<Artist> listArtist, Tracks listMusicArtist, List<Track> listMusicChoosing, TextBox textMusics)
+        public ChoosingFrameParametersAlbums(Frame frame, Albums listAlbum, List<Track> listMusicChoosing, TextBox textMusics)
         {
             this.choosingFrame = frame;
-            this.listArtist = listArtist;
+            this.listAlbum = listAlbum;
             this.listMusicChoosing = listMusicChoosing;
             this.textMusics = textMusics;
         }

@@ -17,7 +17,7 @@
             <RowDefinition Height="0.9*"/>
             <RowDefinition Height="0.08*"/>
         </Grid.RowDefinitions>
-        <TextBlock  x:Name="textFound" Foreground="{StaticResource SecondaryColor}" FontFamily="Kaushan Script"  Text="Choose between 5 and 20 musics among all the artists: " FontSize="18" VerticalAlignment="Center" Margin="10 0 0 0" HorizontalAlignment="Left" />
+        <TextBlock  x:Name="textFound" Foreground="{StaticResource SecondaryColor}" FontFamily="Kaushan Script" FontSize="18" VerticalAlignment="Center" Margin="10 0 0 0" HorizontalAlignment="Left" />
         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right" Margin="0 0 10 0">
             <TextBlock  Foreground="{StaticResource SecondaryColor}" FontFamily="Kaushan Script"  Text="Number of musics: " FontSize="15" VerticalAlignment="Center" Margin="0 0 5 0" />
             <TextBox x:Name="textNumberMusics" Style="{StaticResource TextBoxNumberMusic}" Foreground="{StaticResource SecondaryColor}" FontFamily="Kaushan Script"  Text="0" FontSize="15" BorderThickness="0" Background="{StaticResource WriteColor}" IsEnabled="False" Padding="0" Height="20" Width="25" TextChanged="TextNumberMusics_TextChanged" />

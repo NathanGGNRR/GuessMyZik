@@ -28,6 +28,7 @@ using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages.Frames.Choosing
 {
@@ -42,29 +43,54 @@ namespace GuessMyZik.Pages.Frames.Choosing
             this.DataContext = this;
         }
 
-        private ChoosingFrameParametersArtists choosingFrameParameters;
+        private ChoosingFrameParameters choosingFrameParameters;
         private APIConnect apiConnect = new APIConnect();
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            choosingFrameParameters = (ChoosingFrameParametersArtists)e.Parameter;
-            listViewTracks.ItemsSource = choosingFrameParameters.listMusicArtist.data;
-            if(choosingFrameParameters.listMusicChoosing.Count != 0)
+            choosingFrameParameters = (ChoosingFrameParameters)e.Parameter;
+            if (choosingFrameParameters.artists != null)
             {
-                SelectMusicChoosing();
+                listViewTracks.ItemsSource = choosingFrameParameters.artists.listMusicArtist.data;
+                if(choosingFrameParameters.artists.listMusicChoosing.Count != 0)
+                {
+                    SelectMusicChoosing();
+                }
+            } else
+            {
+                listViewTracks.ItemsSource = choosingFrameParameters.albums.listMusicAlbum.data;
+                if (choosingFrameParameters.albums.listMusicChoosing.Count != 0)
+                {
+                    SelectMusicChoosing();
+                }
             }
-        }
+    }
 
         private void SelectMusicChoosing()
         {
             foreach(Track item in listViewTracks.Items)
             {
-                foreach(Track itemTwo in choosingFrameParameters.listMusicChoosing)
-                if(item.id == itemTwo.id)
+                if (choosingFrameParameters.artists != null)
                 {
-                    listViewTracks.SelectedItems.Add(item);
-                    break;
+                    foreach (Track itemTwo in choosingFrameParameters.artists.listMusicChoosing)
+                    {
+                        if (item.id == itemTwo.id)
+                        {
+                            listViewTracks.SelectedItems.Add(item);
+                            break;
+                        }
+                    }
+                } else
+                {
+                    foreach (Track itemTwo in choosingFrameParameters.albums.listMusicChoosing)
+                    {
+                        if (item.id == itemTwo.id)
+                        {
+                            listViewTracks.SelectedItems.Add(item);
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -81,24 +107,47 @@ namespace GuessMyZik.Pages.Frames.Choosing
                     break;
                 }
             }
-           
-            if (itemSelected)
+
+            if (choosingFrameParameters.artists != null)
             {
-
-                foreach(Track track in choosingFrameParameters.listMusicChoosing)
-                {
-                    if(track.id == (e.ClickedItem as Track).id)
+                if (itemSelected)
+                { 
+                    foreach (Track track in choosingFrameParameters.artists.listMusicChoosing)
                     {
-                        choosingFrameParameters.listMusicChoosing.Remove(track);
-                        break;
-                    }
+                        if (track.id == (e.ClickedItem as Track).id)
+                        {
+                            choosingFrameParameters.artists.listMusicChoosing.Remove(track);
+                            break;
+                        }
 
+                    }
+                    choosingFrameParameters.artists.textMusics.Text = choosingFrameParameters.artists.listMusicChoosing.Count.ToString();
                 }
-                choosingFrameParameters.textMusics.Text = choosingFrameParameters.listMusicChoosing.Count.ToString();
+                else
+                {
+                    choosingFrameParameters.artists.listMusicChoosing.Add(e.ClickedItem as Track);
+                    choosingFrameParameters.artists.textMusics.Text = choosingFrameParameters.artists.listMusicChoosing.Count.ToString();
+                }
             } else
             {
-                choosingFrameParameters.listMusicChoosing.Add(e.ClickedItem as Track);
-                choosingFrameParameters.textMusics.Text = choosingFrameParameters.listMusicChoosing.Count.ToString();
+                if (itemSelected)
+                {
+                    foreach (Track track in choosingFrameParameters.albums.listMusicChoosing)
+                    {
+                        if (track.id == (e.ClickedItem as Track).id)
+                        {
+                            choosingFrameParameters.albums.listMusicChoosing.Remove(track);
+                            break;
+                        }
+
+                    }
+                    choosingFrameParameters.albums.textMusics.Text = choosingFrameParameters.albums.listMusicChoosing.Count.ToString();
+                }
+                else
+                {
+                    choosingFrameParameters.albums.listMusicChoosing.Add(e.ClickedItem as Track);
+                    choosingFrameParameters.albums.textMusics.Text = choosingFrameParameters.albums.listMusicChoosing.Count.ToString();
+                }
             }
         }
 

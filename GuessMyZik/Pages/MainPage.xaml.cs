@@ -23,7 +23,6 @@ using GuessMyZik.Classes;
 using GuessMyZik.Classes.ArtistClasses;
 using GuessMyZik.Classes.AlbumClasses;
 using GuessMyZik.Classes.TrackClasses;
-using GuessMyZik.Classes.CategoryClasses;
 using Windows.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -32,6 +31,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Toolkit.Uwp.UI;
+using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages
 {

@@ -23,6 +23,7 @@ using Windows.UI.Popups;
 using System.Diagnostics;
 using Windows.Web.Http;
 using System.Net.NetworkInformation;
+using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages.Frames.Login
 {

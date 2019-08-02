@@ -27,6 +27,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.Graphics.Imaging;
 using System.Text;
 using Windows.Storage;
+using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages.Frames.Login
 {

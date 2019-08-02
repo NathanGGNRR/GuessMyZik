@@ -35,6 +35,7 @@
         <ResourceDictionary Source="/Assets/ResourceDictionary/ExpanderStyleDictionary.xaml" />
         <ResourceDictionary Source="/Assets/ResourceDictionary/SliderStyleDictionary.xaml" />
         <ResourceDictionary Source="/Assets/ResourceDictionary/CheckBoxStyleDictionary.xaml" />
+        <ResourceDictionary Source="/Assets/ResourceDictionary/GridViewStyleDictionary.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
 </ResourceDictionary>

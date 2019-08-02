@@ -28,6 +28,7 @@ using Newtonsoft.Json;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages.Frames.Choosing
 {
@@ -42,14 +43,27 @@ namespace GuessMyZik.Pages.Frames.Choosing
             this.DataContext = this;
         }
 
-        private ChoosingFrameParametersArtists choosingFrameParameters;
+        private ChoosingFrameParameters choosingFrameParameters;
         private APIConnect apiConnect = new APIConnect();
+        private int classType;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            choosingFrameParameters = (ChoosingFrameParametersArtists)e.Parameter;
-            gridViewArtist.ItemsSource = choosingFrameParameters.listArtist;
+            choosingFrameParameters = (ChoosingFrameParameters)e.Parameter;      
+            if(choosingFrameParameters.artists != null)
+            {
+                classType = 1;
+                DataTemplate dataTemplateArtist = this.Resources["templateArtist"] as DataTemplate;
+                gridView.ItemTemplate = dataTemplateArtist;
+                gridView.ItemsSource = choosingFrameParameters.artists.listArtist;
+            } else
+            {
+                classType = 2;
+                DataTemplate dataTemplateAlbum = this.Resources["templateAlbum"] as DataTemplate;
+                gridView.ItemTemplate = dataTemplateAlbum;
+                gridView.ItemsSource = choosingFrameParameters.albums.listAlbum.data;
+            }
         }
 
         private async Task<Albums> RemoveDuplicateAlbum(ItemClickEventArgs e)
@@ -95,17 +109,47 @@ namespace GuessMyZik.Pages.Frames.Choosing
             return tracks;
         }
 
-        private async void GridViewArtist_ItemClick(object sender, ItemClickEventArgs e)
+        private async Task<Tracks> StoreAllTracks(Album album)
+        {
+            string responseTwo = await apiConnect.GetAsJsonAsync(album.tracklist + "?limit=25");
+            Tracks tracksAlbum = JsonConvert.DeserializeObject<Tracks>(responseTwo);
+            foreach (Track trackAlbum in tracksAlbum.data)
+            {
+                trackAlbum.album = album;
+            }
+            return tracksAlbum;
+        }
+
+        private void GridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             progressMusics.IsActive = true;
             backgroundWaiting.Visibility = Visibility.Visible;
-            Albums albums = await RemoveDuplicateAlbum(e);           
-            choosingFrameParameters.listMusicArtist = await StoreAllTracks(albums);
-            progressMusics.IsActive = false;
-            backgroundWaiting.Visibility = Visibility.Collapsed;
-            choosingFrameParameters.choosingFrame.Navigate(typeof(ListFrame), choosingFrameParameters);
+            if (classType == 1)
+            {
+                GridViewArtistClick(e);
+            } else
+            {
+                GridViewAlbumClick(e);
+            }   
         }
 
+
+        private async void GridViewArtistClick(ItemClickEventArgs e)
+        {
+            Albums albums = await RemoveDuplicateAlbum(e);
+            choosingFrameParameters.artists.listMusicArtist = await StoreAllTracks(albums);
+            progressMusics.IsActive = false;
+            backgroundWaiting.Visibility = Visibility.Collapsed;
+            choosingFrameParameters.artists.choosingFrame.Navigate(typeof(ListFrame), choosingFrameParameters);
+        }
+
+        private async void GridViewAlbumClick(ItemClickEventArgs e)
+        {
+            choosingFrameParameters.albums.listMusicAlbum = await StoreAllTracks(e.ClickedItem as Album);
+            progressMusics.IsActive = false;
+            backgroundWaiting.Visibility = Visibility.Collapsed;
+            choosingFrameParameters.albums.choosingFrame.Navigate(typeof(ListFrame), choosingFrameParameters);
+        }
 
     }
 }

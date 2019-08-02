@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using GuessMyZik.Classes.TrackClasses;
 
-namespace GuessMyZik.Classes
+namespace GuessMyZik.Classes.FrameParameters
 {
     class GameFrameParameters
     {

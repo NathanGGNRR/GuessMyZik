@@ -26,5 +26,24 @@ namespace GuessMyZik.Classes.TrackClasses
         public Artist artist { get; set; }
         public Album album { get; set; }
         public string type { get; set; }
+
+        public Track(string id, bool readable, string title, string title_short, string title_version, string link, string duration, string rank, bool explicit_lyrics, int explicit_content_lyrics, int explicit_content_cover, string preview, Artist artist, Album album, string type)
+        {
+            this.id = id;
+            this.readable = readable;
+            this.title = title;
+            this.title_short = title_short;
+            this.title_version = title_version;
+            this.link = link;
+            this.duration = duration;
+            this.rank = rank;
+            this.explicit_lyrics = explicit_lyrics;
+            this.explicit_content_lyrics = explicit_content_lyrics;
+            this.explicit_content_cover = explicit_content_cover;
+            this.preview = preview;
+            this.artist = artist;
+            this.album = album;
+            this.type = type;
+        }
     }
 }

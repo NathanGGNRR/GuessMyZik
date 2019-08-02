@@ -21,7 +21,6 @@ using GuessMyZik.Classes;
 using GuessMyZik.Classes.ArtistClasses;
 using GuessMyZik.Classes.AlbumClasses;
 using GuessMyZik.Classes.TrackClasses;
-using GuessMyZik.Classes.CategoryClasses;
 using Windows.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -30,6 +29,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Toolkit.Uwp.UI;
+using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages.Frames.Steps
 {
@@ -40,8 +40,9 @@ namespace GuessMyZik.Pages.Frames.Steps
     {
         #region Variables
         private GameFrameParameters gameFrameParameters;
-
+        private RandomClasse randomClasse = new RandomClasse();
         private Frame gameFrame;
+        private APIConnect apiConnect = new APIConnect();
 
         #endregion
 
@@ -121,13 +122,24 @@ namespace GuessMyZik.Pages.Frames.Steps
             gameFrame.Navigate(typeof(FourStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
-        private void BtnValidRandom_Click(object sender, RoutedEventArgs e)
+        private async void BtnValidRandom_Click(object sender, RoutedEventArgs e)
         {
+            progressMusics.IsActive = true;
+            backgroundWaiting.Visibility = Visibility.Visible;
             gameFrameParameters.game_duel = checkBoxRandom.IsChecked;
             gameFrameParameters.number_tracks = Convert.ToInt16(sliderRandom.Value);
-
-            //Fonction RANDOM
-
+            if(gameFrameParameters.classTypeSelected == 1)
+            {
+                gameFrameParameters.listTrack = await randomClasse.AllTracksArtist(gameFrameParameters.listSelected[0] as Artists, Convert.ToInt16(gameFrameParameters.number_tracks));
+            } else {
+                gameFrameParameters.listTrack = await randomClasse.AllTracksAlbum(gameFrameParameters.listSelected[0] as Albums, Convert.ToInt16(gameFrameParameters.number_tracks));
+            }
+            progressMusics.IsActive = false;
+            backgroundWaiting.Visibility = Visibility.Collapsed;
+            if(gameFrameParameters.listTrack.Count != gameFrameParameters.number_tracks)
+            {
+                gameFrameParameters.number_tracks = gameFrameParameters.listTrack.Count;
+            }
             //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
@@ -177,13 +189,15 @@ namespace GuessMyZik.Pages.Frames.Steps
             ChooseGame.AnimationColorBtnSoloExited(pathValidStepOne, (sender as Button), "WriteColor");
         }
 
-        private void BtnValidStepOne_Click(object sender, RoutedEventArgs e)
+        private async void BtnValidStepOne_Click(object sender, RoutedEventArgs e)
         {
+            progressMusics.IsActive = true;
+            backgroundWaiting.Visibility = Visibility.Visible;
             gameFrameParameters.game_duel = checkBoxRandom.IsChecked;
             gameFrameParameters.number_tracks = Convert.ToInt16(sliderStepOne.Value);
-            
-            //Fonction RANDOM
-
+            gameFrameParameters.listTrack = await randomClasse.RandomTracks(Convert.ToInt16(gameFrameParameters.number_tracks));
+            progressMusics.IsActive = false;
+            backgroundWaiting.Visibility = Visibility.Collapsed;
             //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }

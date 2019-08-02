@@ -19,6 +19,7 @@ using GuessMyZik.Pages.Frames.Login;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using GuessMyZik.Classes;
+using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages
 {

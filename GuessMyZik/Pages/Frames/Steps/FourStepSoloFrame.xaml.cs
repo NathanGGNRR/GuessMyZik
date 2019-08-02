@@ -23,7 +23,6 @@ using GuessMyZik.Classes;
 using GuessMyZik.Classes.ArtistClasses;
 using GuessMyZik.Classes.AlbumClasses;
 using GuessMyZik.Classes.TrackClasses;
-using GuessMyZik.Classes.CategoryClasses;
 using Windows.UI.Xaml.Shapes;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -32,6 +31,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Microsoft.Toolkit.Uwp.UI;
+using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages.Frames.Steps
 {
@@ -55,8 +55,18 @@ namespace GuessMyZik.Pages.Frames.Steps
         {
             base.OnNavigatedTo(e);
             gameFrameParameters = (GameFrameParameters)e.Parameter;
-            ChoosingFrameParametersArtists choosing = new ChoosingFrameParametersArtists(navigationChoosing, (gameFrameParameters.listSelected[0] as Artists).data, null, musicChoosen, textNumberMusics);
-            navigationChoosing.Navigate(typeof(GridFrame), choosing);
+            ChoosingFrameParameters choosingParameters = new ChoosingFrameParameters();
+            if (gameFrameParameters.classTypeSelected == 1)
+            {
+                textFound.Text = "Choose between 5 and 20 musics among all artists:";
+                choosingParameters.artists = new ChoosingFrameParametersArtists(navigationChoosing, (gameFrameParameters.listSelected[0] as Artists).data, musicChoosen, textNumberMusics);
+                navigationChoosing.Navigate(typeof(GridFrame), choosingParameters);
+            } else
+            {
+                textFound.Text = "Choose between 5 and 20 musics among all albums:";
+                choosingParameters.albums = new ChoosingFrameParametersAlbums(navigationChoosing, (gameFrameParameters.listSelected[0] as Albums), musicChoosen, textNumberMusics);
+                navigationChoosing.Navigate(typeof(GridFrame), choosingParameters);
+            }
         }
 
         private void BtnBack_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -115,6 +125,10 @@ namespace GuessMyZik.Pages.Frames.Steps
             {
                 btnValid.IsEnabled = false;
             }
+        }
+
+        private void StockDatabase()
+        {
 
         }
     }

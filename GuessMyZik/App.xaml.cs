@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using GuessMyZik.Pages;
 using Windows.UI.Xaml.Media.Animation;
 using GuessMyZik.Classes;
+using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik
 {

@@ -7,25 +7,36 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     NavigationCacheMode="Required"
     mc:Ignorable="d" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
+    <Page.Resources>
+        <DataTemplate x:Key="templateArtist">
+            <Grid Width="100" Height="100" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="imageFound" Source="{Binding picture_medium}" Stretch="Uniform"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" HorizontalScrollMode="Enabled" >
+                    <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="{Binding name}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                </ScrollViewer>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="templateAlbum">
+            <Grid Width="100" Height="100" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.3*"/>
+                </Grid.RowDefinitions>
+                <Image x:Name="imageFound" Source="{Binding cover_medium}" Stretch="Uniform"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" HorizontalScrollMode="Enabled" >
+                    <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="{Binding title}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                </ScrollViewer>
+            </Grid>
+        </DataTemplate>
+        
+    </Page.Resources>
     <Grid>
         <ProgressRing x:Name="progressMusics" IsActive="False" Canvas.ZIndex="6" Foreground="{StaticResource SecondaryColor}" Height="50" Width="50"/>
         <Rectangle x:Name="backgroundWaiting" Fill="Black" Canvas.ZIndex="5" Opacity="0.5" Visibility="Collapsed"/>
-        <GridView IsItemClickEnabled="True" x:Name="gridViewArtist" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 20" ItemClick="GridViewArtist_ItemClick" >
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="100" Height="100" >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="0.3*"/>
-                        </Grid.RowDefinitions>
-                        <Image x:Name="imageFound" Source="{Binding picture_medium}" Stretch="Uniform"/>
-                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" HorizontalScrollMode="Enabled" >
-                            <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="{Binding name}" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                        </ScrollViewer>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+        <GridView IsItemClickEnabled="True" x:Name="gridView" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0 20 0 20" ItemClick="GridView_ItemClick" ItemContainerStyle="{StaticResource GridViewItemSolo}" />
     </Grid>
 </Page>

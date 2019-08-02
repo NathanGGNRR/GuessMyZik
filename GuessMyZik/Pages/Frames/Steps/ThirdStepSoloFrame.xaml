@@ -12,6 +12,8 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/Pictures/backgroundSecondary.png"/>
         </Grid.Background>
+        <ProgressRing x:Name="progressMusics" IsActive="False" Canvas.ZIndex="6" Foreground="{StaticResource SecondaryColor}" Height="50" Width="50"/>
+        <Rectangle x:Name="backgroundWaiting" Fill="Black" Canvas.ZIndex="5" Opacity="0.5" Visibility="Collapsed"/>
         <Grid x:Name="fromStepTwo" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition x:Name="rowOne" Height="Auto"/>

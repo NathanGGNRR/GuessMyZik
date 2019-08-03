@@ -8,7 +8,7 @@ using GuessMyZik.Classes.TrackClasses;
 
 namespace GuessMyZik.Classes.FrameParameters
 {
-    class GameFrameParameters
+    class GameFrameMultiParameters
     {
         public Frame rootFrame { get; set; }
         public Frame secondFrame { get; set; }
@@ -18,8 +18,9 @@ namespace GuessMyZik.Classes.FrameParameters
         public List<Track> listTrack { get; set; }
         public bool? game_duel { get; set; }
         public int? number_tracks { get; set; }
+        public List<Player> players { get; set; }
 
-        public GameFrameParameters(Frame frame, Frame secondFrame, Users user, int? classType, Dictionary<int, object> list ,bool? gameDuel, int? numberTracks)
+        public GameFrameMultiParameters(Frame frame, Frame secondFrame, Users user, int? classType, Dictionary<int, object> list ,bool? gameDuel, int? numberTracks, List<Player> players)
         {
             this.rootFrame = frame;
             this.secondFrame = secondFrame;
@@ -28,6 +29,7 @@ namespace GuessMyZik.Classes.FrameParameters
             this.listSelected = list;
             this.game_duel = gameDuel;
             this.number_tracks = numberTracks;
+            this.players = players;
         }
     }
 }

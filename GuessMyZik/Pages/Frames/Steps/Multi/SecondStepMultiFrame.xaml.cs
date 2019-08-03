@@ -30,22 +30,22 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GuessMyZik.Classes.FrameParameters;
 
-namespace GuessMyZik.Pages.Frames.Steps.Solo
+namespace GuessMyZik.Pages.Frames.Steps.Multi
 {
     /// <summary>
     /// An empty page can be used alone or as a landing page within a frame.
     /// </summary>
-    public sealed partial class FristStepSoloFrame : Page
+    public sealed partial class SecondStepMultiFrame : Page
     {
 
-        private GameFrameSoloParameters gameFrameParameters;
+        private GameFrameMultiParameters gameFrameParameters;
 
         private Frame rootFrame;
         private Frame gameFrame;
 
         private Users connectedUser;
 
-        public FristStepSoloFrame()
+        public SecondStepMultiFrame()
         {
             this.InitializeComponent();
            
@@ -54,7 +54,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            gameFrameParameters = (GameFrameSoloParameters)e.Parameter;
+            gameFrameParameters = (GameFrameMultiParameters)e.Parameter;
             rootFrame = gameFrameParameters.rootFrame;
             gameFrame = gameFrameParameters.secondFrame;
             connectedUser = gameFrameParameters.connectedUser;
@@ -67,7 +67,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
 
         private void BtnMusic_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            ChooseGame.AnimationColorBtnSoloExited(pathMusic, (sender as Button), "ThirdColor");
+            ChooseGame.AnimationColorBtnSoloExited(pathMusic, (sender as Button), "SecondaryColor");
         }
 
         private void BtnRandom_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -77,7 +77,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
 
         private void BtnRandom_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            ChooseGame.AnimationColorBtnSoloExited(pathRandom, (sender as Button), "ThirdColor");
+            ChooseGame.AnimationColorBtnSoloExited(pathRandom, (sender as Button), "SecondaryColor");
         }
 
         private void BtnAlbum_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -87,7 +87,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
 
         private void BtnAlbum_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            ChooseGame.AnimationColorBtnSoloExited(pathAlbum, (sender as Button), "ThirdColor");
+            ChooseGame.AnimationColorBtnSoloExited(pathAlbum, (sender as Button), "SecondaryColor");
         }
 
         private void BtnArtist_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -97,31 +97,31 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
 
         private void BtnArtist_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            ChooseGame.AnimationColorBtnSoloExited(pathArtist, (sender as Button), "ThirdColor");
+            ChooseGame.AnimationColorBtnSoloExited(pathArtist, (sender as Button), "SecondaryColor");
         }
 
         private void BtnRandom_Click(object sender, RoutedEventArgs e)
         {
             gameFrameParameters.classTypeSelected = 4;
-            gameFrame.Navigate(typeof(ThirdStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrame.Navigate(typeof(FourStepMultiFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void BtnMusic_Click(object sender, RoutedEventArgs e)
         {
             gameFrameParameters.classTypeSelected = 3;
-            gameFrame.Navigate(typeof(SecondStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrame.Navigate(typeof(ThirdStepMultiFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void BtnAlbum_Click(object sender, RoutedEventArgs e)
         {
             gameFrameParameters.classTypeSelected = 2;
-            gameFrame.Navigate(typeof(SecondStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrame.Navigate(typeof(ThirdStepMultiFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void BtnArtist_Click(object sender, RoutedEventArgs e)
         {
             gameFrameParameters.classTypeSelected = 1;
-            gameFrame.Navigate(typeof(SecondStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrame.Navigate(typeof(ThirdStepMultiFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }
 }

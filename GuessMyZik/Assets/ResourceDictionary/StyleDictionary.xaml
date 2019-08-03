@@ -11,7 +11,9 @@
     
     <Color x:Key="SecondaryColor">#AFA98D</Color>
     <Color x:Key="SecondaryDarkColor">#9B9680</Color>
-    
+    <Color x:Key="SecondaryLightColor">#c2bda8</Color>
+    <Color x:Key="SecondaryWhiteColor">#d7d4c6</Color>
+
     <Color x:Key="ThirdColor">#6D8EA0</Color>
     <Color x:Key="ThirdDarkColor">#557989</Color>
     <Color x:Key="ThirdLightColor">#FF99ACB6</Color>

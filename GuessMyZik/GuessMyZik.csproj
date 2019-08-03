@@ -126,9 +126,11 @@
     <Compile Include="Classes\FrameParameters\ChoosingFrameParameters.cs" />
     <Compile Include="Classes\FrameParameters\ChoosingFrameParametersAlbums.cs" />
     <Compile Include="Classes\FrameParameters\ChoosingFrameParametersArtists.cs" />
-    <Compile Include="Classes\FrameParameters\GameFrameParameters.cs" />
+    <Compile Include="Classes\FrameParameters\GameFrameMultiParameters.cs" />
+    <Compile Include="Classes\FrameParameters\GameFrameSoloParameters.cs" />
     <Compile Include="Classes\FrameParameters\FrameParameters.cs" />
     <Compile Include="Classes\Levels.cs" />
+    <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\RandomClasse.cs" />
     <Compile Include="Classes\SymmetricEncryption.cs" />
     <Compile Include="Classes\TrackClasses\Track.cs" />
@@ -144,6 +146,18 @@
     <Compile Include="Pages\Frames\Choosing\ListFrame.xaml.cs">
       <DependentUpon>ListFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Frames\Steps\Multi\FiveStepMultiFrame.xaml.cs">
+      <DependentUpon>FiveStepMultiFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Steps\Multi\SecondStepMultiFrame.xaml.cs">
+      <DependentUpon>SecondStepMultiFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Steps\Multi\ThirdStepMultiFrame.xaml.cs">
+      <DependentUpon>ThirdStepMultiFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Steps\Multi\FourStepMultiFrame.xaml.cs">
+      <DependentUpon>FourStepMultiFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Frames\Steps\Solo\FourStepSoloFrame.xaml.cs">
       <DependentUpon>FourStepSoloFrame.xaml</DependentUpon>
     </Compile>
@@ -156,8 +170,8 @@
     <Compile Include="Pages\Frames\Steps\Multi\FirstStepMultiFrame.xaml.cs">
       <DependentUpon>FirstStepMultiFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\Steps\Solo\SecondStepSoloOtherFrame.xaml.cs">
-      <DependentUpon>SecondStepSoloOtherFrame.xaml</DependentUpon>
+    <Compile Include="Pages\Frames\Steps\Solo\SecondStepSoloFrame.xaml.cs">
+      <DependentUpon>SecondStepSoloFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frames\Login\SignInFrame.xaml.cs">
       <DependentUpon>SignInFrame.xaml</DependentUpon>
@@ -334,6 +348,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Frames\Steps\Multi\FiveStepMultiFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Frames\Steps\Multi\SecondStepMultiFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Frames\Steps\Multi\ThirdStepMultiFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Frames\Steps\Multi\FourStepMultiFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\Frames\Steps\Solo\FourStepSoloFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -350,7 +380,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\Steps\Solo\SecondStepSoloOtherFrame.xaml">
+    <Page Include="Pages\Frames\Steps\Solo\SecondStepSoloFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

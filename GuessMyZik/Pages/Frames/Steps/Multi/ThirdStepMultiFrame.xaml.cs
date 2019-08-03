@@ -30,15 +30,15 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GuessMyZik.Classes.FrameParameters;
 
-namespace GuessMyZik.Pages.Frames.Steps.Solo
+namespace GuessMyZik.Pages.Frames.Steps.Multi
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class SecondStepSoloOtherFrame : Page
+    public sealed partial class ThirdStepMultiFrame : Page
     {
         #region Variables
-        private GameFrameParameters gameFrameParameters;
+        private GameFrameMultiParameters gameFrameParameters;
 
         private Frame gameFrame;
         private int? classType;
@@ -49,7 +49,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
         private int pageAdd = 0;
         #endregion
 
-        public SecondStepSoloOtherFrame()
+        public ThirdStepMultiFrame()
         {
             this.InitializeComponent();
             this.DataContext = this; 
@@ -58,7 +58,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            gameFrameParameters = (GameFrameParameters)e.Parameter;
+            gameFrameParameters = (GameFrameMultiParameters)e.Parameter;
             gameFrame = gameFrameParameters.secondFrame;
             classType = gameFrameParameters.classTypeSelected;
             connectedUser = gameFrameParameters.connectedUser;
@@ -93,10 +93,6 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
                 listViewFound.ItemTemplate = dataTemplateFound;
                 DataTemplate dataTemplateAdd = this.Resources["templateTrackAdd"] as DataTemplate;
                 listViewAdd.ItemTemplate = dataTemplateAdd;
-                if (gameFrameParameters.connectedUser != null)
-                {
-                    checkBoxTrack.Visibility = Visibility.Visible;
-                }
             }
         }
 
@@ -176,14 +172,14 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
             if(classType == 1)
             {
                 gameFrameParameters.listSelected[0] = listArtistsAdd;
-                gameFrame.Navigate(typeof(ThirdStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                gameFrame.Navigate(typeof(FourStepMultiFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
             } else if (classType == 2)
             {
                 gameFrameParameters.listSelected[0] = listAlbumsAdd;
-                gameFrame.Navigate(typeof(ThirdStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                gameFrame.Navigate(typeof(FourStepMultiFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
             } else
             {
-                gameFrameParameters.game_duel = checkBoxTrack.IsChecked;
+                gameFrameParameters.game_duel = false;
                 gameFrameParameters.number_tracks = listTracksAdd.data.Count();
                 gameFrameParameters.listTrack = listTracksAdd.data;
                 //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });

@@ -33,28 +33,28 @@ using System.Windows.Input;
 using Microsoft.Toolkit.Uwp.UI;
 using GuessMyZik.Classes.FrameParameters;
 
-namespace GuessMyZik.Pages.Frames.Steps.Solo
+namespace GuessMyZik.Pages.Frames.Steps.Multi
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class FourStepSoloFrame : Page
+    public sealed partial class FiveStepMultiFrame : Page
     {
 
         private List<Track> musicChoosen = new List<Track>();
 
-        private GameFrameSoloParameters gameFrameParameters;
+        private GameFrameMultiParameters gameFrameParameters;
 
-        public FourStepSoloFrame()
+        public FiveStepMultiFrame()
         {
             this.InitializeComponent();
             this.DataContext = this;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            gameFrameParameters = (GameFrameSoloParameters)e.Parameter;
+            gameFrameParameters = (GameFrameMultiParameters)e.Parameter;
             ChoosingFrameParameters choosingParameters = new ChoosingFrameParameters();
             if (gameFrameParameters.classTypeSelected == 1)
             {
@@ -67,6 +67,8 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
                 choosingParameters.albums = new ChoosingFrameParametersAlbums(navigationChoosing, (gameFrameParameters.listSelected[0] as Albums), musicChoosen, textNumberMusics);
                 navigationChoosing.Navigate(typeof(GridFrame), choosingParameters);
             }
+            var message = new MessageDialog(gameFrameParameters.players[0].name);
+            await message.ShowAsync();
         }
 
         private void BtnBack_PointerEntered(object sender, PointerRoutedEventArgs e)

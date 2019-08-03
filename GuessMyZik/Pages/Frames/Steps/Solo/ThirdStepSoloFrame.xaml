@@ -19,13 +19,13 @@
                 <RowDefinition x:Name="rowOne" Height="Auto"/>
                 <RowDefinition x:Name="rowTwo" Height="Auto"/>
             </Grid.RowDefinitions>
-            <controls:Expander x:Name="randomExpander" Style="{StaticResource ExpanderStyleChoosing}" Header="Random Tracks Game" Foreground="{StaticResource WriteColor}" FontSize="20" Background="{StaticResource WriteColor}" IsExpanded="False" FontFamily="Kaushan Script" HorizontalContentAlignment="Stretch" Expanded="RandomExpander_Expanded">
+            <controls:Expander x:Name="randomExpander" Style="{StaticResource ExpanderStyleChoosingSolo}" Header="Random Tracks Game" Foreground="{StaticResource WriteColor}" FontSize="20" Background="{StaticResource WriteColor}" IsExpanded="False" FontFamily="Kaushan Script" HorizontalContentAlignment="Stretch" Expanded="RandomExpander_Expanded">
                 <StackPanel Background="{StaticResource WriteColor}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <CheckBox x:Name="checkBoxRandom" Style="{StaticResource CheckBoxStyleGameThird}" Content="Make this blind test available in a duel." FontFamily="Kaushan Script" FontSize="16" Foreground="{StaticResource ThirdColor}" Margin="20 20 0 0" Visibility="Collapsed"/>
                     <StackPanel Margin="20 20 0 0">
                         <TextBlock Text="Number of tracks to find:" FontFamily="Kaushan Script" FontSize="16" Foreground="{StaticResource ThirdColor}"/>
                         <StackPanel Orientation="Horizontal">
-                            <Slider Style="{StaticResource SliderStyleGame}" x:Name="sliderRandom" Width="200" Minimum="5" Maximum="20" StepFrequency="1" SmallChange="1" LargeChange="1" Value="10" Foreground="{StaticResource ThirdDarkColor}" HorizontalAlignment="Left" />
+                            <Slider Style="{StaticResource SliderStyleGameSolo}" x:Name="sliderRandom" Width="200" Minimum="5" Maximum="20" StepFrequency="1" SmallChange="1" LargeChange="1" Value="10" Foreground="{StaticResource ThirdDarkColor}" HorizontalAlignment="Left" />
                             <TextBlock Text="{Binding Value,ElementName=sliderRandom,Mode=TwoWay}" FontFamily="Kaushan Script" FontSize="16" Foreground="{StaticResource ThirdColor}" Margin="15 0 0 0"/>
                         </StackPanel>
                     </StackPanel>
@@ -52,13 +52,13 @@
                     </Grid>
                 </StackPanel>
             </controls:Expander>
-            <controls:Expander x:Name="choosingExpander" Style="{StaticResource ExpanderStyleChoosing}" Header="Choosing Tracks Game" Foreground="{StaticResource WriteColor}" FontSize="20" Background="{StaticResource SecondaryColor}" IsExpanded="False" Grid.Row="1" FontFamily="Kaushan Script" HorizontalContentAlignment="Stretch" Expanded="ChoosingExpander_Expanded">
+            <controls:Expander x:Name="choosingExpander" Style="{StaticResource ExpanderStyleChoosingSolo}" Header="Choosing Tracks Game" Foreground="{StaticResource WriteColor}" FontSize="20" Background="{StaticResource SecondaryColor}" IsExpanded="False" Grid.Row="1" FontFamily="Kaushan Script" HorizontalContentAlignment="Stretch" Expanded="ChoosingExpander_Expanded">
                 <StackPanel Background="{StaticResource WriteColor}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <CheckBox x:Name="checkBoxChoosing" Style="{StaticResource CheckBoxStyleGameThird}" Content="Make this blind test available in a duel." FontFamily="Kaushan Script" FontSize="16" Foreground="{StaticResource ThirdColor}" Margin="20 20 0 0" Visibility="Collapsed"/>
                     <StackPanel Margin="20 20 0 0">
                         <TextBlock Text="Number of tracks to find:" FontFamily="Kaushan Script" FontSize="16" Foreground="{StaticResource ThirdColor}"/>
                         <StackPanel Orientation="Horizontal">
-                            <Slider Style="{StaticResource SliderStyleGame}" x:Name="sliderChoosing" Width="200" Minimum="5" Maximum="20" StepFrequency="1" SmallChange="1" LargeChange="1" Value="10" Foreground="{StaticResource ThirdDarkColor}" HorizontalAlignment="Left" />
+                            <Slider Style="{StaticResource SliderStyleGameSolo}" x:Name="sliderChoosing" Width="200" Minimum="5" Maximum="20" StepFrequency="1" SmallChange="1" LargeChange="1" Value="10" Foreground="{StaticResource ThirdDarkColor}" HorizontalAlignment="Left" />
                             <TextBlock Text="{Binding Value,ElementName=sliderChoosing,Mode=TwoWay}" FontFamily="Kaushan Script" FontSize="16" Foreground="{StaticResource ThirdColor}" Margin="15 0 0 0"/>
                         </StackPanel>
                     </StackPanel>
@@ -101,7 +101,7 @@
                 <StackPanel Margin="20 20 0 0" Grid.ColumnSpan="2">
                     <TextBlock Text="Number of tracks to find:" FontFamily="Kaushan Script" FontSize="16" Foreground="{StaticResource ThirdColor}"/>
                     <StackPanel Orientation="Horizontal">
-                        <Slider Style="{StaticResource SliderStyleGame}" x:Name="sliderStepOne" Width="200" Minimum="5" Maximum="20" StepFrequency="1" SmallChange="1" LargeChange="1" Value="10" Foreground="{StaticResource ThirdDarkColor}" HorizontalAlignment="Left" />
+                        <Slider Style="{StaticResource SliderStyleGameSolo}" x:Name="sliderStepOne" Width="200" Minimum="5" Maximum="20" StepFrequency="1" SmallChange="1" LargeChange="1" Value="10" Foreground="{StaticResource ThirdDarkColor}" HorizontalAlignment="Left" />
                         <TextBlock Text="{Binding Value,ElementName=sliderStepOne,Mode=TwoWay}" FontFamily="Kaushan Script" FontSize="16" Foreground="{StaticResource ThirdColor}" Margin="15 0 0 0"/>
                     </StackPanel>
                 </StackPanel>

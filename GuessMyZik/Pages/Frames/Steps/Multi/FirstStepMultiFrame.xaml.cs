@@ -39,7 +39,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
     public sealed partial class FirstStepMultiFrame : Page
     {
 
-        private GameFrameParameters gameFrameParameters;
+        private GameFrameMultiParameters gameFrameParameters;
 
         public FirstStepMultiFrame()
         {
@@ -50,7 +50,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            gameFrameParameters = (GameFrameParameters)e.Parameter;
+            gameFrameParameters = (GameFrameMultiParameters)e.Parameter;
             if(gameFrameParameters.connectedUser != null)
             {
                 btnDuel.Visibility = Visibility.Visible;
@@ -87,7 +87,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
 
         private void BtnLocal_Click(object sender, RoutedEventArgs e)
         {
-            //gameFrameParameters.rootFrame.Navigate(typeof(SecondStepMulti), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.secondFrame.Navigate(typeof(SecondStepMultiFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void BtnDuel_Click(object sender, RoutedEventArgs e)

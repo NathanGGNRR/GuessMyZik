@@ -39,7 +39,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
     public sealed partial class ThirdStepSoloFrame : Page
     {
         #region Variables
-        private GameFrameParameters gameFrameParameters;
+        private GameFrameSoloParameters gameFrameParameters;
         private RandomClasse randomClasse = new RandomClasse();
         private Frame gameFrame;
         private APIConnect apiConnect = new APIConnect();
@@ -54,7 +54,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            gameFrameParameters = (GameFrameParameters)e.Parameter;
+            gameFrameParameters = (GameFrameSoloParameters)e.Parameter;
             gameFrame = gameFrameParameters.secondFrame;
           
             if (gameFrameParameters.classTypeSelected != 4)

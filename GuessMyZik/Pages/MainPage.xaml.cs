@@ -62,8 +62,8 @@ namespace GuessMyZik.Pages
             rootFrame = parameter.rootFrame;
             connectedUser = parameter.connectedUser;
             nbVisiteur = parameter.nbVisiteur;
-            navigationSolo.Navigate(typeof(FristStepSoloFrame), new GameFrameParameters(rootFrame, navigationSolo, connectedUser, null, new Dictionary<int, object>(), null, null));
-            navigationMulti.Navigate(typeof(FirstStepMultiFrame), new GameFrameParameters(rootFrame, navigationMulti, connectedUser, null, new Dictionary<int, object>(), null, null));
+            navigationSolo.Navigate(typeof(FristStepSoloFrame), new GameFrameSoloParameters(rootFrame, navigationSolo, connectedUser, null, new Dictionary<int, object>(), null, null));
+            navigationMulti.Navigate(typeof(FirstStepMultiFrame), new GameFrameMultiParameters(rootFrame, navigationMulti, connectedUser, null, new Dictionary<int, object>(), null, null, null));
             InitializeMainPage();
              
         }

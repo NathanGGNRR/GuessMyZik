@@ -148,7 +148,7 @@ namespace GuessMyZik.Classes
                 bool action = false;
                 while (!action) { 
                     Random rnd = new Random();
-                    int randomNumber = rnd.Next(200001, 9999999);
+                    int randomNumber = rnd.Next(2000001, 999999999);
                     string response = await apiConnect.GetAsJsonAsync("https://api.deezer.com/track/" + randomNumber.ToString());
                     try
                     {

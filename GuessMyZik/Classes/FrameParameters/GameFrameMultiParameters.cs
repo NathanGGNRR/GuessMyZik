@@ -16,11 +16,12 @@ namespace GuessMyZik.Classes.FrameParameters
         public int? classTypeSelected { get; set; }
         public Dictionary<int, object> listSelected { get; set; }
         public List<Track> listTrack { get; set; }
-        public bool? game_duel { get; set; }
+        public int? game_duel { get; set; }
         public int? number_tracks { get; set; }
         public List<Player> players { get; set; }
+        public int? party_id { get; set; }
 
-        public GameFrameMultiParameters(Frame frame, Frame secondFrame, Users user, int? classType, Dictionary<int, object> list ,bool? gameDuel, int? numberTracks, List<Player> players)
+        public GameFrameMultiParameters(Frame frame, Frame secondFrame, Users user, int? classType, Dictionary<int, object> list , int? gameDuel, int? numberTracks, List<Player> players, int? party_id)
         {
             this.rootFrame = frame;
             this.secondFrame = secondFrame;
@@ -30,6 +31,7 @@ namespace GuessMyZik.Classes.FrameParameters
             this.game_duel = gameDuel;
             this.number_tracks = numberTracks;
             this.players = players;
+            this.party_id = party_id;
         }
     }
 }

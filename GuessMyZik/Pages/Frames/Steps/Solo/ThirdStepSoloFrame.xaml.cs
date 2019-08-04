@@ -117,7 +117,13 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
 
         private void BtnValidChoosing_Click(object sender, RoutedEventArgs e)
         {
-            gameFrameParameters.game_duel = checkBoxChoosing.IsChecked;
+            if(checkBoxChoosing.IsChecked == true)
+            {
+                gameFrameParameters.game_duel = 1;
+            } else
+            {
+                gameFrameParameters.game_duel = 0;
+            }
             gameFrameParameters.number_tracks = Convert.ToInt16(sliderChoosing.Value);
             gameFrame.Navigate(typeof(FourStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
@@ -126,7 +132,13 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
         {
             progressMusics.IsActive = true;
             backgroundWaiting.Visibility = Visibility.Visible;
-            gameFrameParameters.game_duel = checkBoxRandom.IsChecked;
+            if (checkBoxRandom.IsChecked == true)
+            {
+                gameFrameParameters.game_duel = 1;
+            } else
+            {
+                gameFrameParameters.game_duel = 0;
+            }
             gameFrameParameters.number_tracks = Convert.ToInt16(sliderRandom.Value);
             if(gameFrameParameters.classTypeSelected == 1)
             {
@@ -140,7 +152,18 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
             {
                 gameFrameParameters.number_tracks = gameFrameParameters.listTrack.Count;
             }
+            if (gameFrameParameters.connectedUser != null)
+            {
+                StockDatabase();
+            }
             //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+        }
+
+        private async void StockDatabase()
+        {
+            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
+            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/auth/stockparty.php");
+            gameFrameParameters.party_id = Convert.ToInt16(response);
         }
 
         private void BtnBackChoosing_Click(object sender, RoutedEventArgs e)
@@ -193,11 +216,21 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
         {
             progressMusics.IsActive = true;
             backgroundWaiting.Visibility = Visibility.Visible;
-            gameFrameParameters.game_duel = checkBoxRandom.IsChecked;
+            if (checkBoxStepOne.IsChecked == true)
+            {
+                gameFrameParameters.game_duel = 1;
+            } else
+            {
+                gameFrameParameters.game_duel = 0;
+            }
             gameFrameParameters.number_tracks = Convert.ToInt16(sliderStepOne.Value);
             gameFrameParameters.listTrack = await randomClasse.RandomTracks(Convert.ToInt16(gameFrameParameters.number_tracks));
             progressMusics.IsActive = false;
             backgroundWaiting.Visibility = Visibility.Collapsed;
+            if (gameFrameParameters.connectedUser != null)
+            {
+                StockDatabase();
+            }
             //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }

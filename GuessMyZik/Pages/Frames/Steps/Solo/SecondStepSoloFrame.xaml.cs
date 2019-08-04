@@ -183,11 +183,28 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
                 gameFrame.Navigate(typeof(ThirdStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
             } else
             {
-                gameFrameParameters.game_duel = checkBoxTrack.IsChecked;
+                if(checkBoxTrack.IsChecked == true)
+                {
+                    gameFrameParameters.game_duel = 1;
+                } else
+                {
+                    gameFrameParameters.game_duel = 0;
+                }
                 gameFrameParameters.number_tracks = listTracksAdd.data.Count();
                 gameFrameParameters.listTrack = listTracksAdd.data;
+                if (gameFrameParameters.connectedUser != null)
+                {
+                    StockDatabase();
+                }
                 //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
             }
+        }
+
+        private async void StockDatabase()
+        {
+            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
+            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/auth/stockparty.php");
+            gameFrameParameters.party_id = Convert.ToInt16(response);
         }
 
         private void BtnBackFound_Click(object sender, RoutedEventArgs e)

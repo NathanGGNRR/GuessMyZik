@@ -43,6 +43,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         private GameFrameMultiParameters gameFrameParameters;
         private RandomClasse randomClasse = new RandomClasse();
         private Frame gameFrame;
+        private APIConnect apiConnect = new APIConnect();
         private List<string> keyAffectedRandom = new List<string>();
         private List<string> keyAffectedChoosing = new List<string>();
         private List<string> keyAffectedStepOne = new List<string>();
@@ -112,7 +113,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
 
         private void BtnValidChoosing_Click(object sender, RoutedEventArgs e)
         {
-            gameFrameParameters.game_duel = false;
+            gameFrameParameters.game_duel = 0;
             gameFrameParameters.number_tracks = Convert.ToInt16(sliderChoosing.Value);
             List<Player> players = new List<Player>();
             foreach(StackPanel stackPanel in stackPlayerChoosing.Children)
@@ -133,7 +134,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         {
             progressMusics.IsActive = true;
             backgroundWaiting.Visibility = Visibility.Visible;
-            gameFrameParameters.game_duel = false;
+            gameFrameParameters.game_duel = 0;
             gameFrameParameters.number_tracks = Convert.ToInt16(sliderRandom.Value);
             if(gameFrameParameters.classTypeSelected == 1)
             {
@@ -159,6 +160,10 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
                 players.Add(new Player(playerName, (stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs));
             }
             gameFrameParameters.players = players;
+            if (gameFrameParameters.connectedUser != null)
+            {
+                StockDatabase();
+            }
             //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
@@ -212,7 +217,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         {
             progressMusics.IsActive = true;
             backgroundWaiting.Visibility = Visibility.Visible;
-            gameFrameParameters.game_duel = false;
+            gameFrameParameters.game_duel = 0;
             gameFrameParameters.number_tracks = Convert.ToInt16(sliderStepOne.Value);
             gameFrameParameters.listTrack = await randomClasse.RandomTracks(Convert.ToInt16(gameFrameParameters.number_tracks));
             progressMusics.IsActive = false;
@@ -220,7 +225,6 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             List<Player> players = new List<Player>();
             foreach (StackPanel stackPanel in stackPlayerStepOne.Children)
             {
-
                 string playerName = (stackPanel.Children[1] as TextBox).Text;
                 if ((stackPanel.Children[1] as TextBox).Text == "")
                 {
@@ -229,6 +233,10 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
                 players.Add(new Player(playerName, (stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs));
             }
             gameFrameParameters.players = players;
+            if (gameFrameParameters.connectedUser != null)
+            {
+                StockDatabase();
+            }
             //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
@@ -465,13 +473,15 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         #endregion
 
         #region AddPlayerStepOne
-        private void BtnAddPlayerStepOne_Click(object sender, RoutedEventArgs e)
+        private async void BtnAddPlayerStepOne_Click(object sender, RoutedEventArgs e)
         {
+           
             if (stackPlayerStepOne.Children.Count < 4)
             {
                 StackPanel newStackPlayer = new StackPanel();
                 newStackPlayer.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
                 newStackPlayer.Margin = new Thickness(0, 0, 15, 0);
+                newStackPlayer.Tag = "test" + stackPlayerStepOne.Children.Count + 1;
                 StackPanel newStackTextButton = new StackPanel();
                 newStackTextButton.Width = 140;
                 newStackTextButton.Orientation = Orientation.Horizontal;
@@ -537,12 +547,25 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         private void BtnRemovePlayerStepOne_Click(object sender, RoutedEventArgs e)
         {
             btnAddPlayerStepOne.IsEnabled = true;
-            Button button = (stackPlayerStepOne.Children[Convert.ToInt16((sender as Button).Tag) - 1] as StackPanel).Children[2] as Button;
+            Button button;
+            try
+            {
+                button = (stackPlayerStepOne.Children[Convert.ToInt16((sender as Button).Tag) - 1] as StackPanel).Children[2] as Button;
+            } catch
+            {
+                button = (stackPlayerStepOne.Children[2] as StackPanel).Children[2] as Button;
+            }
             if (button.Tag != null)
             {
                 keyAffectedStepOne.Remove((button.Tag as KeyRoutedEventArgs).Key.ToString());
             }
-            stackPlayerStepOne.Children.RemoveAt(Convert.ToInt16((sender as Button).Tag) - 1);
+            try
+            {
+                stackPlayerStepOne.Children.RemoveAt(Convert.ToInt16((sender as Button).Tag) - 1);
+            } catch
+            {
+                stackPlayerStepOne.Children.RemoveAt(2);
+            }
             checkAffectedKeyStepOne();
         }
 
@@ -579,5 +602,12 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             }
         }
         #endregion
+
+        private async void StockDatabase()
+        {
+            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
+            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/auth/stockparty.php");
+            gameFrameParameters.party_id = Convert.ToInt16(response);
+        }
     }
 }

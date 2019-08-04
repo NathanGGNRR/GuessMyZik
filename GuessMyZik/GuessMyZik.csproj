@@ -130,6 +130,7 @@
     <Compile Include="Classes\FrameParameters\GameFrameSoloParameters.cs" />
     <Compile Include="Classes\FrameParameters\FrameParameters.cs" />
     <Compile Include="Classes\Levels.cs" />
+    <Compile Include="Classes\Party.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\RandomClasse.cs" />
     <Compile Include="Classes\SymmetricEncryption.cs" />

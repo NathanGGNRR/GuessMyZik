@@ -89,11 +89,11 @@ namespace GuessMyZik.Pages.Frames.Choosing
                         }
                     }
                 }
-            }
+            } 
             return albums;
         }
 
-        private async Task<Tracks> StoreAllTracks(Albums albums)
+        private async Task<Tracks> StoreAllTracks(Albums albums, ItemClickEventArgs e)
         {
             Tracks tracks = new Tracks();
             foreach (Album album in albums.data)
@@ -103,6 +103,7 @@ namespace GuessMyZik.Pages.Frames.Choosing
                 foreach (Track trackAlbum in tracksAlbum.data)
                 {
                     trackAlbum.album = album;
+                    trackAlbum.artist = e.ClickedItem as Artist;
                 }
                 tracks.data.AddRange(tracksAlbum.data);
             }
@@ -116,6 +117,7 @@ namespace GuessMyZik.Pages.Frames.Choosing
             foreach (Track trackAlbum in tracksAlbum.data)
             {
                 trackAlbum.album = album;
+                trackAlbum.artist = album.artist;
             }
             return tracksAlbum;
         }
@@ -137,7 +139,7 @@ namespace GuessMyZik.Pages.Frames.Choosing
         private async void GridViewArtistClick(ItemClickEventArgs e)
         {
             Albums albums = await RemoveDuplicateAlbum(e);
-            choosingFrameParameters.artists.listMusicArtist = await StoreAllTracks(albums);
+            choosingFrameParameters.artists.listMusicArtist = await StoreAllTracks(albums, e);
             progressMusics.IsActive = false;
             backgroundWaiting.Visibility = Visibility.Collapsed;
             choosingFrameParameters.artists.choosingFrame.Navigate(typeof(ListFrame), choosingFrameParameters);

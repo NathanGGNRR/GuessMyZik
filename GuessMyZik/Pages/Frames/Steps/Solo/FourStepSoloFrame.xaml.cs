@@ -42,7 +42,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
     {
 
         private List<Track> musicChoosen = new List<Track>();
-
+        private APIConnect apiConnect = new APIConnect();
         private GameFrameSoloParameters gameFrameParameters;
 
         public FourStepSoloFrame()
@@ -93,7 +93,18 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
         private void BtnValid_Click(object sender, RoutedEventArgs e)
         {
             gameFrameParameters.listTrack = musicChoosen;
+            if (gameFrameParameters.connectedUser != null)
+            {
+                StockDatabase();
+            }
             //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+        }
+
+        private async void StockDatabase()
+        {
+            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
+            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/auth/stockparty.php");
+            gameFrameParameters.party_id = Convert.ToInt16(response);
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)
@@ -127,9 +138,5 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
             }
         }
 
-        private void StockDatabase()
-        {
-
-        }
     }
 }

@@ -42,7 +42,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
     {
 
         private List<Track> musicChoosen = new List<Track>();
-
+        private APIConnect apiConnect = new APIConnect();
         private GameFrameMultiParameters gameFrameParameters;
 
         public FiveStepMultiFrame()
@@ -51,7 +51,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             this.DataContext = this;
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             gameFrameParameters = (GameFrameMultiParameters)e.Parameter;
@@ -67,8 +67,6 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
                 choosingParameters.albums = new ChoosingFrameParametersAlbums(navigationChoosing, (gameFrameParameters.listSelected[0] as Albums), musicChoosen, textNumberMusics);
                 navigationChoosing.Navigate(typeof(GridFrame), choosingParameters);
             }
-            var message = new MessageDialog(gameFrameParameters.players[0].name);
-            await message.ShowAsync();
         }
 
         private void BtnBack_PointerEntered(object sender, PointerRoutedEventArgs e)
@@ -95,6 +93,10 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         private void BtnValid_Click(object sender, RoutedEventArgs e)
         {
             gameFrameParameters.listTrack = musicChoosen;
+            if(gameFrameParameters.connectedUser != null)
+            {
+                StockDatabase();
+            }
             //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
@@ -112,16 +114,9 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
 
         private void TextNumberMusics_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (musicChoosen.Count >= 5)
+            if (musicChoosen.Count == gameFrameParameters.number_tracks)
             {
-                if (musicChoosen.Count > gameFrameParameters.number_tracks)
-                {
-                    btnValid.IsEnabled = false;
-                }
-                else
-                {
-                    btnValid.IsEnabled = true;
-                }
+                btnValid.IsEnabled = true;
             }
             else
             {
@@ -129,9 +124,11 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             }
         }
 
-        private void StockDatabase()
+        private async void StockDatabase()
         {
-
+            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
+            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/auth/stockparty.php");
+            gameFrameParameters.party_id = Convert.ToInt16(response);
         }
     }
 }

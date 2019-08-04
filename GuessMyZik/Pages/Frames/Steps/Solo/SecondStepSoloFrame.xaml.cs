@@ -196,7 +196,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
                 {
                     StockDatabase();
                 }
-                //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(gameFrameParameters, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
             }
         }
 

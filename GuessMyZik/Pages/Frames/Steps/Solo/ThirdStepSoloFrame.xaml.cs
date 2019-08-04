@@ -125,7 +125,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
                 gameFrameParameters.game_duel = 0;
             }
             gameFrameParameters.number_tracks = Convert.ToInt16(sliderChoosing.Value);
-            gameFrame.Navigate(typeof(FourStepSoloFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrame.Navigate(typeof(FourStepSoloFrame), new GameFrameParameters(gameFrameParameters, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private async void BtnValidRandom_Click(object sender, RoutedEventArgs e)
@@ -156,7 +156,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
             {
                 StockDatabase();
             }
-            //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(gameFrameParameters, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private async void StockDatabase()
@@ -231,7 +231,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
             {
                 StockDatabase();
             }
-            //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(gameFrameParameters, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
     }
 }

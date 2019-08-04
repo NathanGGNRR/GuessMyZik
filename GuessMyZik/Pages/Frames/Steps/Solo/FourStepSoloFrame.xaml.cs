@@ -54,7 +54,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            gameFrameParameters = (GameFrameSoloParameters)e.Parameter;
+            gameFrameParameters = ((GameFrameParameters)e.Parameter).solo;
             ChoosingFrameParameters choosingParameters = new ChoosingFrameParameters();
             if (gameFrameParameters.classTypeSelected == 1)
             {
@@ -97,7 +97,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
             {
                 StockDatabase();
             }
-            //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(gameFrameParameters, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private async void StockDatabase()

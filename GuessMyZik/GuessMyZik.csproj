@@ -123,10 +123,12 @@
     <Compile Include="Classes\APIConnect.cs" />
     <Compile Include="Classes\ArtistClasses\Artist.cs" />
     <Compile Include="Classes\ArtistClasses\Artists.cs" />
+    <Compile Include="Classes\FrameParameters\GameFrameParameters.cs" />
     <Compile Include="Classes\FrameParameters\ChoosingFrameParameters.cs" />
     <Compile Include="Classes\FrameParameters\ChoosingFrameParametersAlbums.cs" />
     <Compile Include="Classes\FrameParameters\ChoosingFrameParametersArtists.cs" />
     <Compile Include="Classes\FrameParameters\GameFrameMultiParameters.cs" />
+    <Compile Include="Classes\FrameParameters\GameFrame.cs" />
     <Compile Include="Classes\FrameParameters\GameFrameSoloParameters.cs" />
     <Compile Include="Classes\FrameParameters\FrameParameters.cs" />
     <Compile Include="Classes\Levels.cs" />
@@ -141,11 +143,20 @@
     <Compile Include="Classes\Users.cs" />
     <Compile Include="Classes\ChooseGame.cs" />
     <Compile Include="Classes\VerificationAuth.cs" />
+    <Compile Include="Pages\DialogContent\NextContentDialog.xaml.cs">
+      <DependentUpon>NextContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DialogContent\ReadyContentDialog.xaml.cs">
+      <DependentUpon>ReadyContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Frames\Choosing\GridFrame.xaml.cs">
       <DependentUpon>GridFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frames\Choosing\ListFrame.xaml.cs">
       <DependentUpon>ListFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Game\TrackGame.xaml.cs">
+      <DependentUpon>TrackGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frames\Steps\Multi\FiveStepMultiFrame.xaml.cs">
       <DependentUpon>FiveStepMultiFrame.xaml</DependentUpon>
@@ -189,6 +200,9 @@
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -200,7 +214,13 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Music\error.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Music\platineSound.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Music\valid.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Pictures\background.png">
@@ -341,11 +361,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\DialogContent\NextContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\DialogContent\ReadyContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Frames\Choosing\GridFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Frames\Choosing\ListFrame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Frames\Game\TrackGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -405,6 +437,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\GamePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -433,7 +469,9 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assets\Videos\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

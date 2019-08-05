@@ -144,14 +144,20 @@
     <Compile Include="Classes\Users.cs" />
     <Compile Include="Classes\ChooseGame.cs" />
     <Compile Include="Classes\VerificationAuth.cs" />
-    <Compile Include="Pages\DialogContent\EndGuestContentDialog.xaml.cs">
-      <DependentUpon>EndGuestContentDialog.xaml</DependentUpon>
+    <Compile Include="Pages\DialogContent\EndGuestContentDialogMulti.xaml.cs">
+      <DependentUpon>EndGuestContentDialogMulti.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DialogContent\EndGuestContentDialogSolo.xaml.cs">
+      <DependentUpon>EndGuestContentDialogSolo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DialogContent\EndUserContentDialogMulti.xaml.cs">
+      <DependentUpon>EndUserContentDialogMulti.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DialogContent\NextContentDialog.xaml.cs">
       <DependentUpon>NextContentDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DialogContent\EndUserContentDialog.xaml.cs">
-      <DependentUpon>EndUserContentDialog.xaml</DependentUpon>
+    <Compile Include="Pages\DialogContent\EndUserContentDialogSolo.xaml.cs">
+      <DependentUpon>EndUserContentDialogSolo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DialogContent\ReadyContentDialog.xaml.cs">
       <DependentUpon>ReadyContentDialog.xaml</DependentUpon>
@@ -162,8 +168,11 @@
     <Compile Include="Pages\Frames\Choosing\ListFrame.xaml.cs">
       <DependentUpon>ListFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\Game\TrackGame.xaml.cs">
-      <DependentUpon>TrackGame.xaml</DependentUpon>
+    <Compile Include="Pages\Frames\Game\TrackMultiGame.xaml.cs">
+      <DependentUpon>TrackMultiGame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Frames\Game\TrackSoloGame.xaml.cs">
+      <DependentUpon>TrackSoloGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frames\Steps\Multi\FiveStepMultiFrame.xaml.cs">
       <DependentUpon>FiveStepMultiFrame.xaml</DependentUpon>
@@ -368,7 +377,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\DialogContent\EndGuestContentDialog.xaml">
+    <Page Include="Pages\DialogContent\EndGuestContentDialogMulti.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\DialogContent\EndGuestContentDialogSolo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\DialogContent\EndUserContentDialogMulti.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -376,7 +393,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\DialogContent\EndUserContentDialog.xaml">
+    <Page Include="Pages\DialogContent\EndUserContentDialogSolo.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -392,7 +409,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\Game\TrackGame.xaml">
+    <Page Include="Pages\Frames\Game\TrackMultiGame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Frames\Game\TrackSoloGame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

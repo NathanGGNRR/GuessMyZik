@@ -40,7 +40,7 @@ using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages.DialogContent
 {
-    public sealed partial class EndUserContentDialog : ContentDialog
+    public sealed partial class EndUserContentDialogMulti : ContentDialog
     {
 
         private Users userConnected;
@@ -49,12 +49,20 @@ namespace GuessMyZik.Pages.DialogContent
         private double amountlevelUpNext;
         private APIConnect apiConnect = new APIConnect();
 
-        public EndUserContentDialog(object userConnected, int points, Frame rootFrame)
+        public EndUserContentDialogMulti(object userConnected, int points, Frame rootFrame, string winner)
         {
             this.InitializeComponent();
             this.userConnected = userConnected as Users;
             this.points = points;
             this.rootFrame = rootFrame;
+            if (winner.Contains(","))
+            {
+                textPlayerWin.Text = "The winner are " + winner;
+            }
+            else
+            {
+                textPlayerWin.Text = "The winner is " + winner;
+            }
             InitializeContentDialog();
         }
 

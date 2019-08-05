@@ -40,7 +40,7 @@ namespace GuessMyZik.Pages.Frames.Game
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class TrackGame : Page
+    public sealed partial class TrackSoloGame : Page
     {
 
         private DispatcherTimer dispatcherTimer;
@@ -53,7 +53,7 @@ namespace GuessMyZik.Pages.Frames.Game
         private int error = 0;
         private List<string> elementGuessed = new List<string>();
 
-        public TrackGame()
+        public TrackSoloGame()
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Disabled;
@@ -282,10 +282,10 @@ namespace GuessMyZik.Pages.Frames.Game
                 parameter.trackGuessed = parameter.listTrack[parameter.listTrack.IndexOf(parameter.trackGuessed) + 1];
                 if (parameter.connectedUser != null)
                 {
-                    parameter.gameFrame.Navigate(typeof(TrackGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, parameter.connectedUser, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    parameter.gameFrame.Navigate(typeof(TrackSoloGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, parameter.connectedUser, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                 } else
                 {
-                    parameter.gameFrame.Navigate(typeof(TrackGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, null, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    parameter.gameFrame.Navigate(typeof(TrackSoloGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, null, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
 
                 }
                 parameter.gameFrame.BackStack.RemoveAt(parameter.gameFrame.BackStack.Count - 1);
@@ -294,11 +294,11 @@ namespace GuessMyZik.Pages.Frames.Game
             {
                 if (parameter.connectedUser != null)
                 {
-                    EndUserContentDialog dialog = new EndUserContentDialog(parameter.connectedUser, parameter.points, parameter.rootFrame);
+                    EndUserContentDialogSolo dialog = new EndUserContentDialogSolo(parameter.connectedUser, parameter.points, parameter.rootFrame);
                     await dialog.ShowAsync();
                 } else
                 {
-                    EndGuestContentDialog dialog = new EndGuestContentDialog(parameter.rootFrame);
+                    EndGuestContentDialogSolo dialog = new EndGuestContentDialogSolo(parameter.rootFrame);
                     await dialog.ShowAsync();
                 }
             }

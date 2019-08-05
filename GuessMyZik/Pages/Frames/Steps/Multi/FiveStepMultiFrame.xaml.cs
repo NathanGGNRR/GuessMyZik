@@ -97,7 +97,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             {
                 StockDatabase();
             }
-            //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(null, gameFrameParameters), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)

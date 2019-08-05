@@ -62,7 +62,7 @@ namespace GuessMyZik.Pages
             this.DataContext = this;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             if(((GameFrameParameters)e.Parameter).solo != null)
@@ -73,10 +73,10 @@ namespace GuessMyZik.Pages
                 classType = gameFrameSoloParameters.classTypeSelected;
                 if (connectedUser != null)
                 {
-                    navigationGame.Navigate(typeof(TrackGame), new GameFrame(gameFrameSoloParameters.rootFrame, navigationGame, connectedUser, gameFrameSoloParameters.listTrack[0], gameFrameSoloParameters.listTrack, beforeTrack, listViewTracksBefore, textGuessed, classType, points), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    navigationGame.Navigate(typeof(TrackSoloGame), new GameFrame(gameFrameSoloParameters.rootFrame, navigationGame, connectedUser, gameFrameSoloParameters.listTrack[0], gameFrameSoloParameters.listTrack, beforeTrack, listViewTracksBefore, textGuessed, classType, points, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                 } else
                 {
-                    navigationGame.Navigate(typeof(TrackGame), new GameFrame(gameFrameSoloParameters.rootFrame, navigationGame, null, gameFrameSoloParameters.listTrack[0], gameFrameSoloParameters.listTrack, beforeTrack, listViewTracksBefore, textGuessed, classType, points), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    navigationGame.Navigate(typeof(TrackSoloGame), new GameFrame(gameFrameSoloParameters.rootFrame, navigationGame, null, gameFrameSoloParameters.listTrack[0], gameFrameSoloParameters.listTrack, beforeTrack, listViewTracksBefore, textGuessed, classType, points, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                 }
             } else
             {
@@ -86,10 +86,10 @@ namespace GuessMyZik.Pages
                 classType = gameFrameMultiParameters.classTypeSelected;
                 if (connectedUser != null)
                 {
-                    navigationGame.Navigate(typeof(TrackGame), new GameFrame(gameFrameMultiParameters.rootFrame, navigationGame, connectedUser, gameFrameMultiParameters.listTrack[0], gameFrameMultiParameters.listTrack, beforeTrack, listViewTracksBefore, textGuessed, classType, points), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    navigationGame.Navigate(typeof(TrackMultiGame), new GameFrame(gameFrameMultiParameters.rootFrame, navigationGame, connectedUser, gameFrameMultiParameters.listTrack[0], gameFrameMultiParameters.listTrack, beforeTrack, listViewTracksBefore, textGuessed, classType, points, gameFrameMultiParameters.players), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                 } else
                 {
-                    navigationGame.Navigate(typeof(TrackGame), new GameFrame(gameFrameMultiParameters.rootFrame, navigationGame, null, gameFrameMultiParameters.listTrack[0], gameFrameMultiParameters.listTrack, beforeTrack, listViewTracksBefore, textGuessed, classType, points), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    navigationGame.Navigate(typeof(TrackMultiGame), new GameFrame(gameFrameMultiParameters.rootFrame, navigationGame, null, gameFrameMultiParameters.listTrack[0], gameFrameMultiParameters.listTrack, beforeTrack, listViewTracksBefore, textGuessed, classType, points, gameFrameMultiParameters.players), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                 }
             }
             InitializeGamePage();

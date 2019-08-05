@@ -124,7 +124,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
                 {
                     playerName = "Player " + (stackPlayerChoosing.Children.IndexOf(stackPanel) + 1).ToString();
                 }
-                players.Add(new Player(playerName, (stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs));
+                players.Add(new Player(playerName, ((stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs).Key.ToString(),(stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs));
             }
             gameFrameParameters.players = players;
             gameFrame.Navigate(typeof(FiveStepMultiFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
@@ -157,14 +157,14 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
                 {
                     playerName = "Player " + (stackPlayerRandom.Children.IndexOf(stackPanel) + 1).ToString();
                 }
-                players.Add(new Player(playerName, (stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs));
+                players.Add(new Player(playerName, ((stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs).Key.ToString(), (stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs));
             }
             gameFrameParameters.players = players;
             if (gameFrameParameters.connectedUser != null)
             {
                 StockDatabase();
             }
-            //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(null, gameFrameParameters), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         private void BtnBackChoosing_Click(object sender, RoutedEventArgs e)
@@ -230,14 +230,14 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
                 {
                     playerName = "Player " + (stackPlayerStepOne.Children.IndexOf(stackPanel) + 1).ToString();
                 }
-                players.Add(new Player(playerName, (stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs));
+                players.Add(new Player(playerName, ((stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs).Key.ToString(), (stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs));
             }
             gameFrameParameters.players = players;
             if (gameFrameParameters.connectedUser != null)
             {
                 StockDatabase();
             }
-            //gameFrame.Navigate(typeof(PageGame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(null, gameFrameParameters), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
         #region AddPlayerRandom
@@ -473,7 +473,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         #endregion
 
         #region AddPlayerStepOne
-        private async void BtnAddPlayerStepOne_Click(object sender, RoutedEventArgs e)
+        private void BtnAddPlayerStepOne_Click(object sender, RoutedEventArgs e)
         {
            
             if (stackPlayerStepOne.Children.Count < 4)

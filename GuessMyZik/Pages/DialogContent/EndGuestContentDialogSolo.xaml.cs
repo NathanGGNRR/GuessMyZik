@@ -40,11 +40,11 @@ using GuessMyZik.Classes.FrameParameters;
 
 namespace GuessMyZik.Pages.DialogContent
 {
-    public sealed partial class EndGuestContentDialog : ContentDialog
+    public sealed partial class EndGuestContentDialogSolo : ContentDialog
     {
         private Frame rootFrame;
 
-        public EndGuestContentDialog(Frame rootFrame)
+        public EndGuestContentDialogSolo(Frame rootFrame)
         {
             this.InitializeComponent();
             this.rootFrame = rootFrame;

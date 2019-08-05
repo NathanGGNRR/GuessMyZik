@@ -87,7 +87,7 @@ namespace GuessMyZik.Pages
         {
             textWelcomeUser.Text = "Welcome " + connectedUser.username;
             personPicture.Initials = (connectedUser.username[0].ToString() + connectedUser.username[1].ToString()).ToUpper();
-            string response = await apiConnect.GetAsJsonAsync("http://localhost/api/auth/level.php");
+            string response = await apiConnect.GetAsJsonAsync("http://localhost/api/level/level.php");
             List<Levels> levels = JsonConvert.DeserializeObject<List<Levels>>(response);
             double amountActualLevel = Convert.ToDouble(levels[Convert.ToInt16(connectedUser.level_id) - 1].amount_xp);
             double amountNextLevel = 38400;

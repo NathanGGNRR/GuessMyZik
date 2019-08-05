@@ -123,6 +123,7 @@
     <Compile Include="Classes\APIConnect.cs" />
     <Compile Include="Classes\ArtistClasses\Artist.cs" />
     <Compile Include="Classes\ArtistClasses\Artists.cs" />
+    <Compile Include="Classes\ElementFound.cs" />
     <Compile Include="Classes\FrameParameters\GameFrameParameters.cs" />
     <Compile Include="Classes\FrameParameters\ChoosingFrameParameters.cs" />
     <Compile Include="Classes\FrameParameters\ChoosingFrameParametersAlbums.cs" />
@@ -143,8 +144,14 @@
     <Compile Include="Classes\Users.cs" />
     <Compile Include="Classes\ChooseGame.cs" />
     <Compile Include="Classes\VerificationAuth.cs" />
+    <Compile Include="Pages\DialogContent\EndGuestContentDialog.xaml.cs">
+      <DependentUpon>EndGuestContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DialogContent\NextContentDialog.xaml.cs">
       <DependentUpon>NextContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DialogContent\EndUserContentDialog.xaml.cs">
+      <DependentUpon>EndUserContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\DialogContent\ReadyContentDialog.xaml.cs">
       <DependentUpon>ReadyContentDialog.xaml</DependentUpon>
@@ -361,7 +368,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\DialogContent\EndGuestContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\DialogContent\NextContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\DialogContent\EndUserContentDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -44,6 +44,7 @@ namespace GuessMyZik.Pages.Frames.Game
     {
 
         private DispatcherTimer dispatcherTimer;
+        private APIConnect apiConnect = new APIConnect();
         private GameFrame parameter;
         private string trackName;
         private string artistName;
@@ -125,43 +126,45 @@ namespace GuessMyZik.Pages.Frames.Game
                 dispatcherTimer.Start();
             }
         }
+        
+        private void CheckElementGuessed(string textTry, string element, string elementToFound, string textFound)
+        {
+            if (!elementGuessed.Contains(element))
+            {
+                if (textTry == elementToFound)
+                {
+                    for (int i = 0; i < parameter.textGuess.Count; i++)
+                    {
+                        if (parameter.textGuess[i].Tag.ToString() == element)
+                        {
+                            ChangeOnGamePage(element, textFound, i);
+                            if (parameter.connectedUser != null)
+                            {
+                                StockElementGuessed(element);
+                            }
+                            break;
+                        }
+                    }
 
-        private async void clickTry()
+                }
+            }
+        }
+
+        private async void StockElementGuessed(string element_found)
+        {
+            ElementFound elementFound = new ElementFound(parameter.connectedUser.username, parameter.trackGuessed.id, element_found, DateTime.Now.ToString());
+            await apiConnect.PostAsJsonAsync(elementFound, "http://localhost/api/stockelementguessed.php");
+        }
+
+        private void clickTry()
         {
             if(textTry.Text != "")
             {
                 string textTryGuess = textTry.Text.ToLower().Replace(" ", string.Empty);
                 if (parameter.classType == 1)
                 {
-                    if (!elementGuessed.Contains("track"))
-                    {
-                        if (textTryGuess == trackName)
-                        {
-                            for (int i = 0; i < parameter.textGuess.Count; i++)
-                            {
-                                if (parameter.textGuess[i].Tag.ToString() == "track")
-                                {
-                                    ChangeOnGamePage("track", "Name of track: " + parameter.trackGuessed.title_short, i);
-                                    break;
-                                }
-                            }
-
-                        }
-                    }
-                    if (!elementGuessed.Contains("album"))
-                    {
-                        if (textTryGuess == albumName)
-                        {
-                            for (int i = 0; i < parameter.textGuess.Count; i++)
-                            {
-                                if (parameter.textGuess[i].Tag.ToString() == "album")
-                                {
-                                    ChangeOnGamePage("album", "Title of album: " + parameter.trackGuessed.album.title, i);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    CheckElementGuessed(textTryGuess, "track", trackName, "Name of track: " + parameter.trackGuessed.title_short);
+                    CheckElementGuessed(textTryGuess, "album", albumName, "Title of album: " + parameter.trackGuessed.album.title);
                     if (textTryGuess != trackName && textTryGuess != albumName)
                     {
                         ErrorGame();
@@ -169,35 +172,8 @@ namespace GuessMyZik.Pages.Frames.Game
                 }
                 else if (parameter.classType == 2)
                 {
-                    if (!elementGuessed.Contains("track"))
-                    {
-                        if (textTryGuess == trackName)
-                        {
-                            for (int i = 0; i < parameter.textGuess.Count; i++)
-                            {
-                                if (parameter.textGuess[i].Tag.ToString() == "track")
-                                {
-                                    ChangeOnGamePage("track", "Name of track: " + parameter.trackGuessed.title_short, i);
-                                    break;
-                                }
-                            }
-
-                        }
-                    }
-                    if (!elementGuessed.Contains("artist"))
-                    {
-                        if (textTryGuess == artistName)
-                        {
-                            for (int i = 0; i < parameter.textGuess.Count; i++)
-                            {
-                                if (parameter.textGuess[i].Tag.ToString() == "artist")
-                                {
-                                    ChangeOnGamePage("artist", "Name of artist: " + parameter.trackGuessed.artist.name, i);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    CheckElementGuessed(textTryGuess, "track", trackName, "Name of track: " + parameter.trackGuessed.title_short);
+                    CheckElementGuessed(textTryGuess, "artist", artistName, "Name of artist: " + parameter.trackGuessed.artist.name); 
                     if (textTryGuess != trackName && textTryGuess != artistName)
                     {
                         ErrorGame();
@@ -205,34 +181,8 @@ namespace GuessMyZik.Pages.Frames.Game
                 }
                 else if (parameter.classType == 3)
                 {
-                    if (!elementGuessed.Contains("album"))
-                    {
-                        if (textTryGuess == albumName)
-                        {
-                            for (int i = 0; i < parameter.textGuess.Count; i++)
-                            {
-                                if (parameter.textGuess[i].Tag.ToString() == "album")
-                                {
-                                    ChangeOnGamePage("album", "Title of album: " + parameter.trackGuessed.album.title, i);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (!elementGuessed.Contains("artist"))
-                    {
-                        if (textTryGuess == artistName)
-                        {
-                            for (int i = 0; i < parameter.textGuess.Count; i++)
-                            {
-                                if (parameter.textGuess[i].Tag.ToString() == "artist")
-                                {
-                                    ChangeOnGamePage("artist", "Name of artist: " + parameter.trackGuessed.artist.name, i);
-                                    break;
-                                }
-                            }
-                        }
-                    }
+                    CheckElementGuessed(textTryGuess, "album", albumName, "Title of album: " + parameter.trackGuessed.album.title);
+                    CheckElementGuessed(textTryGuess, "artist", artistName, "Name of artist: " + parameter.trackGuessed.artist.name);
                     if (textTryGuess != artistName && textTryGuess != albumName)
                     {
                         ErrorGame();
@@ -240,51 +190,9 @@ namespace GuessMyZik.Pages.Frames.Game
                 }
                 else
                 {
-                    if (!elementGuessed.Contains("track"))
-                    {
-                        if (textTryGuess == trackName)
-                        {
-                            for (int i = 0; i < parameter.textGuess.Count; i++)
-                            {
-                                if (parameter.textGuess[i].Tag.ToString() == "track")
-                                {
-                                    ChangeOnGamePage("track", "Name of track: " + parameter.trackGuessed.title_short, i);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (!elementGuessed.Contains("artist"))
-                    {
-                        if (textTryGuess == artistName)
-                        {
-                            for (int i = 0; i < parameter.textGuess.Count; i++)
-                            {
-                                if (parameter.textGuess[i].Tag.ToString() == "artist")
-                                {
-                                    ChangeOnGamePage("artist", "Name of artist: " + parameter.trackGuessed.artist.name, i);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (!elementGuessed.Contains("album"))
-                    {
-                        if (textTryGuess == albumName)
-                        {
-                            for (int i = 0; i < parameter.textGuess.Count; i++)
-                            {
-                                if (parameter.textGuess[i].Tag.ToString() == "album")
-                                {
-                                    ChangeOnGamePage("album", "Title of album: " + parameter.trackGuessed.album.title, i);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
+                    CheckElementGuessed(textTryGuess, "track", trackName, "Name of track: " + parameter.trackGuessed.title_short);
+                    CheckElementGuessed(textTryGuess, "artist", artistName, "Name of artist: " + parameter.trackGuessed.artist.name);
+                    CheckElementGuessed(textTryGuess, "album", albumName, "Title of album: " + parameter.trackGuessed.album.title);
                     if (textTryGuess != trackName && textTryGuess != artistName && textTryGuess != albumName)
                     {
                         ErrorGame();
@@ -347,13 +255,13 @@ namespace GuessMyZik.Pages.Frames.Game
             trackSound.Stop();
             dispatcherTimer.Tick -= dispatcherTimer_Tick;
             dispatcherTimer.Stop();
-            parameter.points = pointTrack;
+            parameter.points += pointTrack;
             parameter.beforeTrack.Add(parameter.trackGuessed);
             parameter.listBeforeTrack.Items.Add(parameter.trackGuessed);
             if (parameter.listTrack.IndexOf(parameter.trackGuessed) != parameter.listTrack.Count - 1)
             {
-                NextContentDialog dialog = new NextContentDialog();
-                await dialog.ShowAsync();
+                //NextContentDialog dialog = new NextContentDialog();
+                //await dialog.ShowAsync();
             }
             for (int i = 0; i < parameter.textGuess.Count; i++)
             {
@@ -372,14 +280,27 @@ namespace GuessMyZik.Pages.Frames.Game
             if (parameter.listTrack.IndexOf(parameter.trackGuessed) != parameter.listTrack.Count - 1)
             {
                 parameter.trackGuessed = parameter.listTrack[parameter.listTrack.IndexOf(parameter.trackGuessed) + 1];
-                parameter.rootFrame.Navigate(typeof(TrackGame), new GameFrame(parameter.rootFrame, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
-                parameter.rootFrame.BackStack.RemoveAt(parameter.rootFrame.BackStack.Count - 1);
+                if (parameter.connectedUser != null)
+                {
+                    parameter.gameFrame.Navigate(typeof(TrackGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, parameter.connectedUser, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                } else
+                {
+                    parameter.gameFrame.Navigate(typeof(TrackGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, null, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+
+                }
+                parameter.gameFrame.BackStack.RemoveAt(parameter.gameFrame.BackStack.Count - 1);
             }
             else
             {
-                // 
-                // Page FIN Game
-                //
+                if (parameter.connectedUser != null)
+                {
+                    EndUserContentDialog dialog = new EndUserContentDialog(parameter.connectedUser, parameter.points, parameter.rootFrame);
+                    await dialog.ShowAsync();
+                } else
+                {
+                    EndGuestContentDialog dialog = new EndGuestContentDialog(parameter.rootFrame);
+                    await dialog.ShowAsync();
+                }
             }
         }
 

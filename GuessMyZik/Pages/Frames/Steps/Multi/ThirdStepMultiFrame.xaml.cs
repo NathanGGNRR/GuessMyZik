@@ -192,7 +192,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         private async void StockDatabase()
         {
             Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
-            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/auth/stockparty.php");
+            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/stockparty.php");
             gameFrameParameters.party_id = Convert.ToInt16(response);
         }
 

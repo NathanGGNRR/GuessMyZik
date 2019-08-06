@@ -282,10 +282,10 @@ namespace GuessMyZik.Pages.Frames.Game
                 parameter.trackGuessed = parameter.listTrack[parameter.listTrack.IndexOf(parameter.trackGuessed) + 1];
                 if (parameter.connectedUser != null)
                 {
-                    parameter.gameFrame.Navigate(typeof(TrackSoloGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, parameter.connectedUser, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    parameter.gameFrame.Navigate(typeof(TrackSoloGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, parameter.connectedUser, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players, parameter.party), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                 } else
                 {
-                    parameter.gameFrame.Navigate(typeof(TrackSoloGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, null, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    parameter.gameFrame.Navigate(typeof(TrackSoloGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, null, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
 
                 }
                 parameter.gameFrame.BackStack.RemoveAt(parameter.gameFrame.BackStack.Count - 1);
@@ -294,8 +294,31 @@ namespace GuessMyZik.Pages.Frames.Game
             {
                 if (parameter.connectedUser != null)
                 {
-                    EndUserContentDialogSolo dialog = new EndUserContentDialogSolo(parameter.connectedUser, parameter.points, parameter.rootFrame);
-                    await dialog.ShowAsync();
+                    if (parameter.party.points != 0)
+                    {
+                        List<string> infoParameter = new List<string>() { parameter.party.party_id.ToString(), parameter.connectedUser.username, parameter.points.ToString()};
+                        string response = await apiConnect.PostAsJsonAsync(infoParameter, "http://localhost/api/party/addduel.php");
+                        var message = new MessageDialog(response);
+                        await message.ShowAsync();
+                        EndUserContentDialogSolo dialog;
+                        if (parameter.points > parameter.party.points)
+                        {
+                            dialog = new EndUserContentDialogSolo(parameter.connectedUser, parameter.points, parameter.rootFrame, 1);
+                        } else if (parameter.points == parameter.party.points)
+                        {
+                            dialog = new EndUserContentDialogSolo(parameter.connectedUser, parameter.points, parameter.rootFrame, 2);
+                        } else
+                        {
+                            dialog = new EndUserContentDialogSolo(parameter.connectedUser, parameter.points, parameter.rootFrame, 3);
+                        }    
+                        await dialog.ShowAsync();
+                    } else
+                    {
+                        parameter.party.points = parameter.points;
+                        await apiConnect.PostAsJsonAsync(parameter.party, "http://localhost/api/party/updateparty.php");
+                        EndUserContentDialogSolo dialog = new EndUserContentDialogSolo(parameter.connectedUser, parameter.points, parameter.rootFrame);
+                        await dialog.ShowAsync();
+                    }
                 } else
                 {
                     EndGuestContentDialogSolo dialog = new EndGuestContentDialogSolo(parameter.rootFrame);

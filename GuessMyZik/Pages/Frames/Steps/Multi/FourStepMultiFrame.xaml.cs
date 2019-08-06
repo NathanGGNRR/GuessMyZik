@@ -47,6 +47,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         private List<string> keyAffectedRandom = new List<string>();
         private List<string> keyAffectedChoosing = new List<string>();
         private List<string> keyAffectedStepOne = new List<string>();
+        private List<string> keyAffectedStepTwo = new List<string>();
 
 
         #endregion
@@ -62,14 +63,19 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             gameFrameParameters = (GameFrameMultiParameters)e.Parameter;
             gameFrame = gameFrameParameters.secondFrame;
           
-            if (gameFrameParameters.classTypeSelected != 4)
+            if (gameFrameParameters.classTypeSelected == 4)
+            {
+                fromStepOne.Visibility = Visibility.Visible;
+            } else if (gameFrameParameters.classTypeSelected == 3)
             {
                 fromStepTwo.Visibility = Visibility.Visible;
             } else
             {
-                fromStepOne.Visibility = Visibility.Visible;
+                fromStepThree.Visibility = Visibility.Visible;
             }
         }
+
+        #region StepThree
 
         private void BtnValidRandom_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
@@ -162,7 +168,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             gameFrameParameters.players = players;
             if (gameFrameParameters.connectedUser != null)
             {
-                StockDatabase();
+                gameFrameParameters.party_id = await StockDatabase();
             }
             gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(null, gameFrameParameters), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
@@ -186,6 +192,10 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         {
             randomExpander.IsExpanded = false;
         }
+
+        #endregion
+
+        #region StepOne
 
         private void BtnBackStepOne_Click(object sender, RoutedEventArgs e)
         {
@@ -235,10 +245,64 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             gameFrameParameters.players = players;
             if (gameFrameParameters.connectedUser != null)
             {
-                StockDatabase();
+                gameFrameParameters.party_id = await StockDatabase();
             }
             gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(null, gameFrameParameters), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
+
+        #endregion
+
+        #region StepTwo
+
+        private void BtnBackStepTwo_Click(object sender, RoutedEventArgs e)
+        {
+            gameFrame.GoBack();
+        }
+
+        private void BtnBackStepTwo_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            ChooseGame.AnimationColorBtnSoloExited(pathBackStepTwo, (sender as Button), "ExitColor");
+
+        }
+
+        private void BtnBackStepTwo_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            ChooseGame.AnimationColorBtnSoloExited(pathBackStepTwo, (sender as Button), "WriteColor");
+        }
+
+        private void BtnValidStepTwo_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            ChooseGame.AnimationColorBtnSoloExited(pathValidStepTwo, (sender as Button), "LastColor");
+        }
+
+        private void BtnValidStepTwo_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            ChooseGame.AnimationColorBtnSoloExited(pathValidStepTwo, (sender as Button), "WriteColor");
+        }
+
+        private async void BtnValidStepTwo_Click(object sender, RoutedEventArgs e)
+        {
+            progressMusics.IsActive = true;
+            backgroundWaiting.Visibility = Visibility.Visible;
+            List<Player> players = new List<Player>();
+            foreach (StackPanel stackPanel in stackPlayerStepTwo.Children)
+            {
+                string playerName = (stackPanel.Children[1] as TextBox).Text;
+                if ((stackPanel.Children[1] as TextBox).Text == "")
+                {
+                    playerName = "Player " + (stackPlayerStepTwo.Children.IndexOf(stackPanel) + 1).ToString();
+                }
+                players.Add(new Player(playerName, ((stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs).Key.ToString(), (stackPanel.Children[2] as Button).Tag as KeyRoutedEventArgs));
+            }
+            gameFrameParameters.players = players;
+            if (gameFrameParameters.connectedUser != null)
+            {
+                gameFrameParameters.party_id = await StockDatabase();
+            }
+            gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(null, gameFrameParameters), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+        }
+
+        #endregion
 
         #region AddPlayerRandom
         private void BtnAddPlayerRandom_Click(object sender, RoutedEventArgs e)
@@ -603,11 +667,144 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
         }
         #endregion
 
-        private async void StockDatabase()
+        #region AddPlayerStepTwo
+        private void BtnAddPlayerStepTwo_Click(object sender, RoutedEventArgs e)
         {
-            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
-            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/stockparty.php");
-            gameFrameParameters.party_id = Convert.ToInt16(response);
+
+            if (stackPlayerStepTwo.Children.Count < 4)
+            {
+                StackPanel newStackPlayer = new StackPanel();
+                newStackPlayer.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
+                newStackPlayer.Margin = new Thickness(0, 0, 15, 0);
+                newStackPlayer.Tag = "test" + stackPlayerStepTwo.Children.Count + 1;
+                StackPanel newStackTextButton = new StackPanel();
+                newStackTextButton.Width = 140;
+                newStackTextButton.Orientation = Orientation.Horizontal;
+                newStackTextButton.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+                TextBlock newTextBlockPlayer = new TextBlock();
+                newTextBlockPlayer.Text = "Player " + (stackPlayerStepTwo.Children.Count + 1).ToString();
+                newTextBlockPlayer.FontFamily = new FontFamily("Kaushan Script");
+                newTextBlockPlayer.FontSize = 16;
+                newTextBlockPlayer.Foreground = new SolidColorBrush((Color)Application.Current.Resources["SecondaryDarkColor"]);
+                newStackTextButton.Children.Add(newTextBlockPlayer);
+                Button newButtonLess = new Button();
+                newButtonLess.Background = new SolidColorBrush((Color)Application.Current.Resources["ExitColor"]);
+                newButtonLess.BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["ExitDarkColor"]);
+                newButtonLess.Foreground = new SolidColorBrush((Color)Application.Current.Resources["ExitColor"]);
+                newButtonLess.FontFamily = new FontFamily("Kaushan Script");
+                newButtonLess.Height = 7;
+                newButtonLess.Margin = new Thickness(40, 0, 0, 0);
+                newButtonLess.Width = 28;
+                newButtonLess.Tag = stackPlayerStepTwo.Children.Count + 1;
+                newButtonLess.BorderThickness = new Thickness(0);
+                newButtonLess.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Right;
+                newButtonLess.Click += BtnRemovePlayerStepTwo_Click;
+                newStackTextButton.Children.Add(newButtonLess);
+                newStackPlayer.Children.Add(newStackTextButton);
+                TextBox newTextBoxPlayer = new TextBox();
+                newTextBoxPlayer.FontSize = 18;
+                newTextBoxPlayer.Height = 35;
+                newTextBoxPlayer.Width = 140;
+                newTextBoxPlayer.FontFamily = new FontFamily("Trebuchet MS");
+                newTextBoxPlayer.Style = (Style)App.Current.Resources["textBoxFocusThird"];
+                newTextBoxPlayer.SelectionHighlightColor = new SolidColorBrush((Color)Application.Current.Resources["SecondaryDarkColor"]);
+                newTextBoxPlayer.FontWeight = Windows.UI.Text.FontWeights.Bold;
+                newTextBoxPlayer.Margin = new Thickness(0, 10, 0, 0);
+                newTextBoxPlayer.PlaceholderText = "Name of player " + (stackPlayerStepTwo.Children.Count + 1).ToString();
+                newTextBoxPlayer.PlaceholderForeground = new SolidColorBrush((Color)Application.Current.Resources["ThirdColor"]);
+                newTextBoxPlayer.VerticalAlignment = VerticalAlignment.Center;
+                newTextBoxPlayer.VerticalContentAlignment = VerticalAlignment.Center;
+                newTextBoxPlayer.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
+                newStackPlayer.Children.Add(newTextBoxPlayer);
+                Button newButtonPlayer = new Button();
+                newButtonPlayer.Style = (Style)(App.Current.Resources["BtnSecondary"]);
+                newButtonPlayer.Background = new SolidColorBrush((Color)Application.Current.Resources["SecondaryColor"]);
+                newButtonPlayer.BorderBrush = new SolidColorBrush((Color)Application.Current.Resources["SecondaryDarkColor"]);
+                newButtonPlayer.Foreground = new SolidColorBrush((Color)Application.Current.Resources["SecondaryColor"]);
+                newButtonPlayer.FontFamily = new FontFamily("Kaushan Script");
+                newButtonPlayer.Margin = new Thickness(0, 10, 0, 0);
+                newButtonPlayer.Content = "Click and affect key";
+                newButtonPlayer.Height = 30;
+                newButtonPlayer.FontSize = 15;
+                newButtonPlayer.Width = 140;
+                newButtonPlayer.Click += AffectKeyStepTwo_Click;
+                newButtonPlayer.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
+                newStackPlayer.Children.Add(newButtonPlayer);
+                stackPlayerStepTwo.Children.Add(newStackPlayer);
+                checkAffectedKeyStepTwo();
+                if (stackPlayerStepTwo.Children.Count == 4)
+                {
+                    btnAddPlayerStepTwo.IsEnabled = false;
+                }
+            }
+        }
+
+        private void BtnRemovePlayerStepTwo_Click(object sender, RoutedEventArgs e)
+        {
+            btnAddPlayerStepTwo.IsEnabled = true;
+            Button button;
+            try
+            {
+                button = (stackPlayerStepTwo.Children[Convert.ToInt16((sender as Button).Tag) - 1] as StackPanel).Children[2] as Button;
+            }
+            catch
+            {
+                button = (stackPlayerStepTwo.Children[2] as StackPanel).Children[2] as Button;
+            }
+            if (button.Tag != null)
+            {
+                keyAffectedStepTwo.Remove((button.Tag as KeyRoutedEventArgs).Key.ToString());
+            }
+            try
+            {
+                stackPlayerStepTwo.Children.RemoveAt(Convert.ToInt16((sender as Button).Tag) - 1);
+            }
+            catch
+            {
+                stackPlayerStepTwo.Children.RemoveAt(2);
+            }
+            checkAffectedKeyStepTwo();
+        }
+
+
+        private void AffectKeyStepTwo_Click(object senderElement, RoutedEventArgs click)
+        {
+            (senderElement as Button).Content = "...";
+            (senderElement as Button).KeyDown += BtnAffectKeyStepTwo_KeyDown;
+
+        }
+
+        private void BtnAffectKeyStepTwo_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (!keyAffectedStepTwo.Contains(e.Key.ToString()))
+            {
+                keyAffectedStepTwo.Add(e.Key.ToString());
+                (sender as Button).Content = e.Key.ToString();
+                (sender as Button).Tag = e;
+                (sender as Button).KeyDown -= BtnAffectKeyStepTwo_KeyDown;
+                checkAffectedKeyStepTwo();
+            }
+
+        }
+
+        private void checkAffectedKeyStepTwo()
+        {
+            if (stackPlayerStepTwo.Children.Count == keyAffectedStepTwo.Count)
+            {
+                btnValidStepTwo.IsEnabled = true;
+            }
+            else
+            {
+                btnValidStepTwo.IsEnabled = false;
+            }
+        }
+        #endregion
+
+        private async Task<int> StockDatabase()
+        {
+            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.classTypeSelected, gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
+            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/party/stockparty.php");
+           return Convert.ToInt16(response);
         }
     }
 }

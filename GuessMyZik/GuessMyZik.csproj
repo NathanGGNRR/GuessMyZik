@@ -168,6 +168,9 @@
     <Compile Include="Pages\Frames\Choosing\ListFrame.xaml.cs">
       <DependentUpon>ListFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Frames\Duel\DuelFrame.xaml.cs">
+      <DependentUpon>DuelFrame.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Frames\Game\TrackMultiGame.xaml.cs">
       <DependentUpon>TrackMultiGame.xaml</DependentUpon>
     </Compile>
@@ -189,8 +192,8 @@
     <Compile Include="Pages\Frames\Steps\Solo\FourStepSoloFrame.xaml.cs">
       <DependentUpon>FourStepSoloFrame.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Frames\Steps\Solo\FristStepSoloFrame.xaml.cs">
-      <DependentUpon>FristStepSoloFrame.xaml</DependentUpon>
+    <Compile Include="Pages\Frames\Steps\Solo\FirstStepSoloFrame.xaml.cs">
+      <DependentUpon>FirstStepSoloFrame.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Frames\Login\RegistrationFrame.xaml.cs">
       <DependentUpon>RegistrationFrame.xaml</DependentUpon>
@@ -409,6 +412,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Frames\Duel\DuelFrame.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\Frames\Game\TrackMultiGame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -437,7 +444,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Frames\Steps\Solo\FristStepSoloFrame.xaml">
+    <Page Include="Pages\Frames\Steps\Solo\FirstStepSoloFrame.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

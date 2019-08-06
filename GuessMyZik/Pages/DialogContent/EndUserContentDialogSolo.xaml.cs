@@ -58,6 +58,34 @@ namespace GuessMyZik.Pages.DialogContent
             InitializeContentDialog();
         }
 
+        public EndUserContentDialogSolo(object userConnected, int points, Frame rootFrame, int statusDuel)
+        {
+            this.InitializeComponent();
+            this.userConnected = userConnected as Users;
+            this.points = points;
+            this.rootFrame = rootFrame;
+            InitializeContentDialog();
+            InitializeDuel(statusDuel);
+        }
+
+        private void InitializeDuel(int statusDuel)
+        {
+            stackDuel.Visibility = Visibility.Visible;
+            if(statusDuel == 1)
+            {
+                textDuel.Text = "You win !";
+                textDuel.Foreground = new SolidColorBrush((Color)Application.Current.Resources["LastColor"]);
+            } else if(statusDuel == 2)
+            {
+                textDuel.Text = "You made a tie.";
+                textDuel.Foreground = new SolidColorBrush((Color)Application.Current.Resources["SecondaryColor"]);
+            } else
+            {
+                textDuel.Text = "You lost !";
+                textDuel.Foreground = new SolidColorBrush((Color)Application.Current.Resources["ExitColor"]);
+            }
+        }
+
         private async void InitializeContentDialog()
         {
             textCongratsUser.Text = "Congratulations " + userConnected.username;

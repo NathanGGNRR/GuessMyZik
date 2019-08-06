@@ -35,7 +35,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
     /// <summary>
     /// An empty page can be used alone or as a landing page within a frame.
     /// </summary>
-    public sealed partial class FristStepSoloFrame : Page
+    public sealed partial class FirstStepSoloFrame : Page
     {
 
         private GameFrameSoloParameters gameFrameParameters;
@@ -45,7 +45,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
 
         private Users connectedUser;
 
-        public FristStepSoloFrame()
+        public FirstStepSoloFrame()
         {
             this.InitializeComponent();
            

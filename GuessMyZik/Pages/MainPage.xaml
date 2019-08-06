@@ -240,6 +240,7 @@
                     <Rectangle Grid.Column="2"  Grid.RowSpan="7" Fill="{StaticResource ThirdDarkColor}"/>
                     <Rectangle Grid.Row="2" Grid.Column="1" Fill="{StaticResource ThirdDarkColor}"/>
                     <TextBlock x:Name="textMultiGame" Grid.Row="1" Grid.Column="1"  Foreground="{StaticResource ThirdDarkColor}" FontFamily="Kaushan Script"  Text="Multi Game" FontSize="36" VerticalAlignment="Center" Padding="0,0,0,0" HorizontalAlignment="Center" />
+
                     <Frame x:Name="navigationMulti" Grid.Column="1" Grid.Row="3">
                         <Frame.ContentTransitions>
                             <TransitionCollection>
@@ -254,122 +255,28 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="Last guessed musics:" FontSize="38" VerticalAlignment="Bottom" Padding="0,0,2,0" HorizontalAlignment="Left"/>
-
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="4"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="4"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="4"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="4"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="4"/>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image Source="/Assets/Pictures/MainPage/albumTest.jpg" Stretch="Uniform"  Canvas.ZIndex="2" Margin="0 10 0 0"/>
-                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" VerticalAlignment="Center" Padding="0,0,2,0" HorizontalAlignment="Left" Grid.Row="1">
-                            <TextBlock.Inlines>
-                                <Run FontSize="18" Text="Mon coeur avait raison"/>
-                                <LineBreak />
-                                <Run FontSize="15" Text="Maitre GIMS" />
-                            </TextBlock.Inlines>
-                        </TextBlock>
-                    </Grid>
-                    <Rectangle Fill="{StaticResource WriteColor}" Margin="0 10 0 55" Grid.Column="2"/>
-                    <Grid Grid.Column="4">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image Source="/Assets/Pictures/MainPage/albumTest.jpg" Stretch="Uniform"  Canvas.ZIndex="2" Margin="0 10 0 0"/>
-                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" VerticalAlignment="Center" Padding="0,0,2,0" HorizontalAlignment="Left" Grid.Row="1">
-                            <TextBlock.Inlines>
-                                <Run FontSize="18" Text="Mon coeur avait raison"/>
-                                <LineBreak />
-                                <Run FontSize="15" Text="Maitre GIMS" />
-                            </TextBlock.Inlines>
-                        </TextBlock>
-                    </Grid>
-                    <Rectangle Fill="{StaticResource WriteColor}" Margin="0 10 0 55" Grid.Column="6"/>
-                    <Grid Grid.Column="8">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image Source="/Assets/Pictures/MainPage/albumTest.jpg" Stretch="Uniform"  Canvas.ZIndex="2" Margin="0 10 0 0"/>
-                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" VerticalAlignment="Center" Padding="0,0,2,0" HorizontalAlignment="Left" Grid.Row="1">
-                            <TextBlock.Inlines>
-                                <Run FontSize="18" Text="Mon coeur avait raison"/>
-                                <LineBreak />
-                                <Run FontSize="15" Text="Maitre GIMS" />
-                            </TextBlock.Inlines>
-                        </TextBlock>
-                    </Grid>
-                    <Rectangle Fill="{StaticResource WriteColor}" Margin="0 10 0 55" Grid.Column="10"/>
-                    <Grid Grid.Column="12">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image Source="/Assets/Pictures/MainPage/albumTest.jpg" Stretch="Uniform"  Canvas.ZIndex="2" Margin="0 10 0 0"/>
-                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" VerticalAlignment="Center" Padding="0,0,2,0" HorizontalAlignment="Left" Grid.Row="1">
-                            <TextBlock.Inlines>
-                                <Run FontSize="18" Text="Mon coeur avait raison"/>
-                                <LineBreak />
-                                <Run FontSize="15" Text="Maitre GIMS" />
-                            </TextBlock.Inlines>
-                        </TextBlock>
-                    </Grid>
-                    <Rectangle Fill="{StaticResource WriteColor}" Margin="0 10 0 55" Grid.Column="14"/>
-                    <Grid Grid.Column="16">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image Source="/Assets/Pictures/MainPage/albumTest.jpg" Stretch="Uniform"  Canvas.ZIndex="2" Margin="0 10 0 0"/>
-                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" VerticalAlignment="Center" Padding="0,0,2,0" HorizontalAlignment="Left" Grid.Row="1">
-                            <TextBlock.Inlines>
-                                <Run FontSize="18" Text="Mon coeur avait raison"/>
-                                <LineBreak />
-                                <Run FontSize="15" Text="Maitre GIMS" />
-                            </TextBlock.Inlines>
-                        </TextBlock>
-                    </Grid>
-                    <Rectangle Fill="{StaticResource WriteColor}" Margin="0 10 0 55" Grid.Column="18"/>
-                    <Grid Grid.Column="20">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Image Source="/Assets/Pictures/MainPage/albumTest.jpg" Stretch="Uniform"  Canvas.ZIndex="2" Margin="0 10 0 0"/>
-                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" VerticalAlignment="Center" Padding="0,0,2,0" HorizontalAlignment="Left" Grid.Row="1">
-                            <TextBlock.Inlines>
-                                <Run FontSize="18" Text="Mon coeur avait raison"/>
-                                <LineBreak />
-                                <Run FontSize="15" Text="Maitre GIMS" />
-                            </TextBlock.Inlines>
-                        </TextBlock>
-                    </Grid>
-                </Grid>
+                <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="Last guessed tracks:" FontSize="38" VerticalAlignment="Bottom" Padding="0,0,2,0" HorizontalAlignment="Left"/>
+                <ListView  Grid.Row="1" x:Name="listViewLastTrack"  Canvas.ZIndex="3" VerticalAlignment="Center" Margin="10 0 10 0" ItemContainerStyle="{StaticResource ListViewItemContainerStyleSolo}" IsItemClickEnabled="False">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="150" VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="0.3*"/>
+                                </Grid.RowDefinitions>
+                                <Image x:Name="imageFound" Source="{Binding Path=artist.picture_medium}" Stretch="Uniform"/>
+                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" HorizontalScrollMode="Enabled" >
+                                    <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="{Binding title_short}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                </ScrollViewer>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"></StackPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                </ListView>
             </Grid>
         </Grid>
     </Grid>

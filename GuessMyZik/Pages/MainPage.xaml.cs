@@ -62,10 +62,28 @@ namespace GuessMyZik.Pages
             rootFrame = parameter.rootFrame;
             connectedUser = parameter.connectedUser;
             nbVisiteur = parameter.nbVisiteur;
-            navigationSolo.Navigate(typeof(FristStepSoloFrame), new GameFrameSoloParameters(rootFrame, navigationSolo, connectedUser, null, new Dictionary<int, object>(), null, null, null));
-            navigationMulti.Navigate(typeof(FirstStepMultiFrame), new GameFrameMultiParameters(rootFrame, navigationMulti, connectedUser, null, new Dictionary<int, object>(), null, null, null, null));
+            if (connectedUser != null)
+            {
+                navigationSolo.Navigate(typeof(FirstStepSoloFrame), new GameFrameSoloParameters(rootFrame, navigationSolo, connectedUser, null, new Dictionary<int, object>(), null, null, null));
+                navigationMulti.Navigate(typeof(FirstStepMultiFrame), new GameFrameMultiParameters(rootFrame, navigationMulti, connectedUser, null, new Dictionary<int, object>(), null, null, null, null));
+            }
+            else
+            {
+                GameFrameSoloParameters soloGuest = new GameFrameSoloParameters(rootFrame, navigationSolo, null, null, new Dictionary<int, object>(), null, null, null);
+                soloGuest.nbVisiteur = nbVisiteur;
+                GameFrameMultiParameters multiGuest = new GameFrameMultiParameters(rootFrame, navigationMulti, null, null, new Dictionary<int, object>(), null, null, null, null);
+                multiGuest.nbVisiteur = nbVisiteur;
+                navigationSolo.Navigate(typeof(FirstStepSoloFrame), soloGuest);
+                navigationMulti.Navigate(typeof(FirstStepMultiFrame), multiGuest);
+            }
             InitializeMainPage();
-             
+        }
+
+        private async void InitializeLastGuessed()
+        {
+            string response = await apiConnect.PostAsJsonAsync(connectedUser.username,"http://localhost/api/lastguessed.php");
+            List<Track> tracksGuessed = JsonConvert.DeserializeObject<List<Track>>(response);
+            listViewLastTrack.ItemsSource = tracksGuessed;
         }
 
         private void InitializeMainPage()
@@ -75,6 +93,7 @@ namespace GuessMyZik.Pages
                 gridUser.Visibility = Visibility.Visible;
                 btnsUser.Visibility = Visibility.Visible;
                 InitializeUser();
+                InitializeLastGuessed();
             } else
             {
                 gridGuest.Visibility = Visibility.Visible;
@@ -262,6 +281,7 @@ namespace GuessMyZik.Pages
             rootFrame.GoBack();
         }
 
-        
+
+       
     }
 }

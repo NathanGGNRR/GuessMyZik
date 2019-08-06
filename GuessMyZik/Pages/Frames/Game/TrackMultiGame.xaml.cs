@@ -284,8 +284,8 @@ namespace GuessMyZik.Pages.Frames.Game
             parameter.listBeforeTrack.Items.Add(parameter.trackGuessed);
             if (parameter.listTrack.IndexOf(parameter.trackGuessed) != parameter.listTrack.Count - 1)
             {
-                //NextContentDialog dialog = new NextContentDialog();
-                //await dialog.ShowAsync();
+                NextContentDialog dialog = new NextContentDialog();
+                await dialog.ShowAsync();
             }
             for (int i = 0; i < parameter.textGuess.Count; i++)
             {
@@ -306,10 +306,10 @@ namespace GuessMyZik.Pages.Frames.Game
                 parameter.trackGuessed = parameter.listTrack[parameter.listTrack.IndexOf(parameter.trackGuessed) + 1];
                 if (parameter.connectedUser != null)
                 {
-                    parameter.gameFrame.Navigate(typeof(TrackMultiGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, parameter.connectedUser, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    parameter.gameFrame.Navigate(typeof(TrackMultiGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, parameter.connectedUser, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
                 } else
                 {
-                    parameter.gameFrame.Navigate(typeof(TrackMultiGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, null, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+                    parameter.gameFrame.Navigate(typeof(TrackMultiGame), new GameFrame(parameter.rootFrame, parameter.gameFrame, null, parameter.trackGuessed, parameter.listTrack, parameter.beforeTrack, parameter.listBeforeTrack, parameter.textGuess, parameter.classType, parameter.points, parameter.players, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
 
                 }
                 parameter.gameFrame.BackStack.RemoveAt(parameter.gameFrame.BackStack.Count - 1);

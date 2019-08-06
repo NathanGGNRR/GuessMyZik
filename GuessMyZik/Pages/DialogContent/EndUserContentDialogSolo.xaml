@@ -25,6 +25,9 @@
                 <PersonPicture x:Name="personPicture" Width="50" VerticalAlignment="Center" BackgroundSizing="InnerBorderEdge" />
                 <TextBlock x:Name="textCongratsUser" Foreground="{StaticResource SecondaryColor}" FontFamily="Kaushan Script"  Text="Congratulation AtomicxFire" FontSize="20" VerticalAlignment="Center" Margin="10 0 0 0" HorizontalAlignment="Left"/>
             </StackPanel>
+            <StackPanel x:Name="stackDuel" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+                <TextBlock x:Name="textDuel" Foreground="{StaticResource SecondaryColor}" FontFamily="Kaushan Script"  Text="You loose" FontSize="20" VerticalAlignment="Center" Margin="10 0 0 0" HorizontalAlignment="Left"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
                 <TextBlock x:Name="textLvlActual"  Foreground="{StaticResource SecondaryColor}" FontFamily="Kaushan Script"  Text="Lvl 2" FontSize="18" VerticalAlignment="Center" Padding="0,0,0,0" HorizontalAlignment="Center" />
                 <Grid Margin="10 0 10 0" Width="250" VerticalAlignment="Center">

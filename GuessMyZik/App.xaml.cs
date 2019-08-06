@@ -78,8 +78,7 @@ namespace GuessMyZik
                     // When the navigation stack is not restored, go to the first page,
                     // then configure the new page by sending the required information as
                     // setting.
-                    FrameParameters frame = new FrameParameters(rootFrame, null, new Users("test", "test", "test@test.fr", "1", "20"));
-                    rootFrame.Navigate(typeof(MainPage), frame, new DrillInNavigationTransitionInfo());
+                    rootFrame.Navigate(typeof(HomePage), rootFrame, new DrillInNavigationTransitionInfo());
                 }
                 // Check that the current window is active
                 Window.Current.Activate();

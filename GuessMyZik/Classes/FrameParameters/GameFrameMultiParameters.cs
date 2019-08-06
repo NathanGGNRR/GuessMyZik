@@ -20,6 +20,7 @@ namespace GuessMyZik.Classes.FrameParameters
         public int? number_tracks { get; set; }
         public List<Player> players { get; set; }
         public int? party_id { get; set; }
+        public int? nbVisiteur { get; set; }
 
         public GameFrameMultiParameters(Frame frame, Frame secondFrame, Users user, int? classType, Dictionary<int, object> list , int? gameDuel, int? numberTracks, List<Player> players, int? party_id)
         {

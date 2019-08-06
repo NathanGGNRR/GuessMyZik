@@ -90,12 +90,12 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             ChooseGame.AnimationColorBtnSoloExited(pathValid, (sender as Button), "WriteColor");
         }
 
-        private void BtnValid_Click(object sender, RoutedEventArgs e)
+        private async void BtnValid_Click(object sender, RoutedEventArgs e)
         {
             gameFrameParameters.listTrack = musicChoosen;
             if(gameFrameParameters.connectedUser != null)
             {
-                StockDatabase();
+                gameFrameParameters.party_id = await StockDatabase();
             }
             gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(null, gameFrameParameters), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
@@ -124,11 +124,11 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
             }
         }
 
-        private async void StockDatabase()
+        private async Task<int> StockDatabase()
         {
-            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
-            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/stockparty.php");
-            gameFrameParameters.party_id = Convert.ToInt16(response);
+            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.classTypeSelected, gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
+            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/party/stockparty.php");
+            return Convert.ToInt16(response);
         }
     }
 }

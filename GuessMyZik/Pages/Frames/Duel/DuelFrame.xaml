@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="GuessMyZik.Pages.Frames.Duel.DuelFrame"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GuessMyZik.Pages.Frames.Duel"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+
+    <Grid Grid.Column="1" Grid.Row="3">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <ListView x:Name="listViewTracks" ItemContainerStyle="{StaticResource ListViewItemContainerStyleCheckBoxSolo}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="100" Width="600" Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="100"/>
+                            </Grid.ColumnDefinitions>
+                            <PersonPicture x:Name="personDuel" VerticalAlignment="Top" BackgroundSizing="InnerBorderEdge" Height="90" Initials="{Binding initials}" Margin="0 0 0 10"/>
+                            <StackPanel Grid.Column="1" VerticalAlignment="Stretch">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="Against" FontSize="25" Margin="0 0 8 0"/>
+                                    <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="{Binding username}" FontSize="25"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="date of" FontSize="20" Margin="0 0 8 0"/>
+                                    <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="{Binding date}" FontSize="20"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="{Binding nb_tracks}" FontSize="15" Margin="0 0 4 0"/>
+                                    <TextBlock Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script"  Text="tracks" FontSize="15" />
+                                </StackPanel>
+                            </StackPanel>
+                            <Button x:Name="btnDuel" Grid.Column="2" Style="{StaticResource BtnValid}" Background="{StaticResource ThirdLightColor}" BorderBrush="{StaticResource ThirdDarkColor}" Foreground="{StaticResource ThirdColor}" FontSize="28" FontFamily="Kaushan Script"  Margin="10 15 10 15" Padding="8 8 8 8" IsEnabled="True" Click="BtnDuel_Click" Tag="{Binding}" HorizontalAlignment="Right">
+                                <Path x:Name="pathDuel" Fill="{StaticResource ThirdDarkColor}" Data="m497.962,430.08c-9.993-9.993-23.321-14.478-36.433-13.799l-48.262-48.262 25.376-25.376c12.5-12.501 12.5-32.759 0-45.252-12.485-12.5-32.767-12.5-45.252,0l-9.375,9.375-50.763-50.763 137.369-137.369c2.438-2.43 4.461-5.235 6-8.313l32.001-64.002c6.156-12.321 3.742-27.204-6-36.939-9.727-9.735-24.61-12.141-36.939-6l-64.002,32.001c-3.078,1.539-5.883,3.563-8.313,6l-137.368,137.37-137.369-137.369c-2.43-2.438-5.235-4.461-8.313-6l-64.002-32.001c-12.321-6.156-27.204-3.758-36.939,6-9.742,9.735-12.157,24.618-6,36.939l32.001,64.002c1.539,3.078 3.563,5.883 6,8.313l137.369,137.369-50.762,50.763-9.375-9.375c-12.485-12.5-32.767-12.5-45.252,0-12.5,12.493-12.5,32.751 0,45.252l25.376,25.376-48.262,48.26c-13.112-0.679-26.439,3.806-36.433,13.799-18.716,18.716-18.716,49.168 0,67.884 18.717,18.717 49.168,18.717 67.885,0 9.993-9.993 14.478-23.32 13.799-36.432l48.262-48.262 25.376,25.376c6.242,6.25 14.438,9.375 22.626,9.375 8.188,0 16.383-3.125 22.626-9.375 12.5-12.5 12.5-32.751 0-45.252l-9.375-9.375 50.763-50.763 50.763,50.763-9.375,9.375c-12.5,12.5-12.5,32.751 0,45.252 6.242,6.25 14.438,9.375 22.626,9.375s16.383-3.125 22.626-9.375l25.376-25.376 48.262,48.262c-0.679,13.112 3.806,26.438 13.799,36.432 18.717,18.717 49.168,18.717 67.885,0 18.714-18.716 18.714-49.167-0.002-67.883z" Stretch="Uniform" Margin="4 4 4 4" Canvas.ZIndex="3"/>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Grid.Row="1" x:Name="btnBackDuel" Style="{StaticResource BtnBackWithoutBorder}" Background="{StaticResource ExitColor}" BorderBrush="{StaticResource ExitDarkColor}" Foreground="{StaticResource ExitColor}" FontSize="28" FontFamily="Kaushan Script"  Height="30" HorizontalAlignment="Stretch" PointerEntered="BtnBackDuel_PointerEntered" PointerExited="BtnBackDuel_PointerExited" Click="BtnBackDuel_Click"   >
+                <Path x:Name="pathBackDuel" Fill="{StaticResource WriteColor}" Data="M496.5,233.842c-30.841-76.706-114.112-115.06-249.823-115.06h-63.953V45.693c0-4.952-1.809-9.235-5.424-12.85
+		    c-3.617-3.617-7.896-5.426-12.847-5.426c-4.952,0-9.235,1.809-12.85,5.426L5.424,179.021C1.809,182.641,0,186.922,0,191.871
+		    c0,4.948,1.809,9.229,5.424,12.847L151.604,350.9c3.619,3.613,7.902,5.428,12.85,5.428c4.947,0,9.229-1.814,12.847-5.428
+		    c3.616-3.614,5.424-7.898,5.424-12.848v-73.094h63.953c18.649,0,35.349,0.568,50.099,1.708c14.749,1.143,29.413,3.189,43.968,6.143
+		    c14.564,2.95,27.224,6.991,37.979,12.135c10.753,5.144,20.794,11.756,30.122,19.842c9.329,8.094,16.943,17.7,22.847,28.839
+		    c5.896,11.136,10.513,24.311,13.846,39.539c3.326,15.229,4.997,32.456,4.997,51.675c0,10.466-0.479,22.176-1.428,35.118
+		    c0,1.137-0.236,3.375-0.715,6.708c-0.473,3.333-0.712,5.852-0.712,7.562c0,2.851,0.808,5.232,2.423,7.136
+		    c1.622,1.902,3.86,2.851,6.714,2.851c3.046,0,5.708-1.615,7.994-4.853c1.328-1.711,2.561-3.806,3.71-6.283
+		    c1.143-2.471,2.43-5.325,3.854-8.562c1.431-3.237,2.43-5.513,2.998-6.848c24.17-54.238,36.258-97.158,36.258-128.756
+		    C511.63,291.039,506.589,259.344,496.5,233.842z" Stretch="Uniform" Margin="0 5 0 5" Canvas.ZIndex="3"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Page>

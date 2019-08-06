@@ -154,16 +154,17 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
             }
             if (gameFrameParameters.connectedUser != null)
             {
-                StockDatabase();
+                gameFrameParameters.party = await StockDatabase();
             }
             gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(gameFrameParameters, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
-        private async void StockDatabase()
+        private async Task<Party> StockDatabase()
         {
-            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
-            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/stockparty.php");
-            gameFrameParameters.party_id = Convert.ToInt16(response);
+            Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.classTypeSelected, gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
+            string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/party/stockparty.php");
+            partyStocked.party_id = Convert.ToInt16(response);
+            return partyStocked;
         }
 
         private void BtnBackChoosing_Click(object sender, RoutedEventArgs e)
@@ -229,7 +230,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
             backgroundWaiting.Visibility = Visibility.Collapsed;
             if (gameFrameParameters.connectedUser != null)
             {
-                StockDatabase();
+                gameFrameParameters.party = await StockDatabase();
             }
             gameFrameParameters.rootFrame.Navigate(typeof(GamePage), new GameFrameParameters(gameFrameParameters, null), new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }

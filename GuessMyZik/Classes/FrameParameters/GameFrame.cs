@@ -21,8 +21,9 @@ namespace GuessMyZik.Classes.FrameParameters
         public int? classType { get; set; }
         public int points { get; set; }
         public List<Player> players { get; set; }
+        public Party party { get; set; }
 
-        public GameFrame(Frame rootFrame, Frame gameFrame, Users connectedUser, Track trackGuessed, List<Track> listTrack, List<Track> beforeTrack,ListView listView ,List<TextBlock> textGuess, int? classType, int points, List<Player> players)
+        public GameFrame(Frame rootFrame, Frame gameFrame, Users connectedUser, Track trackGuessed, List<Track> listTrack, List<Track> beforeTrack,ListView listView ,List<TextBlock> textGuess, int? classType, int points, List<Player> players, Party party)
         {
             this.rootFrame = rootFrame;
             this.gameFrame = gameFrame;
@@ -35,6 +36,7 @@ namespace GuessMyZik.Classes.FrameParameters
             this.classType = classType;
             this.points = points;
             this.players = players;
+            this.party = party;
         }
     }
 }

@@ -18,9 +18,10 @@ namespace GuessMyZik.Classes.FrameParameters
         public List<Track> listTrack { get; set; }
         public int? game_duel { get; set; }
         public int? number_tracks { get; set; }
-        public int? party_id { get; set; }
+        public Party party { get; set; }
+        public int? nbVisiteur { get; set; }
 
-        public GameFrameSoloParameters(Frame frame, Frame secondFrame, Users user, int? classType, Dictionary<int, object> list , int? gameDuel, int? numberTracks, int? party_id)
+        public GameFrameSoloParameters(Frame frame, Frame secondFrame, Users user, int? classType, Dictionary<int, object> list , int? gameDuel, int? numberTracks, Party party)
         {
             this.rootFrame = frame;
             this.secondFrame = secondFrame;
@@ -29,7 +30,7 @@ namespace GuessMyZik.Classes.FrameParameters
             this.listSelected = list;
             this.game_duel = gameDuel;
             this.number_tracks = numberTracks;
-            this.party_id = party_id;
+            this.party = party;
         }
     }
 }

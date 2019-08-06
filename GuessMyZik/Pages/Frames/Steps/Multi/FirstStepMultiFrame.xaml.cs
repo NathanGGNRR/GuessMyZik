@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using GuessMyZik.Pages.Frames;
+using GuessMyZik.Pages.Frames.Duel;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using GuessMyZik.Classes;
@@ -92,7 +93,7 @@ namespace GuessMyZik.Pages.Frames.Steps.Multi
 
         private void BtnDuel_Click(object sender, RoutedEventArgs e)
         {
-            //gameFrameParameters.rootFrame.Navigate(typeof(Duelpage), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
+            gameFrameParameters.secondFrame.Navigate(typeof(DuelFrame), gameFrameParameters, new SlideNavigationTransitionInfo() { Effect = SlideNavigationTransitionEffect.FromRight });
         }
 
        

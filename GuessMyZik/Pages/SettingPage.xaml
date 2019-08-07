@@ -1,6 +1,6 @@
 ﻿<Page
-    Name="mainPage"
-    x:Class="GuessMyZik.Pages.MainPage"
+    Name="settingPage"
+    x:Class="GuessMyZik.Pages.SettingPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -14,17 +14,23 @@
     </Page.Background>
 
     <Page.Resources>
+        <Storyboard x:Name="errorFirstPasswordBoxStoryboard">
+            <ColorAnimation x:Name="errorFirstPasswordBoxColor"  Storyboard.TargetProperty="(PasswordBox.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.5" AutoReverse="True" Completed="ErrorFirstPasswordBoxColor_Completed"/>
+        </Storyboard>
+        <Storyboard x:Name="errorSecondPasswordBoxStoryboard">
+            <ColorAnimation x:Name="errorSecondPasswordBoxColor"  Storyboard.TargetProperty="(PasswordBox.BorderBrush).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.5" AutoReverse="True" Completed="ErrorSecondPasswordBoxColor_Completed" />
+        </Storyboard>
         <Storyboard x:Name="btnExitPointerEntered">
             <ColorAnimation Storyboard.TargetName="btnExit" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.3"/>
         </Storyboard>
         <Storyboard x:Name="btnExitPointerExited">
             <ColorAnimation Storyboard.TargetName="btnExit" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource WriteColor}" Duration="0:0:0.3"/>
         </Storyboard>
-        <Storyboard x:Name="btnSettingsPointerEntered">
-            <ColorAnimation Storyboard.TargetName="btnSettings" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource SecondaryDarkColor}" Duration="0:0:0.3"/>
+        <Storyboard x:Name="btnHomePointerEntered">
+            <ColorAnimation Storyboard.TargetName="btnHome" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource SecondaryDarkColor}" Duration="0:0:0.3"/>
         </Storyboard>
-        <Storyboard x:Name="btnSettingsPointerExited">
-            <ColorAnimation Storyboard.TargetName="btnSettings" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource SecondaryColor}" Duration="0:0:0.3"/>
+        <Storyboard x:Name="btnHomePointerExited">
+            <ColorAnimation Storyboard.TargetName="btnHome" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource SecondaryColor}" Duration="0:0:0.3"/>
         </Storyboard>
         <Storyboard x:Name="btnStatsPointerEntered">
             <ColorAnimation Storyboard.TargetName="btnStats" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource SecondaryDarkColor}" Duration="0:0:0.3"/>
@@ -38,15 +44,10 @@
         <Storyboard x:Name="btnDisconnectUserPointerExited">
             <ColorAnimation Storyboard.TargetName="btnDisconnectUser" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource SecondaryColor}" Duration="0:0:0.3"/>
         </Storyboard>
-        <Storyboard x:Name="btnDisconnectGuestPointerEntered">
-            <ColorAnimation Storyboard.TargetName="btnDisconnectGuest" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource ExitColor}" Duration="0:0:0.3"/>
-        </Storyboard>
-        <Storyboard x:Name="btnDisconnectGuestPointerExited">
-            <ColorAnimation Storyboard.TargetName="btnDisconnectGuest" Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="{StaticResource SecondaryColor}" Duration="0:0:0.3"/>
-        </Storyboard>
+
     </Page.Resources>
 
-    <Grid x:Name="gridMainPage">
+    <Grid x:Name="gridSettingPage">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1.5*"/>
             <ColumnDefinition Width="9*"/>
@@ -68,27 +69,16 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="8*"/>
             </Grid.RowDefinitions>
+            
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.7*"/>
                     <ColumnDefinition Width="4*"/>
                 </Grid.ColumnDefinitions>
                 <PersonPicture x:Name="personPicture" Width="75" VerticalAlignment="Top" BackgroundSizing="InnerBorderEdge" />
-                <Grid Grid.Column="1" x:Name="gridGuest" Visibility="Collapsed">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" Text="Welcome as a guest" FontSize="38" VerticalAlignment="Bottom" Padding="0,0,0,0" HorizontalAlignment="Left"/>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" Padding="0,0,0,0" Margin="0 0 0 27">
-                        <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script" VerticalAlignment="Center" Text="Guest number:" FontSize="25" Margin="0 0 10 0" Padding="0 0 2 0" />
-                        <TextBlock x:Name="textNbVisiteur" Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="250" FontSize="28" VerticalAlignment="Center" Padding="0 0 2 0"/>
-                    </StackPanel>
-                </Grid>
-                <Grid Grid.Column="1" x:Name="gridUser" Visibility="Collapsed">
+                <Grid Grid.Column="1" x:Name="gridUser" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -134,7 +124,7 @@
 
             </Grid>
             <Image Grid.Column="1" x:Name="logoPicture" Source="/Assets/Pictures/logo.png" Stretch="Uniform" />
-            <Grid  Grid.Column="3" x:Name="btnsGuest" Visibility="Collapsed">
+            <Grid  Grid.Column="3" x:Name="btnsUser" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.2*"/>
                     <ColumnDefinition Width="0.7*"/>
@@ -148,26 +138,8 @@
                     <RowDefinition Height="6*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Grid x:Name="gridBtnDisconnectGuest" Grid.Column="6" Grid.Row="1" PointerEntered="BtnDisconnectGuest_PointerEntered" PointerExited="BtnDisconnectGuest_PointerExited" Background="Transparent" Tapped="BtnDisconnectGuest_Tapped">
-                    <Button x:Name="btnDisconnectGuest" Style="{StaticResource BtnDisconnect}" Background="{StaticResource SecondaryColor}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" />
-                </Grid>
-            </Grid>
-            <Grid  Grid.Column="3" x:Name="btnsUser" Visibility="Collapsed">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.2*"/>
-                    <ColumnDefinition Width="0.7*"/>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="0.6*"/>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="0.4*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="6*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <Grid x:Name="gridBtnSettings" Grid.Column="3" Grid.Row="1" PointerEntered="BtnSettings_PointerEntered" PointerExited="BtnSettings_PointerExited" Background="Transparent" Tapped="BtnSettings_Tapped">
-                    <Button x:Name="btnSettings" Style="{StaticResource BtnSettings}" Background="{StaticResource SecondaryColor}" HorizontalAlignment="Stretch" />
+                <Grid x:Name="gridBtnHome" Grid.Column="3" Grid.Row="1" PointerEntered="BtnHome_PointerEntered" PointerExited="BtnHome_PointerExited" Background="Transparent" Tapped="BtnHome_Tapped">
+                    <Button x:Name="btnHome" Style="{StaticResource BtnHome}" Background="{StaticResource SecondaryColor}" HorizontalAlignment="Stretch" />
                 </Grid>
                 <Grid x:Name="gridBtnStats" Grid.Column="1" Grid.Row="1" PointerEntered="BtnStats_PointerEntered" PointerExited="BtnStats_PointerExited" Background="Transparent" Tapped="BtnStats_Tapped">
                     <Button x:Name="btnStats" Style="{StaticResource BtnStats}" Background="{StaticResource SecondaryColor}" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch"/>
@@ -178,104 +150,93 @@
             </Grid>
             <Grid Grid.Row="1" Grid.ColumnSpan="3">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="0.2*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="0.5*"/>
                 </Grid.RowDefinitions>
-                <Grid x:Name="gridSolo" Grid.Row="1">
+                <Grid x:Name="gridSetting" Grid.Row="1" Grid.Column="1">
                     <Grid.Background>
                         <ImageBrush ImageSource="/Assets/Pictures/backgroundSecondary.png"/>
                     </Grid.Background>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="6"/>
-                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="1.5*"/>
                         <RowDefinition Height="6"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="6"/>
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="6"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="6"/>
-                    </Grid.ColumnDefinitions>
-                    <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource SecondaryDarkColor}"/>
-                    <Rectangle Grid.Row="4" Grid.ColumnSpan="3" Fill="{StaticResource SecondaryDarkColor}"/>
-                    <Rectangle Grid.Column="0" Grid.RowSpan="7" Fill="{StaticResource SecondaryDarkColor}"/>
-                    <Rectangle Grid.Column="2"  Grid.RowSpan="7" Fill="{StaticResource SecondaryDarkColor}"/>
-                    <Rectangle Grid.Row="2" Grid.Column="1" Fill="{StaticResource SecondaryDarkColor}"/>
-                    <TextBlock x:Name="textSoloGame" Grid.Row="1" Grid.Column="1"  Foreground="{StaticResource SecondaryColor}" FontFamily="Kaushan Script"  Text="Solo Game" FontSize="36" VerticalAlignment="Center" Padding="0,0,0,0" HorizontalAlignment="Center" />
-                    <Frame x:Name="navigationSolo" Grid.Column="1" Grid.Row="3">
-                        <Frame.ContentTransitions>
-                            <TransitionCollection>
-                                <NavigationThemeTransition />
-                            </TransitionCollection>
-                        </Frame.ContentTransitions>
-                    </Frame>
-                </Grid>
-                <Grid x:Name="gridMulti" Grid.Row="1" Grid.Column="2">
-                    <Grid.Background>
-                        <ImageBrush ImageSource="/Assets/Pictures/backgroundSecondary.png"/>
-                    </Grid.Background>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="6"/>
-                        <RowDefinition Height="0.2*"/>
-                        <RowDefinition Height="6"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="6.5*"/>
                         <RowDefinition Height="6"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="6"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="6"/>
                     </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" Text="CHANGE PASSWORD" Grid.Row="1" x:Name="textSetting" Foreground="{StaticResource ThirdColor}" FontFamily="Kaushan Script" FontSize="50" FontWeight="Normal" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     <Rectangle Grid.Row="0" Grid.ColumnSpan="3" Fill="{StaticResource ThirdDarkColor}"/>
                     <Rectangle Grid.Row="4" Grid.ColumnSpan="3" Fill="{StaticResource ThirdDarkColor}"/>
                     <Rectangle Grid.Column="0" Grid.RowSpan="7" Fill="{StaticResource ThirdDarkColor}"/>
                     <Rectangle Grid.Column="2"  Grid.RowSpan="7" Fill="{StaticResource ThirdDarkColor}"/>
-                    <Rectangle Grid.Row="2" Grid.Column="1" Fill="{StaticResource ThirdDarkColor}"/>
-                    <TextBlock x:Name="textMultiGame" Grid.Row="1" Grid.Column="1"  Foreground="{StaticResource ThirdDarkColor}" FontFamily="Kaushan Script"  Text="Multi Game" FontSize="36" VerticalAlignment="Center" Padding="0,0,0,0" HorizontalAlignment="Center" />
-
-                    <Frame x:Name="navigationMulti" Grid.Column="1" Grid.Row="3">
-                        <Frame.ContentTransitions>
-                            <TransitionCollection>
-                                <NavigationThemeTransition />
-                            </TransitionCollection>
-                        </Frame.ContentTransitions>
-                    </Frame>
-                </Grid>
-            </Grid>
-            <Grid Grid.Row="2" Grid.ColumnSpan="3">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="3*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="Last guessed tracks:" FontSize="38" VerticalAlignment="Bottom" Padding="0,0,2,0" HorizontalAlignment="Left"/>
-                <ListView  Grid.Row="1" x:Name="listViewLastTrack"  Canvas.ZIndex="3" VerticalAlignment="Center" Margin="10 0 10 0" ItemContainerStyle="{StaticResource ListViewItemContainerStyleSolo}" IsItemClickEnabled="False">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Width="150" VerticalAlignment="Stretch">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="0.3*"/>
-                                </Grid.RowDefinitions>
-                                <Image x:Name="imageFound" Source="{Binding Path=artist.picture_medium}" Stretch="Uniform"/>
-                                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled" HorizontalScrollMode="Enabled" >
-                                    <TextBlock Foreground="{StaticResource WriteColor}" FontFamily="Kaushan Script"  Text="{Binding title_short}" FontSize="22" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                </ScrollViewer>
+                    <Rectangle Grid.Column="1" Grid.Row="2"  Fill="{StaticResource ThirdDarkColor}"/>
+                    <Grid x:Name="gridFormPassword" Grid.Row="3" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition Width="1.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <ProgressRing x:Name="progressSetting" Grid.RowSpan="6" Grid.ColumnSpan="3" IsActive="False" Foreground="{StaticResource SecondaryColor}" Height="50" Width="50"/>
+                        <Rectangle x:Name="backgroundWaiting" Fill="Black" Grid.RowSpan="6" Grid.ColumnSpan="3" Canvas.ZIndex="5" Opacity="0.5" Visibility="Collapsed"/>
+                        <StackPanel Grid.Row="1" Grid.Column="1">
+                            <Grid Margin="0 0 0 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Name="passwordPicture" Source="/Assets/Pictures/LoginPage/passwordThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2"/>
+                                <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Actual password" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}"  Padding="0" VerticalAlignment="Center"/>
                             </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"></StackPanel>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                </ListView>
+                            <PasswordBox x:Name="passwordActualBox" Style="{StaticResource passwordBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="passwordEnable_KeyUp"/>
+                            <TextBlock x:Name="errorActualPassword" Foreground="{StaticResource ExitColor}" FontFamily="Trebuchet MS" FontSize="15" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="1">
+                            <Grid Margin="0 0 0 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Name="newPasswordPicture" Source="/Assets/Pictures/LoginPage/passwordThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2" Margin="0 0 0 3"/>
+                                <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="New Password" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}" Padding="0" VerticalAlignment="Center"/>
+                            </Grid>
+                            <PasswordBox x:Name="newPasswordBox" Style="{StaticResource passwordBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="passwordEnable_KeyUp"/>
+                            <TextBlock x:Name="errorNewPassword" Foreground="{StaticResource ExitColor}" FontFamily="Trebuchet MS" FontSize="15" Grid.ColumnSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Left" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Grid.Column="1" >
+                            <Grid Margin="0 0 0 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Name="newPasswordConfirm" Source="/Assets/Pictures/LoginPage/passwordThird.png" Stretch="Uniform" Grid.Column="0" Canvas.ZIndex="2" Margin="0 0 0 3"/>
+                                <TextBlock Grid.Column="1" Margin="5 0 0 0" Text="Confirm New Password" FontFamily="Kaushan Script" FontSize="25" Foreground="{StaticResource ThirdColor}" Padding="0" VerticalAlignment="Center"/>
+                            </Grid>
+                            <PasswordBox x:Name="newPasswordConfirmBox" Style="{StaticResource passwordBoxFocusThird}" FontSize="15" FontFamily="Trebuchet MS" SelectionHighlightColor="{StaticResource ThirdDarkColor}" KeyUp="passwordEnable_KeyUp"/>
+                            <TextBlock x:Name="errorNewPasswordConfirm" Foreground="{StaticResource ExitColor}" FontFamily="Trebuchet MS" FontSize="15" FontWeight="Bold"/>
+                        </StackPanel>
+                        <Button Grid.Row="4" Grid.Column="1" x:Name="btnChange"  Style="{StaticResource BtnPrimaryThird}" Background="{StaticResource ThirdColor}" Content="Change Password" FontFamily="Kaushan Script" FontSize="22" HorizontalAlignment="Stretch" Foreground="{StaticResource WriteColor}" BorderBrush="{StaticResource ThirdDarkColor}" Canvas.ZIndex="4" Margin="0 10 0 10" IsEnabled="False" Click="BtnChange_Click" />
+
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

@@ -14,6 +14,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
+            <ProgressRing x:Name="progressDuel" Grid.RowSpan="2"  IsActive="False" Foreground="{StaticResource SecondaryColor}" Height="50" Width="50"/>
+            <Rectangle x:Name="backgroundWaiting" Fill="Black" Grid.RowSpan="2" Canvas.ZIndex="5" Opacity="0.5" Visibility="Collapsed"/>
             <ListView x:Name="listViewTracks" ItemContainerStyle="{StaticResource ListViewItemContainerStyleCheckBoxSolo}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>

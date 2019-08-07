@@ -296,7 +296,7 @@ namespace GuessMyZik.Pages
         /// <param name="e">Event details to TappedRoutedEventArgs.</param>
         private void BtnSettings_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            rootFrame.Navigate(typeof(SettingPage), new FrameParameters(rootFrame, null, connectedUser), new DrillInNavigationTransitionInfo());
         }
 
 

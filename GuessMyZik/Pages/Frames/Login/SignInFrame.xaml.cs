@@ -53,6 +53,10 @@ namespace GuessMyZik.Pages.Frames.Login
             if(passwordBox.Password != "" && textUserOrMail.Text != "") //Check if all the textbox are empty or not.
             {
                 btnConnect.IsEnabled = true; //Enabled the button btnRegister.
+                if (e.Key == Windows.System.VirtualKey.Enter)
+                {
+                    ClickSignIn();
+                }
             } else
             {
                 btnConnect.IsEnabled = false; //Disabled the button btnRegister.
@@ -85,7 +89,12 @@ namespace GuessMyZik.Pages.Frames.Login
         /// </summary>
         /// <param name="sender">Element on which the event is launched.</param>
         /// <param name="e">Event details to RoutedEventArgs.</param>
-        private async void BtnConnect_Click(object sender, RoutedEventArgs e)
+        private void BtnConnect_Click(object sender, RoutedEventArgs e)
+        {
+            ClickSignIn();  
+        }
+
+        private async void ClickSignIn()
         {
             progressConnect.IsActive = true;
             backgroundWaiting.Visibility = Visibility.Visible;

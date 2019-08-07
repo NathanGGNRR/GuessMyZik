@@ -163,6 +163,8 @@ namespace GuessMyZik.Pages.Frames.Steps.Solo
         {
             Party partyStocked = new Party(gameFrameParameters.connectedUser.username, DateTime.Today.ToShortDateString(), gameFrameParameters.classTypeSelected, gameFrameParameters.number_tracks, gameFrameParameters.game_duel, gameFrameParameters.listTrack);
             string response = await apiConnect.PostAsJsonAsync(partyStocked, "http://localhost/api/party/stockparty.php");
+            var message = new MessageDialog(response);
+            await message.ShowAsync();
             partyStocked.party_id = Convert.ToInt16(response);
             return partyStocked;
         }

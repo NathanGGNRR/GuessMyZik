@@ -51,9 +51,13 @@ namespace GuessMyZik.Pages.Frames.Duel
 
         private async void InitializeDuelFrame()
         {
+            progressDuel.IsActive = true;
+            backgroundWaiting.Visibility = Visibility.Visible;
             string response = await apiConnect.PostAsJsonAsync(gameFrameParameters.connectedUser.username, "http://localhost/api/party/getparty.php");
             List<Party> parties = JsonConvert.DeserializeObject<List<Party>>(response);
             listViewTracks.ItemsSource = parties;
+            progressDuel.IsActive = false;
+            backgroundWaiting.Visibility = Visibility.Collapsed;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

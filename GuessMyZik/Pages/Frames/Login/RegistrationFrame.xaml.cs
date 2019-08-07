@@ -57,6 +57,10 @@ namespace GuessMyZik.Pages.Frames.Login
             if (passwordBox.Password != "" && passwordConfirmBox.Password != "" && textMail.Text != "" && textUsername.Text != "") //Check if all the textbox are empty or not.
             {
                 btnRegister.IsEnabled = true; //Enabled the button btnRegister.
+                if (e.Key == Windows.System.VirtualKey.Enter)
+                {
+                    ClickRegister();
+                }
             }
             else
             {
@@ -70,11 +74,16 @@ namespace GuessMyZik.Pages.Frames.Login
         /// </summary>
         /// <param name="sender">Element on which the event is launched.</param>
         /// <param name="e">Event details to RoutedEventArgs.</param>
-        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            ClickRegister();
+        }
+
+        private async void ClickRegister()
         {
             if (VerificationAuth.IsValidPassword(passwordBox.Password, passwordConfirmBox.Password)) //Check if both password match.
             {
-                if(VerificationAuth.IsValidEmail(textMail.Text)) //Check if mail is valid.
+                if (VerificationAuth.IsValidEmail(textMail.Text)) //Check if mail is valid.
                 {
                     progressRegister.IsActive = true;
                     backgroundWaiting.Visibility = Visibility.Visible;
@@ -84,7 +93,8 @@ namespace GuessMyZik.Pages.Frames.Login
                     if (response == "YES") //Registration good.
                     {
                         rootFrame.Navigate(typeof(MainPage), new FrameParameters(rootFrame, null, registration), new DrillInNavigationTransitionInfo()); //Close this page and open MainPage.
-                    } else
+                    }
+                    else
                     {
                         progressRegister.IsActive = false;
                         backgroundWaiting.Visibility = Visibility.Collapsed;
@@ -100,11 +110,12 @@ namespace GuessMyZik.Pages.Frames.Login
                             errorMail.Text = "Your email is already taken.";
                         }
                     }
-                    
 
-                } else
+
+                }
+                else
                 {
-                   VerificationAuth.AnimationErrorTextBox(textMail, errorFirstTextBoxStoryboard, errorFirstTextBoxColor, btnRegister); //Launch error animation on textMail TextBox.
+                    VerificationAuth.AnimationErrorTextBox(textMail, errorFirstTextBoxStoryboard, errorFirstTextBoxColor, btnRegister); //Launch error animation on textMail TextBox.
                     errorMail.Text = "Your email is invalid.";
                 }
             }

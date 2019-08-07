@@ -159,6 +159,9 @@
     <Compile Include="Pages\DialogContent\EndUserContentDialogSolo.xaml.cs">
       <DependentUpon>EndUserContentDialogSolo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\DialogContent\ChangePasswordContentDialog.xaml.cs">
+      <DependentUpon>ChangePasswordContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DialogContent\ReadyContentDialog.xaml.cs">
       <DependentUpon>ReadyContentDialog.xaml</DependentUpon>
     </Compile>
@@ -212,6 +215,9 @@
     </Compile>
     <Compile Include="Pages\Frames\Login\WelcomeLoginFrame.xaml.cs">
       <DependentUpon>WelcomeLoginFrame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -400,6 +406,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Pages\DialogContent\ChangePasswordContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\DialogContent\ReadyContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -471,6 +481,10 @@
     <Page Include="Pages\Frames\Login\WelcomeLoginFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SettingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -260,8 +260,8 @@ namespace GuessMyZik.Pages.Frames.Game
             parameter.listBeforeTrack.Items.Add(parameter.trackGuessed);
             if (parameter.listTrack.IndexOf(parameter.trackGuessed) != parameter.listTrack.Count - 1)
             {
-                //NextContentDialog dialog = new NextContentDialog();
-                //await dialog.ShowAsync();
+                NextContentDialog dialog = new NextContentDialog();
+                await dialog.ShowAsync();
             }
             for (int i = 0; i < parameter.textGuess.Count; i++)
             {

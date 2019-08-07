@@ -15,9 +15,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using GuessMyZik.Pages.Frames;
+using GuessMyZik.Pages.DialogContent;
 using GuessMyZik.Pages.Frames.Steps.Solo;
 using GuessMyZik.Pages.Frames.Steps.Multi;
 using GuessMyZik.Pages.Frames.Choosing;
+using GuessMyZik.Pages.Frames.Game;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using GuessMyZik.Classes;
@@ -39,68 +41,29 @@ namespace GuessMyZik.Pages
     /// <summary>
     /// An empty page can be used alone or as a landing page within a frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class SettingPage : Page
     {
 
-        private Frame rootFrame;
+        private FrameParameters parameter;
         private Users connectedUser;
-        private int? nbVisiteur;
         private APIConnect apiConnect = new APIConnect();
-        
+        private readonly SymmetricEncryption encryptionProvider;
 
-        public MainPage()
+
+        public SettingPage()
         {
             this.InitializeComponent();
-            this.DataContext = this;
+            encryptionProvider = new SymmetricEncryption(); //Instantiates the SymmetricEncryption class
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            FrameParameters parameter = (FrameParameters)e.Parameter;
-            rootFrame = parameter.rootFrame;
+            parameter = (FrameParameters)e.Parameter;
             connectedUser = parameter.connectedUser;
-            nbVisiteur = parameter.nbVisiteur;
-            if (connectedUser != null)
-            {
-                navigationSolo.Navigate(typeof(FirstStepSoloFrame), new GameFrameSoloParameters(rootFrame, navigationSolo, connectedUser, null, new Dictionary<int, object>(), null, null, null));
-                navigationMulti.Navigate(typeof(FirstStepMultiFrame), new GameFrameMultiParameters(rootFrame, navigationMulti, connectedUser, null, new Dictionary<int, object>(), null, null, null, null));
-            }
-            else
-            {
-                GameFrameSoloParameters soloGuest = new GameFrameSoloParameters(rootFrame, navigationSolo, null, null, new Dictionary<int, object>(), null, null, null);
-                soloGuest.nbVisiteur = nbVisiteur;
-                GameFrameMultiParameters multiGuest = new GameFrameMultiParameters(rootFrame, navigationMulti, null, null, new Dictionary<int, object>(), null, null, null, null);
-                multiGuest.nbVisiteur = nbVisiteur;
-                navigationSolo.Navigate(typeof(FirstStepSoloFrame), soloGuest);
-                navigationMulti.Navigate(typeof(FirstStepMultiFrame), multiGuest);
-            }
-            InitializeMainPage();
+            InitializeUser();
         }
-
-        private async void InitializeLastGuessed()
-        {
-            string response = await apiConnect.PostAsJsonAsync(connectedUser.username,"http://localhost/api/lastguessed.php");
-            List<Track> tracksGuessed = JsonConvert.DeserializeObject<List<Track>>(response);
-            listViewLastTrack.ItemsSource = tracksGuessed;
-        }
-
-        private void InitializeMainPage()
-        {
-            if(connectedUser != null)
-            {
-                gridUser.Visibility = Visibility.Visible;
-                btnsUser.Visibility = Visibility.Visible;
-                InitializeUser();
-                InitializeLastGuessed();
-            } else
-            {
-                gridGuest.Visibility = Visibility.Visible;
-                btnsGuest.Visibility = Visibility.Visible;
-                InitializeGuest();
-            }
-        }
-
+        
         private async void InitializeUser()
         {
             textWelcomeUser.Text = "Welcome " + connectedUser.username;
@@ -117,11 +80,6 @@ namespace GuessMyZik.Pages
             double value = Math.Round(calcul);
             progressUser.Value = value;
             textLvl.Text = "Lvl " + connectedUser.level_id;
-        }
-
-        private void InitializeGuest()
-        {
-            textNbVisiteur.Text = nbVisiteur.ToString();
         }
 
 
@@ -160,9 +118,9 @@ namespace GuessMyZik.Pages
         /// </summary>
         /// <param name="sender">Element on which the event is launched.</param>
         /// <param name="e">Event details to PointerRoutedEventArgs.</param>
-        private void BtnSettings_PointerEntered(object sender, PointerRoutedEventArgs e)
+        private void BtnHome_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            btnSettingsPointerEntered.Begin(); //Launch the storyboard called btnSettingsPointerEntered, animate color of the button BtnSettings with the color resource SecondaryDarkColor.
+            btnHomePointerEntered.Begin(); //Launch the storyboard called btnSettingsPointerEntered, animate color of the button BtnHome with the color resource SecondaryDarkColor.
         }
 
         /// <summary>
@@ -170,9 +128,9 @@ namespace GuessMyZik.Pages
         /// </summary>
         /// <param name="sender">Element on which the event is launched.</param>
         /// <param name="e">Event details to PointerRoutedEventArgs.</param>
-        private void BtnSettings_PointerExited(object sender, PointerRoutedEventArgs e)
+        private void BtnHome_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            btnSettingsPointerExited.Begin(); //Launch the storyboard called btnSettingsPointerExited, animate color of the button BtnSettings with the color resource SecondaryColor.
+            btnHomePointerExited.Begin(); //Launch the storyboard called btnSettingsPointerExited, animate color of the button BtnHome with the color resource SecondaryColor.
         }
 
 
@@ -196,26 +154,7 @@ namespace GuessMyZik.Pages
             btnStatsPointerExited.Begin(); //Launch the storyboard called btnStatsPointerExited, animate color of the button BtnStats with the color resource SecondaryColor.
         }
 
-        /// <summary>
-        /// Called when the mouse entered on the grid element gridBtnDisconnectGuest. 
-        /// </summary>
-        /// <param name="sender">Element on which the event is launched.</param>
-        /// <param name="e">Event details to PointerRoutedEventArgs.</param>
-        private void BtnDisconnectGuest_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            btnDisconnectGuestPointerEntered.Begin(); //Launch the storyboard called btnDisconnectGuestPointerEntered, animate color of the button BtnDisconnect with the color resource ExitColor.
-        }
-
-        /// <summary>
-        /// Called when the mouse exited the grid element gridBtnDisconnectGuest. 
-        /// </summary>
-        /// <param name="sender">Element on which the event is launched.</param>
-        /// <param name="e">Event details to PointerRoutedEventArgs.</param>
-        private void BtnDisconnectGuest_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            btnDisconnectGuestPointerExited.Begin(); //Launch the storyboard called btnDisconnectGuestPointerExited, animate color of the button BtnDisconnect with the color resource SecondaryColor.
-        }
-
+     
         /// <summary>
         /// Called when the mouse entered on the grid element gridBtnDisconnectUser. 
         /// </summary>
@@ -242,9 +181,9 @@ namespace GuessMyZik.Pages
         /// </summary>
         /// <param name="sender">Element on which the event is launched.</param>
         /// <param name="e">Event details to TappedRoutedEventArgs.</param>
-        private void BtnSettings_Tapped(object sender, TappedRoutedEventArgs e)
+        private void BtnHome_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            rootFrame.Navigate(typeof(SettingPage), new FrameParameters(rootFrame, null, connectedUser), new DrillInNavigationTransitionInfo());
+            parameter.rootFrame.Navigate(typeof(MainPage), new FrameParameters(parameter.rootFrame, null, connectedUser), new DrillInNavigationTransitionInfo());
         }
 
 
@@ -266,21 +205,106 @@ namespace GuessMyZik.Pages
         private void BtnDisconnectUser_Tapped(object sender, TappedRoutedEventArgs e)
         {
 
-            rootFrame.GoBack();
+            parameter.rootFrame.Navigate(typeof(LoginPage), parameter.rootFrame);
         }
 
         /// <summary>
-        /// Called when you click on the grid element gridBtnDisconnectGuest.
+        /// Called when a keyboard key is pressed into textbox.
         /// </summary>
         /// <param name="sender">Element on which the event is launched.</param>
-        /// <param name="e">Event details to TappedRoutedEventArgs.</param>
-        private void BtnDisconnectGuest_Tapped(object sender, TappedRoutedEventArgs e)
+        /// <param name="e">Event details to KeyRoutedEventArgs.</param>
+        private void passwordEnable_KeyUp(object sender, KeyRoutedEventArgs e)
         {
-            apiConnect.PostAsJson(nbVisiteur.ToString(), "http://localhost/api/auth/guest.php");
-            rootFrame.GoBack();
+            if (passwordActualBox.Password != "" && newPasswordBox.Password != "" && newPasswordConfirmBox.Password != "") //Check if all the password box are empty or not.
+            {
+                btnChange.IsEnabled = true; //Enabled the button btnChange.
+                if (e.Key == Windows.System.VirtualKey.Enter)
+                {
+                    ClickSetting();
+                }
+            }
+            else
+            {
+                btnChange.IsEnabled = false; //Disabled the button btnChange.
+            }
+            this.resetErrorTextBox(); //Reset all error messages
+        }
+
+        /// <summary>
+        /// Called when you click on the btnRegister button.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to RoutedEventArgs.</param>
+        private void BtnChange_Click(object sender, RoutedEventArgs e)
+        {
+            ClickSetting();
+        }
+
+        private async void ClickSetting()
+        {
+            if (VerificationAuth.IsValidPassword(newPasswordBox.Password, newPasswordConfirmBox.Password)) //Check if both password match.
+            {
+                progressSetting.IsActive = true;
+                backgroundWaiting.Visibility = Visibility.Visible;
+                string ActualPassword = encryptionProvider.Decrypt(connectedUser.password);
+                if (passwordActualBox.Password == ActualPassword)
+                {
+                    connectedUser.password = encryptionProvider.Encrypt(newPasswordBox.Password);//Encrypt the password.
+                    await apiConnect.PostAsJsonAsync(connectedUser, "http://localhost/api/auth/changepassword.php");
+                    progressSetting.IsActive = false;
+                    backgroundWaiting.Visibility = Visibility.Collapsed;
+                    ChangePasswordContentDialog dialog = new ChangePasswordContentDialog(parameter.rootFrame, parameter.connectedUser);
+                    await dialog.ShowAsync();
+                }
+                else
+                {
+                    progressSetting.IsActive = false;
+                    backgroundWaiting.Visibility = Visibility.Collapsed;
+                    VerificationAuth.AnimationErrorTextBox(passwordActualBox, errorSecondPasswordBoxStoryboard, errorSecondPasswordBoxColor, btnChange); //Launch error animation on textMail TextBox.
+                    errorActualPassword.Text = "Your actual password do not match.";
+                }
+            }
+            else
+            {
+                progressSetting.IsActive = false;
+                backgroundWaiting.Visibility = Visibility.Collapsed;
+                VerificationAuth.AnimationErrorTextBox(newPasswordBox, errorFirstPasswordBoxStoryboard, errorFirstPasswordBoxColor, btnChange); //Launch error animation on passwordBox PasswordBox.
+                VerificationAuth.AnimationErrorTextBox(newPasswordConfirmBox, errorSecondPasswordBoxStoryboard, errorSecondPasswordBoxColor, btnChange); //Launch error animation on passwordConfirmBox PasswordBox.
+                errorNewPassword.Text = "The new passwords do not match.";
+            }
+        }
+
+        /// <summary>
+        /// Called when the animation of the ErrorFirstTextBoxColor storyboard is finished.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to the target object.</param>
+        private void ErrorFirstPasswordBoxColor_Completed(object sender, object e)
+        {
+            errorFirstPasswordBoxStoryboard.Stop(); //Stop the storyboard
+        }
+
+        /// <summary>
+        /// Called when the animation of the ErrorSecondTextBoxColor storyboard is finished.
+        /// </summary>
+        /// <param name="sender">Element on which the event is launched.</param>
+        /// <param name="e">Event details to the target object.</param>
+        private void ErrorSecondPasswordBoxColor_Completed(object sender, object e)
+        {
+            errorSecondPasswordBoxStoryboard.Stop(); //Stop the storyboard
+        }
+
+        /// <summary>
+        /// Function that empties all the TextBox.
+        /// </summary>
+        private void resetErrorTextBox()
+        {
+            errorActualPassword.Text = "";
+            errorNewPassword.Text = "";
+            errorNewPasswordConfirm.Text = "";
         }
 
 
-       
+
     }
 }

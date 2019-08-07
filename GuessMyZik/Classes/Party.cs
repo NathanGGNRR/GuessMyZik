@@ -25,7 +25,10 @@ namespace GuessMyZik.Classes
         {
             this.party_id = 0;
             this.username = username;
-            this.initials = username[0].ToString().ToUpper() + username[1].ToString().ToUpper();
+            if (this.username != null)
+            {
+                this.initials = username[0].ToString().ToUpper() + username[1].ToString().ToUpper();
+            }
             this.date = date;
             this.classType = classType;
             this.nb_tracks = nb_tracks;

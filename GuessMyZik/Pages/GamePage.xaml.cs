@@ -170,6 +170,9 @@ namespace GuessMyZik.Pages
             double value = Math.Round(calcul);
             progressUser.Value = value;
             textLvl.Text = "Lvl " + connectedUser.level_id;
+            string responseTwo = await apiConnect.PostAsJsonAsync(connectedUser.username, "http://localhost/api/stats/getkdr.php");
+            List<string> kdr = JsonConvert.DeserializeObject<List<string>>(responseTwo);
+            textVictories.Text = "Win(s): " + kdr[0];
         }
 
         private void InitializeGuest()
@@ -307,7 +310,7 @@ namespace GuessMyZik.Pages
         /// <param name="e">Event details to TappedRoutedEventArgs.</param>
         private void BtnStats_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            rootFrame.Navigate(typeof(StatsPage), new FrameParameters(rootFrame, null, connectedUser), new DrillInNavigationTransitionInfo());
         }
 
         /// <summary>

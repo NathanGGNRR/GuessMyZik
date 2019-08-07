@@ -216,6 +216,9 @@
     <Compile Include="Pages\Frames\Login\WelcomeLoginFrame.xaml.cs">
       <DependentUpon>WelcomeLoginFrame.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\StatsPage.xaml.cs">
+      <DependentUpon>StatsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
@@ -252,6 +255,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Pictures\backgroundSecondary.png" />
+    <Content Include="Assets\Pictures\party.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Pictures\LoginPage\envelopeThird.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -481,6 +487,10 @@
     <Page Include="Pages\Frames\Login\WelcomeLoginFrame.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\StatsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\SettingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
